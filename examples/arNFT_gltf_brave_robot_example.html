@@ -63,8 +63,8 @@
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
                     // gLTF model provided by Brett Alistair Kromkamp https://github.com/brettkromkamp
-                    nftAddTJS.addModel('./Data/models/brave_robot/gLTF/brave_robot.glb', 'pinball', 80, false);
-
+                    //nftAddTJS.addModel('./Data/models/brave_robot/gLTF/brave_robot.glb', 'pinball', 80, false);
+                    nftAddTJS.addModel('https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex', 'pinball', 80, false);
                     const tick = () => {
                         sceneThreejs.draw();
                         window.requestAnimationFrame(tick)
