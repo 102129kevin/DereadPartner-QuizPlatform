@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>ARnft example with a gltf model</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
-    <link rel="stylesheet" href="css/nft-style.css">
+    <link rel="stylesheet" href="/examples/css/nft-style.css">
 </head>
 
 <body>
@@ -15,14 +15,20 @@
         🖼 Marker Image
     </a>
 
-    <script src="js/third_party/three.js/three.min.js"></script>
-    <script src="js/ARnftThreejs.js"></script>
-    <script src="../dist/ARnft.js"></script>
+    <script src="/examples/js/third_party/three.js/three.min.js"></script>
+    <script src="/examples/js/ARnftThreejs.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.144.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.144.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="/dist/ARnft.js"></script>
 
     <script>
         let width = 640;
         let height = 480;
-        ARnft.ARnft.init(width, height, [["examples/DataNFT/pinball"]], [['pinball']], 'config_brave_robot.json', true)
+
+
+
+
+        ARnft.ARnft.init(width, height, [["public/arMarker/t101/street"]], [['street']], 'config_gltf_myself.json', true)
             .then((nft) => {
                 document.addEventListener('containerEvent', function (ev) {
 
@@ -62,12 +68,40 @@
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
-                    // gLTF model provided by Brett Alistair Kromkamp https://github.com/brettkromkamp
-                    nftAddTJS.addModel('./Data/models/brave_robot/gLTF/brave_robot.glb', 'pinball', 80, false);
                     
+                    //add callback when tracking successed
+                    // let mixers = [];
+                    // let clock = new THREE.Clock();
+                    function modelAnimation(gltf) {
+                        let model = gltf.scene.children[0];
+                        //console.log(gltf.scene);
+                        model.scale.x = 40;
+                        model.scale.y = 40;
+                        model.scale.z = 40;
+                        model.rotation.x = 0;
+                        model.rotation.y = 0;
+                        model.rotation.z = 0;
+                        //if model have animation
+                        // let animation = gltf.animations[0];
+                        // let mixer = new THREE.AnimationMixer(model);
+                        // mixers.push(mixer);
+                        // let action = mixer.clipAction(animation);
+                        // action.play();
+                    }
+                    // function updateAnimations() {
+                    //     if (mixers.length > 0) {
+                    //         for (var i = 0; i < mixers.length; i++) {
+                    //             mixers[i].update(clock.getDelta());
+                    //         }
+                    //     }
+                    // }
+
+                    //add glb model    
+                    nftAddTJS.addModelWithCallback('/public/model3D/shiba.glb', 'street', modelAnimation, false);
                     const tick = () => {
                         sceneThreejs.draw();
                         window.requestAnimationFrame(tick)
+                        //updateAnimations();
                     }
                     tick()
                 })
