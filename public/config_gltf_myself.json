@@ -1,6 +1,6 @@
 {
   "addPath": "ARnft",
-  "cameraPara": "/examples/Data/camera_para.dat",
+  "cameraPara": "examples/Data/camera_para.dat",
   "container": {
     "create": true,
     "containerName": "",
