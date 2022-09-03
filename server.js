@@ -1,9 +1,17 @@
 // Load Node modules
-var express = require('express');
-var path = require('path');
+let express = require('express');
+let path = require('path');
+let cors = require('cors');
+let corsOption = {
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+};
 // Initialise Express
-var app = express();
-
+let app = express();
+//config cors
+//app.use(cors(corsOption));
 // Render static files
 app.use('/examples', express.static(path.join(__dirname, 'examples')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
