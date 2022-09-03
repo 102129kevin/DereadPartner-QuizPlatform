@@ -11,7 +11,7 @@ let corsOption = {
 // Initialise Express
 let app = express();
 //config cors
-//app.use(cors(corsOption));
+app.use(cors(corsOption));
 // Render static files
 app.use('/examples', express.static(path.join(__dirname, 'examples')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));

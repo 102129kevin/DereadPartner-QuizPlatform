@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>ARnft example showing a video</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
-    <link rel="stylesheet" href="css/nft-style.css">
+    <link rel="stylesheet" href="/examples/css/nft-style.css">
 </head>
 
 <body>
@@ -14,18 +14,18 @@
         class="ui marker" target="_blank">
         🖼 Marker Image
     </a>
-    <video loop autoplay muted webkit-playsinline playsinline crossOrigin="anonymous" id="arvideo">
-        <source src="https://avo-content-dev.s3.amazonaws.com/videos/bg_1588085276090.mp4" type='video/mp4'>
+    <video loop autoplay webkit-playsinline playsinline crossOrigin="anonymous" id="arvideo">
+        <source src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/sea4.mp4?v=1661482537916" type='video/mp4'>
     </video>
 
-    <script src="js/third_party/three.js/three.min.js"></script>
-    <script src="js/ARnftThreejs.js"></script>
+    <script src="/examples/js/third_party/three.js/three.min.js"></script>
+    <script src="/examples/js/ARnftThreejs.js"></script>
     <script src="/dist/ARnft.js"></script>
 
     <script>
         let width = 640;
         let height = 480;
-        ARnft.ARnft.init(width, height, [["examples/DataNFT/pinball"]], [['pinball']], 'config.json', true)
+        ARnft.ARnft.init(width, height, [["public/arMarker/trex/t1"]], [['trex']], 'config_video_myself.json', true)
             .then((nft) => {
                 document.addEventListener('containerEvent', function (ev) {
 
@@ -59,7 +59,7 @@
                     nftAddTJS.oef = true;
                     // Set width, height and width and height number of segments of the PlaneGeometry.
                     let imgConfig = {w: 1, h: 1, ws: 1, hs: 1};
-                    nftAddTJS.addVideo('arvideo', 'pinball', 180, imgConfig, false);
+                    nftAddTJS.addVideo('arvideo', 'trex', 120, imgConfig, false);
 
                     const tick = () => {
                         sceneThreejs.draw();
