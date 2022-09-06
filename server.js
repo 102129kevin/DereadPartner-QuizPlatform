@@ -16,6 +16,7 @@ app.use(cors(corsOption));
 app.use('/examples', express.static(path.join(__dirname, 'examples')));
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // Port website will run on
 app.listen(process.env.PORT || 3000, function() {
