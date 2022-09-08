@@ -1,0 +1,5 @@
+node_modules/*
+!node_modules/@webarkit/arnft-threejs/types
+!node_modules/@webarkit/arnft-threejs/src
+!node_modules/@webarkit/arnft-threejs/dist
+docs/*
