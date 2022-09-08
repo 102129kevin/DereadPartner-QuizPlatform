@@ -28,7 +28,7 @@
         let width = 640;
         let height = 480;
 
-        ARnft.ARnft.init(width, height, [["public/arMarker/nftT1/nftT1"]], [['street']], 'config_gltf_myself.json', true)
+        ARnft.ARnft.init(width, height, [["public/arMarker/nftT3/nftT3"]], [['testEdu']], 'config_gltf_myself.json', true)
             .then((nft) => {
                 document.addEventListener('containerEvent', function (ev) {
 
@@ -105,7 +105,7 @@
 
                     //add glb model    
                     //nftAddTJS.addModelWithCallback('/public/model3D/shiba.glb', 'street', modelAnimation, false);
-                    nftAddTJS.addModelWithCallback('https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/shiba.glb?v=1662165125628', 'street', modelAnimation, false);
+                    nftAddTJS.addModelWithCallback('https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/shiba.glb?v=1662165125628', 'testEdu', modelAnimation, false);
                     const tick = () => {
                         sceneThreejs.draw();
                         window.requestAnimationFrame(tick)
