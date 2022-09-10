@@ -165,7 +165,6 @@ export default class NFTaddTJS {
 
     public addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean) {
         const root = new Object3D();
-        console.log("testsss");
         root.name = "root-" + name;
         this.scene.add(root);
         //let model: any;
@@ -182,17 +181,13 @@ export default class NFTaddTJS {
                 console.log("insideTS : x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
             });
             
-            //console.log(model);
-            
             model.traverse((child:any) => {
                 
-                    child.addEventListener("click",(event:any) =>{
-                        console.log("hiinclick");
-                    });
+                child.addEventListener("click",(event:any) =>{
+                    console.log("hiinclick");
+                });
                 
             });
-                
-            //interactionManager.add(child);
 
             model.addEventListener('mouseover', (event:any) => {
                 console.log(event);
@@ -220,6 +215,8 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
+            //console.log("x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
+            //console.log("x=" + this.scene.position.x + " y=" + this.scene.position.y + " z=" + this.scene.position.z)
             if (this._oef === true) {
                 let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
                 filter = this._filter.update(ev.detail.matrixGL_RH);

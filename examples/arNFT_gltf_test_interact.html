@@ -14,8 +14,7 @@
                 "three/": "https://cdn.skypack.dev/three@0.139.2/",
                 "threeInteractive": "../node_modules/three.interactive/build/three.interactive.js",
                 "OrbitControls": "../node_modules/three/examples/jsm/controls/OrbitControls.js",
-                "GLTFLoader": "../node_modules/three/examples/jsm/loaders/GLTFLoader.js",
-                "RGBELoader": "../node_modules/three/examples/jsm/loaders/RGBELoader.js"
+                "GLTFLoader": "../node_modules/three/examples/jsm/loaders/GLTFLoader.js"
             }
         } 
     </script>
@@ -24,7 +23,7 @@
 
 <body>
 
-    <div id="mycontainer"></div>
+    <!--<div id="mycontainer"></div>-->
 
     <a href="https://raw.githubusercontent.com/artoolkitx/artoolkit5/master/doc/Marker%20images/pinball.jpg"
         class="ui marker" target="_blank">
@@ -34,15 +33,21 @@
     <script src="/examples/js/third_party/three.js/three.min.js"></script>
     <script src="/myARthree/arnft-threejs/dist/ARnftThreejs.js"></script>
     <script src="/dist/ARnft.js"></script>
+    <!--test for simpleorbit control
+    <script src="../myARthree/SimpleOrbitControls/demo/stinput.js"></script>
+	<script src="../myARthree//SimpleOrbitControls/simple_orbit_controls.js"></script>
+    -->
 
     <script type="module">
         import { OrbitControls } from 'OrbitControls';
         import { GLTFLoader } from 'GLTFLoader';
-        import { RGBELoader } from 'RGBELoader';
         import {InteractionManager} from 'threeInteractive';
 
         let width = 640;
         let height = 480;
+
+        // let input, controls, _lastTime;
+        let setmodel;
 
         ARnft.ARnft.init(width, height, [["public/arMarker/t101/street"]], [['street']], 'config_brave_robot.json', true)
             .then((nft) => {
@@ -71,6 +76,8 @@
                         }
                     };
 
+                    //_lastTime = (new Date()).getTime();
+
                     // const myrenderer = new THREE.WebGLRenderer({
                     //     alpha: true,
                     //     antialias: true,
@@ -87,35 +94,42 @@
                         false);
                     sceneThreejs.initRenderer();
 
-                    const renderer = sceneThreejs.getRenderer();
+                    const renderer = sceneThreejs.getRenderer()
                     renderer.toneMapping = THREE.ACESFilmicToneMapping;
                     renderer.toneMappingExposure = 1.2;
                     renderer.outputEncoding = THREE.sRGBEncoding;
                     renderer.physicallyCorrectLights = true;
-                    document.getElementById("mycontainer").appendChild(renderer.domElement);
+                    //document.getElementById("mycontainer").appendChild(renderer.domElement);
+                    //canvas.appendChild(myrenderer.domElement);
 
                     const scene = sceneThreejs.getScene();
 
                     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                    camera.position.set(0.0, 0.0, 10.0);
+                    camera.position.set(0, 0, 10);
                     //camera.lookAt(scene.position);
                     //camera.lookAt(new THREE.Vector3(101.6,77.13,0));
-                    console.log("scene : x=" + scene.position.x + " y=" + scene.position.y + " z=" + scene.position.z);
-                    //window.camera = camera;
-                    //scene.add(camera);
+
+                    //input = new StInput(window);
 
                     const controls = new OrbitControls(camera, renderer.domElement);
                     controls.enableDamping = true;
-                    controls.rotateSpeed = -1;
+                    // controls.autoRotate = true;
+                    // controls.autoRotateSpeed = 25;
+                    controls.rotateSpeed = -0.15;
                     controls.dampingFactor = 0.18;
                     controls.minDistance = 0.1;
                     controls.maxDistance = 10000;
-                    controls.enablePan = false;
-                    controls.screenSpacePanning = false;
-                    controls.target = new THREE.Vector3(0,0,0);
+                    controls.target = new THREE.Vector3(0.0 , 0.0 , 0);
+                    controls.touches = {
+                        ONE: THREE.TOUCH.ROTATE,
+                        TWO: THREE.TOUCH.DOLLY_PAN
+                    }
                     controls.update();
                     //window.controls = controls;
                     
+                    //controls = new THREE.SimpleOrbitControls(renderer, scene, camera);
+
+
                     const interactionManager = new InteractionManager(
                         renderer,
                         camera,
@@ -158,28 +172,49 @@
                     // interactionManager.add(cube);
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
+
                     const threeGLTFLoader = new GLTFLoader();
-
-
                     threeGLTFLoader.load('./Data/models/Duck/glTF/Duck.glb', (gltf) => {
-
-                        // console.log(gltf);
-                        // console.log(gltf.scene);
                         
-                        let setModel =  nftAddTJS.addInteract(gltf.scene, 'street', 80, false);
-                        interactionManager.add(setModel);
-                        console.log(setModel);
-                        console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z);
+                        setmodel =  nftAddTJS.addInteract(gltf.scene, 'street', 80, false);
+                        interactionManager.add(setmodel);
+                        //scene.add(setmodel);
+                        //console.log(setmodel.position);
+                        //console.log(setModel);
+                        //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z);
                         
                     });
-
-                    
                     
                     nftAddTJS.oef = true;
 
                     const tick = () => {
                         
+                        // calculate delta time
+                        // const timeNow = (new Date()).getTime();
+                        // const deltaTime = (timeNow - _lastTime) / 1000.0;
+                        // _lastTime = timeNow;
+
                         window.requestAnimationFrame(tick);
+
+                        // decide what to move and get mouse delta
+                        // var rotateCamera = input.mouseDown(input.MouseButtons.right);
+                        // var moveCamera = input.mouseDown(input.MouseButtons.left);
+                        // var mouseDelta = input.mouseDelta;
+
+                        // zoom value
+                        // var zoom = input.mouseWheel;
+                        // if (input.down('page_up')) zoom += 10;
+                        // else if (input.down('page_down')) zoom -= 10;
+
+                        // update controls
+                        // controls.update({
+                        //     deltaTime: deltaTime, 
+                        //     rotateHorizontally: rotateCamera ? mouseDelta.x * 0.2 : 0,
+                        //     rotateVertically: rotateCamera ? mouseDelta.y * 0.2 : 0,
+                        //     moveOffsetVertically: (moveCamera ? -mouseDelta.y * 10 : 0) * 10,
+                        //     moveOffsetHorizontally: (moveCamera ? mouseDelta.x * 10 : 0) * 10,
+                        //     zoom: zoom * 10,
+                        // });
 
                         sceneThreejs.draw();
 
@@ -188,6 +223,8 @@
                         interactionManager.update();
 
                         renderer.render(scene,camera);
+
+                        // input.endFrame();
 
                         //updateAnimations();
                     }
@@ -198,7 +235,6 @@
                     function handleWindowResize() {
                         camera.aspect = window.innerWidth / window.innerHeight;
                         camera.updateProjectionMatrix();
-
                         renderer.setSize(window.innerWidth, window.innerHeight);
                     }
                 });
