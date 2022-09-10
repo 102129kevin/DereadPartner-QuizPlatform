@@ -10,8 +10,8 @@
     <script type="importmap"> 
         { 
             "imports": {
-                "three": "https://cdn.skypack.dev/three@0.139.2/build/three.module", 
-                "three/": "https://cdn.skypack.dev/three@0.139.2/",
+                "three": "../node_modules/three/build/three.module.js", 
+                "three/": "../node_modules/three/",
                 "threeInteractive": "../node_modules/three.interactive/build/three.interactive.js",
                 "OrbitControls": "../node_modules/three/examples/jsm/controls/OrbitControls.js",
                 "GLTFLoader": "../node_modules/three/examples/jsm/loaders/GLTFLoader.js"
@@ -29,7 +29,7 @@
         class="ui marker" target="_blank">
         🖼 Marker Image
     </a>
-
+    <script src=""></script>
     <script src="/examples/js/third_party/three.js/three.min.js"></script>
     <script src="/myARthree/arnft-threejs/dist/ARnftThreejs.js"></script>
     <script src="/dist/ARnft.js"></script>
@@ -37,15 +37,18 @@
     <script src="../myARthree/SimpleOrbitControls/demo/stinput.js"></script>
 	<script src="../myARthree//SimpleOrbitControls/simple_orbit_controls.js"></script>
     -->
+
+    <!--
     <script src="../node_modules/three.interactive/build/three.interactive.js"></script>
     <script src="../node_modules/three/examples/jsm/controls/OrbitControls.js"></script>
     <script src="../node_modules/three/examples/jsm/loaders/GLTFLoader.js"></script>
+    -->
 
     <script type="module">
         import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
         import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
         import {InteractionManager} from '../node_modules/three.interactive/build/three.interactive.js';
-        //import * as THREE from 'https://cdn.skypack.dev/three@0.139.2/build/three.module';
+        
 
         let width = 640;
         let height = 480;
