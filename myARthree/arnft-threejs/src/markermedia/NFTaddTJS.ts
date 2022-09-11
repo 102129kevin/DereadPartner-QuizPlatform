@@ -181,9 +181,7 @@ export default class NFTaddTJS {
         //const threeGLTFLoader = new GLTFLoader();
         //threeGLTFLoader.load(url, (gltf) => {
         //model = gltf.scene;
-        model.scale.x = scale;
-        model.scale.y = scale;
-        model.scale.z = scale;
+        model.scale.set(scale, scale, scale);
         //model.rotation.x = Math.PI / 2;
         model.rotation.x = MathUtils.degToRad(rotationVector.x);
         model.rotation.y = MathUtils.degToRad(rotationVector.y);
