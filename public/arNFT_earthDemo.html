@@ -381,7 +381,7 @@
                     };
 
                     let rotationInit = {
-                        "x": 0,
+                        "x": 20,
                         "y": -90,
                         "z": 0
                     };
@@ -417,7 +417,7 @@
 
                     const threeGLTFLoader = new GLTFLoader();
                     threeGLTFLoader.load('./model3D/planet.glb', (gltf) => {
-                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 40, false, rotationInit, nftLost);
+                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 60, false, rotationInit, nftLost);
 
                         for (let i = 0; i < scene.children.length; i++) {
                             //console.log(scene.children[i]);
