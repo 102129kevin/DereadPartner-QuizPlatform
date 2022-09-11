@@ -6,8 +6,6 @@
     <title>ARnft example with a gltf model</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
     <link rel="stylesheet" href="/examples/css/nft-style.css">
-    <link rel="stylesheet" href="/examples/css/arNFT_gltf_test_interact.css">
-    <link rel="stylesheet" href="/public/css/ch-earth.css">
 
     <script type="importmap">
         { 
@@ -20,14 +18,13 @@
             }
         } 
     </script>
-    <script src="/public/js/sceneManagerARnft.js"></script>
 </head>
 
 <body>
 
-    <!--<div id="mycontainer"></div>-->
 
-    <a href="https://raw.githubusercontent.com/artoolkitx/artoolkit5/master/doc/Marker%20images/pinball.jpg"
+
+    <a href="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/street.jpg?v=1662859480970"
         class="ui marker" target="_blank">
         🖼 Marker Image
     </a>
@@ -44,11 +41,9 @@
 
         let width = 640;
         let height = 480;
-
-
         let setmodel;
 
-        ARnft.ARnft.init(width, height, [["public/arMarker/t101/street"]], [['street']], 'config_brave_robot.json', true)
+        ARnft.ARnft.init(width, height, [["public/arMarker/t101/street"]], [['street']], 'config.json', true)
             .then((nft) => {
                 document.addEventListener('containerEvent', function (ev) {
 
@@ -74,8 +69,6 @@
                             "far": 1000
                         }
                     };
-
-
 
                     let sceneThreejs = new ARnftThreejs.SceneRendererTJS(config, canvas, nft.uuid,
                         false);
@@ -116,35 +109,9 @@
                         renderer.domElement
                     );
 
-                    // const geometry = new THREE.BoxGeometry(180, 180, 180);
-                    // const material = new THREE.MeshBasicMaterial();
-                    // const cube = new THREE.Mesh(geometry, material);    
-
                     let directionalLight = new THREE.DirectionalLight('#fff', 0.4);
                     directionalLight.position.set(0.5, 0, 0.866);
                     scene.add(directionalLight);
-
-                    // cube.addEventListener("mouseover", (event) => {
-                    //     event.target.material.color.set(0xff0000);
-                    //     document.body.style.cursor = "pointer";
-                    //     console.log("mouseover");
-                    // });
-
-                    // cube.addEventListener("mouseout", (event) => {
-                    //     event.target.material.color.set(0xffffff);
-                    //     document.body.style.cursor = "default";
-                    //     console.log("mouseout");
-                    // });
-
-                    // cube.addEventListener("mousedown", (event) => {
-                    //     event.target.scale.set(1.1, 1.1, 1.1);
-                    //     console.log("mousedown");
-                    // });
-
-                    // cube.addEventListener("click", (event) => {
-                    //     event.target.scale.set(1.0, 1.0, 1.0);
-                    //     console.log("click");
-                    // });
 
                     // let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     // nftAddTJS.add(cube, 'street', false);
@@ -154,11 +121,10 @@
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
 
                     const threeGLTFLoader = new GLTFLoader();
-                    threeGLTFLoader.load('./Data/models/Duck/glTF/Duck.glb', (gltf) => {
+                    threeGLTFLoader.load('./model3D/shiba.glb', (gltf) => {
 
-                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 80, false);
+                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 55, false);
                         interactionManager.add(setmodel);
-                        //scene.add(setmodel);
 
                         //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z); 0 0 0
 
@@ -198,67 +164,6 @@
         })
     </script>
 
-    <div id="whole">
-        <div id="top">
-            <!--use sceneManager.js to generate NFT2 lonBoard-->
-            <div id="nft2Info">
-                <div id="lonBoard">
-                    <div id="board">
-                        <div id="lonTag" class="item1">目前位置</div>
-                        <div id="lonData" class="item2"></div>
-                        <div id="timeTag" class="item1">時區</div>
-                        <div id="timeData" class="item2"></div>
-                        <div id="countryTag" class="item1">代表國家</div>
-                        <div id="countryData" class="item2">
-                            <div id="countryPic"></div>
-                            <div id="countryName">巴西(費爾南多·迪諾羅尼亞群島)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="down">
-            <!--use sceneManager.js to generate NFT2 Slider and btn * 2 -->
-
-            <div id="nft2Control">
-                <input type="range" min="0" max="360" step="1" value="0" />
-                <button>往東</button>
-                <button>往西</button>
-                <a href="#setTimeLightbox"><button>設定時區</button></a>
-            </div>
-
-            <button id="earthTest">地球</button>
-            <button id="dogTest">柴犬</button>
-            <button id="frankTest">墮天使</button>
-            <button id="hologram_consoleTest">電腦</button>
-            <button id="blender_chanTest">二次元</button>
-            <button id="japanTest">動漫人物</button>
-        </div>
-    </div>
-
-    <div class="myLightbox" id="setTimeLightbox">
-        <div id="setTimePanel">
-            <h1>設定時間</h1>
-
-            <div class="setTimePanelLine">
-                <input type="radio" name="setTimeMode" id="manualTime" value="manualTime" />
-                <label>手動模式</label>
-            </div>
-            <div class="setTimePanelLine" id="setTimeDiv">
-                <label>指定時間:</label>
-                <input type="time" id="timeData" disabled />
-            </div>
-            <div class="setTimePanelLine">
-                <input type="radio" name="setTimeMode" id="autoTime" value="autoTime" checked />
-                <label>自動模式</label>
-            </div>
-            <div id="setTimeBtnLine">
-                <a href="#"><button id="setConfirm">確認</button></a>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

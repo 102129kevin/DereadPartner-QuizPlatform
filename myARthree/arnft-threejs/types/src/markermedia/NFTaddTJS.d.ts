@@ -1,4 +1,9 @@
 import { Object3D } from "three";
+interface RotateVector {
+    x: number;
+    y: number;
+    z: number;
+}
 interface IPlaneConfig {
     w: number;
     h: number;
@@ -16,7 +21,7 @@ export default class NFTaddTJS {
     constructor(uuid: string);
     add(mesh: Object3D, name: string, objVisibility: boolean): void;
     addModel(url: string, name: string, scale: number, objVisibility: boolean): void;
-    addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean): Object3D<import("three").Event>;
+    addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean, rotationVector: RotateVector, htmlEl: NodeListOf<Element>): Object3D<import("three").Event>;
     addModelWithCallback(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean): void;
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;

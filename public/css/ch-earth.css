@@ -1,0 +1,206 @@
+* {
+  font-family: Microsoft YaHei;
+}
+
+body {
+  margin: 0px;
+  overflow: hidden;
+  height: 100%
+}
+
+.myloader {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.myloader div {
+  text-align: center;
+  font-size: 1.25em;
+  color: white;
+}
+
+/* default loading box */
+
+.arjs-loader {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.arjs-loader div {
+  text-align: center;
+  font-size: 1.25em;
+  color: white;
+}
+
+.myLightbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: -1;
+  opacity: 0;
+}
+
+.myLightbox:target {
+  /*z-index設2是為了蓋過全部z-index:1的區塊，營造燈箱至上效果*/
+  z-index: 1;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+#setTimePanel {
+  width: 300px;
+  height: 250px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#setTimePanel h1 {
+  width: 100%;
+  text-align: center;
+}
+
+.setTimePanelLine {
+  margin-left: 40px;
+  line-height: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+#setTimeDiv {
+  margin-left: 70px;
+  font-size: 16px;
+}
+
+#setTimeBtnLine {
+  text-align: center;
+}
+
+#modelControl {
+  opacity: 0.5;
+  position: fixed;
+  bottom: 30px;
+  left: 10px;
+  z-index: 1;
+}
+
+#whole {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+#top {
+  height: 85%;
+
+}
+
+#down {
+  height: 15%;
+
+}
+
+.nftFound {
+  visibility: visible;
+}
+
+.nftLost {
+  visibility: hidden;
+}
+
+#nft2Info {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+}
+
+#lonBoard {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 150px;
+}
+
+#board {
+  display: flex;
+  flex-wrap: wrap;
+  width: 242px;
+  height: 150px;
+  background-image: url("../assest/image/board.jpg");
+  background-size: 242px 150px;
+  color: white;
+}
+
+.item1 {
+  flex-basis: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item2 {
+  flex-basis: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+#countryData {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#countryPic {
+  width: 45px;
+  height: 30px;
+  background-size: 45px 30px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 45px;
+}
+
+#countryName {
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-left: 5px;
+}
+
+#nft2Control {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}

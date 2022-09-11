@@ -7,6 +7,7 @@ import {
     Mesh,
     MeshStandardMaterial,
     Vector3,
+    MathUtils
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Utils } from "../utils/Utils";
@@ -28,6 +29,12 @@ interface ARvideo {
  */
 interface Entity {
     name: string;
+}
+
+interface RotateVector {
+    x: number;
+    y: number;
+    z: number;
 }
 
 /**
@@ -55,6 +62,7 @@ export default class NFTaddTJS {
     private uuid: string;
     private _filter: ARnftFilter;
     private _oef: boolean;
+    //private htmlEl: Array<HTMLElement>;
 
     /**
      * The NFTaddTJS constuctor, you need to pass the uuid from the ARnft instance.
@@ -163,60 +171,70 @@ export default class NFTaddTJS {
         this.names.push(name);
     }
 
-    public addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean) {
+    public addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean, rotationVector: RotateVector, htmlEl: NodeListOf<Element>) {
         const root = new Object3D();
+        console.log(htmlEl.length);
         root.name = "root-" + name;
         this.scene.add(root);
         //let model: any;
         /* Load Model */
         //const threeGLTFLoader = new GLTFLoader();
         //threeGLTFLoader.load(url, (gltf) => {
-            //model = gltf.scene;
-            model.scale.set(scale, scale, scale);
-            model.rotation.x = Math.PI / 2;
-            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
-                var msg = ev.detail;
-                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
-                model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
-                console.log("insideTS : x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
-            });
-            
-            model.traverse((child:any) => {
-                
-                child.addEventListener("click",(event:any) =>{
-                    console.log("hiinclick");
-                });
-                
+        //model = gltf.scene;
+        model.scale.set(scale, scale, scale);
+        //model.rotation.x = Math.PI / 2;
+        model.rotation.x = MathUtils.degToRad(rotationVector.x);
+        model.rotation.y = MathUtils.degToRad(rotationVector.y);
+        model.rotation.z = MathUtils.degToRad(rotationVector.z);
+
+        //console.log(rotationVector);
+
+        this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+            var msg = ev.detail;
+            model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+            model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+            console.log("insideTS : x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
+        });
+
+        model.traverse((child: any) => {
+
+            child.addEventListener("click", (event: any) => {
+                console.log("hiinclick");
             });
 
-            model.addEventListener('mouseover', (event:any) => {
-                console.log(event);
-                document.body.style.cursor = 'pointer';
-            });
+        });
 
-            model.addEventListener('mouseout', (event:any) => {
-                console.log(event);
-                document.body.style.cursor = 'default';
-            });
+        model.addEventListener('mouseover', (event: any) => {
+            console.log(event);
+            document.body.style.cursor = 'pointer';
+        });
 
-            model.addEventListener('mouseover', (event:any) => {
-                console.log(event);
-                document.body.style.cursor = 'pointer';
-            });
+        model.addEventListener('mouseout', (event: any) => {
+            console.log(event);
+            document.body.style.cursor = 'default';
+        });
 
-            model.addEventListener('mousedown', (event:any) => {
-                console.log(event);
-                console.log(event.target.name);
-                event.stopPropagation();
-            });
+        model.addEventListener('mouseover', (event: any) => {
+            console.log(event);
+            document.body.style.cursor = 'pointer';
+        });
 
-            root.add(model);
+        model.addEventListener('mousedown', (event: any) => {
+            console.log(event);
+            console.log(event.target.name);
+            event.stopPropagation();
+        });
+
+        root.add(model);
         //});
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
-            //console.log("x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
-            //console.log("x=" + this.scene.position.x + " y=" + this.scene.position.y + " z=" + this.scene.position.z)
+            htmlEl.forEach(function (item) {
+                item.classList.remove("nftLost");
+                item.classList.add("nftFound");
+            });
+
             if (this._oef === true) {
                 let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
                 filter = this._filter.update(ev.detail.matrixGL_RH);
@@ -236,6 +254,10 @@ export default class NFTaddTJS {
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
             model.visible = objVisibility;
+            htmlEl.forEach(function (item) {
+                item.classList.remove("nftFound");
+                item.classList.add("nftLost");
+            });
         });
         this.names.push(name);
 
