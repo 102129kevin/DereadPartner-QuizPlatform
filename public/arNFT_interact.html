@@ -70,6 +70,12 @@
                         }
                     };
 
+                    let rotationInit = {
+                        "x": 90,
+                        "y": 0,
+                        "z": 0
+                    };
+
                     let sceneThreejs = new ARnftThreejs.SceneRendererTJS(config, canvas, nft.uuid,
                         false);
                     sceneThreejs.initRenderer();
@@ -123,7 +129,7 @@
                     const threeGLTFLoader = new GLTFLoader();
                     threeGLTFLoader.load('./model3D/shiba.glb', (gltf) => {
 
-                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 55, false);
+                        setmodel = nftAddTJS.addInteract2(gltf.scene, 'street', 55, false);
                         interactionManager.add(setmodel);
 
                         //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z); 0 0 0
