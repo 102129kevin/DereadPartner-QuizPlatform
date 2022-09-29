@@ -1,4 +1,4 @@
 node_modules/*
-!node_modules/three-rotation-controls/index.js
+!/node_modules/three-rotation-controls/index.js
 myARthree/arnft-threejs/node_modules/*
 docs/*
