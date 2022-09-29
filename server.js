@@ -20,6 +20,6 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/myARthree', express.static(path.join(__dirname, 'myARthree')));
 
 // Port website will run on
-app.listen(process.env.PORT || 3000, function() {
+app.listen(process.env.PORT || 3000, function () {
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });

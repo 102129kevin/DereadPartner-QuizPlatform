@@ -20,7 +20,7 @@
             }
         } 
     </script>
-    <script src="/public/js/sceneManagerARnft.js"></script>
+    <!--<script src="/public/js/sceneManagerARnft.js"></script>-->
 </head>
 
 <body>
@@ -41,10 +41,10 @@
         import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
         import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
         import { InteractionManager } from '../node_modules/three.interactive/build/three.interactive.js';
+        import { RotationJoystickControls } from '../dist/three-joystick-master/src/index.js';
 
         let width = 640;
         let height = 480;
-
 
         let setmodel;
 
@@ -82,43 +82,50 @@
                     sceneThreejs.initRenderer();
 
                     const renderer = sceneThreejs.getRenderer()
-                    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-                    renderer.toneMappingExposure = 1.2;
-                    renderer.outputEncoding = THREE.sRGBEncoding;
-                    renderer.physicallyCorrectLights = true;
+                    // renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                    // renderer.toneMappingExposure = 1.2;
+                    // renderer.outputEncoding = THREE.sRGBEncoding;
+                    // renderer.physicallyCorrectLights = true;
 
 
                     const scene = sceneThreejs.getScene();
 
                     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+                    scene.add(camera);
                     camera.position.set(0, 0, 10);
 
-                    const controls = new OrbitControls(camera, renderer.domElement);
-                    controls.enableDamping = true;
+                    // const controls = new OrbitControls(camera, renderer.domElement);
+                    // controls.enableDamping = true;
                     // controls.autoRotate = true;
                     // controls.autoRotateSpeed = 25;
-                    controls.rotateSpeed = -0.15;
-                    controls.dampingFactor = 0.18;
-                    controls.minDistance = 0.1;
-                    controls.maxDistance = 10000;
-                    controls.target = new THREE.Vector3(0.0, 0.0, 0);
-                    controls.touches = {
-                        ONE: THREE.TOUCH.ROTATE,
-                        TWO: THREE.TOUCH.DOLLY_PAN
-                    }
-                    controls.update();
+                    // controls.rotateSpeed = -0.15;
+                    // controls.dampingFactor = 0.18;
+                    // controls.minDistance = 0.1;
+                    // controls.maxDistance = 10000;
+                    // controls.target = new THREE.Vector3(0.0, 0.0, 0);
+                    // controls.touches = {
+                    //     ONE: THREE.TOUCH.ROTATE,
+                    //     TWO: THREE.TOUCH.DOLLY_PAN
+                    // }
+                    // controls.update();
 
+                    // const interactionManager = new InteractionManager(
+                    //     renderer,
+                    //     camera,
+                    //     renderer.domElement
+                    // );
 
+                    const geometry = new THREE.BoxGeometry(180, 180, 180);
+                    const material = new THREE.MeshBasicMaterial();
+                    const cube = new THREE.Mesh(geometry, material);
 
-                    const interactionManager = new InteractionManager(
-                        renderer,
+                    //scene.add(cube);
+
+                    const rotationJoystick = new RotationJoystickControls(
                         camera,
-                        renderer.domElement
+                        scene,
+                        cube,
                     );
-
-                    // const geometry = new THREE.BoxGeometry(180, 180, 180);
-                    // const material = new THREE.MeshBasicMaterial();
-                    // const cube = new THREE.Mesh(geometry, material);    
 
                     let directionalLight = new THREE.DirectionalLight('#fff', 0.4);
                     directionalLight.position.set(0.5, 0, 0.866);
@@ -146,36 +153,46 @@
                     //     console.log("click");
                     // });
 
-                    // let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
-                    // nftAddTJS.add(cube, 'street', false);
+                    let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
+                    nftAddTJS.oef = true;
+                    nftAddTJS.add(cube, 'street', false);
                     // nftAddTJS.addtest('./Data/models/Duck/glTF/Duck.glb', 'pinball', 80, false);
                     // interactionManager.add(cube);
 
-                    let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
+                    // let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
 
-                    const threeGLTFLoader = new GLTFLoader();
-                    threeGLTFLoader.load('./Data/models/Duck/glTF/Duck.glb', (gltf) => {
+                    // const threeGLTFLoader = new GLTFLoader();
+                    // threeGLTFLoader.load('./Data/models/Duck/glTF/Duck.glb', (gltf) => {
 
-                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 80, false);
-                        interactionManager.add(setmodel);
-                        //scene.add(setmodel);
+                    //     setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 80, false);
+                    //     console.log(typeof (gltf.scene));
+                    //     interactionManager.add(setmodel);
+                    //     //scene.add(setmodel);
 
-                        //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z); 0 0 0
+                    //     //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z); 0 0 0
 
-                    });
+                    // });
 
-                    nftAddTJS.oef = true;
+
 
                     const tick = () => {
-                        window.requestAnimationFrame(tick);
-
                         sceneThreejs.draw();
 
-                        controls.update();
 
-                        interactionManager.update();
 
-                        renderer.render(scene, camera);
+
+
+                        // controls.update();
+
+                        //rotationJoystick.update();
+
+                        //interactionManager.update();
+
+                        //renderer.render(scene, camera);
+
+                        window.requestAnimationFrame(tick);
+
+
 
                         //updateAnimations();
                     }
@@ -197,68 +214,6 @@
             console.log('onInitThreejsRendering is available only outside containerEvent!');
         })
     </script>
-
-    <div id="whole">
-        <div id="top">
-            <!--use sceneManager.js to generate NFT2 lonBoard-->
-            <div id="nft2Info">
-                <div id="lonBoard">
-                    <div id="board">
-                        <div id="lonTag" class="item1">目前位置</div>
-                        <div id="lonData" class="item2"></div>
-                        <div id="timeTag" class="item1">時區</div>
-                        <div id="timeData" class="item2"></div>
-                        <div id="countryTag" class="item1">代表國家</div>
-                        <div id="countryData" class="item2">
-                            <div id="countryPic"></div>
-                            <div id="countryName">巴西(費爾南多·迪諾羅尼亞群島)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="down">
-            <!--use sceneManager.js to generate NFT2 Slider and btn * 2 -->
-
-            <div id="nft2Control">
-                <input type="range" min="0" max="360" step="1" value="0" />
-                <button>往東</button>
-                <button>往西</button>
-                <a href="#setTimeLightbox"><button>設定時區</button></a>
-            </div>
-
-            <button id="earthTest">地球</button>
-            <button id="dogTest">柴犬</button>
-            <button id="frankTest">墮天使</button>
-            <button id="hologram_consoleTest">電腦</button>
-            <button id="blender_chanTest">二次元</button>
-            <button id="japanTest">動漫人物</button>
-        </div>
-    </div>
-
-    <div class="myLightbox" id="setTimeLightbox">
-        <div id="setTimePanel">
-            <h1>設定時間</h1>
-
-            <div class="setTimePanelLine">
-                <input type="radio" name="setTimeMode" id="manualTime" value="manualTime" />
-                <label>手動模式</label>
-            </div>
-            <div class="setTimePanelLine" id="setTimeDiv">
-                <label>指定時間:</label>
-                <input type="time" id="timeData" disabled />
-            </div>
-            <div class="setTimePanelLine">
-                <input type="radio" name="setTimeMode" id="autoTime" value="autoTime" checked />
-                <label>自動模式</label>
-            </div>
-            <div id="setTimeBtnLine">
-                <a href="#"><button id="setConfirm">確認</button></a>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
