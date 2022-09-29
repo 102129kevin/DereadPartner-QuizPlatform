@@ -18,6 +18,7 @@ app.use('/dist', express.static(path.join(__dirname, 'dist')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 app.use('/myARthree', express.static(path.join(__dirname, 'myARthree')));
+app.use('/threeRotate', express.static(path.join(__dirname, 'threeRotate')));
 
 // Port website will run on
 app.listen(process.env.PORT || 3000, function () {
