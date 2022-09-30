@@ -272,58 +272,19 @@ export default class NFTaddTJS {
 
         root.name = "root-" + name;
         this.scene.add(root);
-        //let model: any;
-        /* Load Model */
-        //const threeGLTFLoader = new GLTFLoader();
-        //threeGLTFLoader.load(url, (gltf) => {
-        //model = gltf.scene;
         model.scale.set(scale, scale, scale);
         model.rotation.x = Math.PI / 2;
-
-
         this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
             var msg = ev.detail;
             model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
             model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
             console.log("insideTS : x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
         });
-
-        model.traverse((child: any) => {
-
-            child.addEventListener("click", (event: any) => {
-                console.log("hiinclick");
-            });
-
-        });
-
-        model.addEventListener('mouseover', (event: any) => {
-            console.log(event);
-            document.body.style.cursor = 'pointer';
-        });
-
-        model.addEventListener('mouseout', (event: any) => {
-            console.log(event);
-            document.body.style.cursor = 'default';
-        });
-
-        model.addEventListener('mouseover', (event: any) => {
-            console.log(event);
-            document.body.style.cursor = 'pointer';
-        });
-
-        model.addEventListener('mousedown', (event: any) => {
-            console.log(event);
-            console.log(event.target.name);
-            event.stopPropagation();
-        });
-
         root.add(model);
-        //});
+
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
-
-
             if (this._oef === true) {
                 let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
                 filter = this._filter.update(ev.detail.matrixGL_RH);
@@ -346,9 +307,6 @@ export default class NFTaddTJS {
 
         });
         this.names.push(name);
-
-        //
-        //this.entities.push({name});
 
         return model;
     }

@@ -34,14 +34,13 @@
 
 
     <script src="/examples/js/third_party/three.js/three.min.js"></script>
-    <script src="/myARthree/arnft-threejs/dist/ARnftThreejs.js"></script>
+    <script src="/js/myARthree/arnft-threejs/dist/ARnftThreejs.js"></script>
     <script src="/dist/ARnft.js"></script>
 
     <script type="module">
         import { OrbitControls } from '../node_modules/three/examples/jsm/controls/OrbitControls.js';
         import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
         import { InteractionManager } from '../node_modules/three.interactive/build/three.interactive.js';
-        import { RotationJoystickControls } from '../dist/three-joystick-master/src/index.js';
 
         let width = 640;
         let height = 480;
@@ -82,10 +81,10 @@
                     sceneThreejs.initRenderer();
 
                     const renderer = sceneThreejs.getRenderer()
-                    // renderer.toneMapping = THREE.ACESFilmicToneMapping;
-                    // renderer.toneMappingExposure = 1.2;
-                    // renderer.outputEncoding = THREE.sRGBEncoding;
-                    // renderer.physicallyCorrectLights = true;
+                    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                    renderer.toneMappingExposure = 1.2;
+                    renderer.outputEncoding = THREE.sRGBEncoding;
+                    renderer.physicallyCorrectLights = true;
 
 
                     const scene = sceneThreejs.getScene();
@@ -94,38 +93,22 @@
                     scene.add(camera);
                     camera.position.set(0, 0, 10);
 
-                    // const controls = new OrbitControls(camera, renderer.domElement);
-                    // controls.enableDamping = true;
-                    // controls.autoRotate = true;
-                    // controls.autoRotateSpeed = 25;
-                    // controls.rotateSpeed = -0.15;
-                    // controls.dampingFactor = 0.18;
-                    // controls.minDistance = 0.1;
-                    // controls.maxDistance = 10000;
-                    // controls.target = new THREE.Vector3(0.0, 0.0, 0);
-                    // controls.touches = {
-                    //     ONE: THREE.TOUCH.ROTATE,
-                    //     TWO: THREE.TOUCH.DOLLY_PAN
-                    // }
-                    // controls.update();
-
                     // const interactionManager = new InteractionManager(
                     //     renderer,
                     //     camera,
                     //     renderer.domElement
                     // );
 
-                    const geometry = new THREE.BoxGeometry(180, 180, 180);
-                    const material = new THREE.MeshBasicMaterial();
-                    const cube = new THREE.Mesh(geometry, material);
-
+                    // const geometry = new THREE.BoxGeometry(180, 180, 180);
+                    // const material = new THREE.MeshBasicMaterial();
+                    // const cube = new THREE.Mesh(geometry, material);
                     //scene.add(cube);
 
-                    const rotationJoystick = new RotationJoystickControls(
-                        camera,
-                        scene,
-                        cube,
-                    );
+                    // const rotationJoystick = new RotationJoystickControls(
+                    //     camera,
+                    //     scene,
+                    //     cube,
+                    // );
 
                     let directionalLight = new THREE.DirectionalLight('#fff', 0.4);
                     directionalLight.position.set(0.5, 0, 0.866);
@@ -155,44 +138,31 @@
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
-                    nftAddTJS.add(cube, 'street', false);
-                    // nftAddTJS.addtest('./Data/models/Duck/glTF/Duck.glb', 'pinball', 80, false);
+                    //nftAddTJS.add(cube, 'street', false);
                     // interactionManager.add(cube);
 
-                    // let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
+                    const threeGLTFLoader = new GLTFLoader();
+                    threeGLTFLoader.load('./Data/models/Duck/glTF/Duck.glb', (gltf) => {
 
-                    // const threeGLTFLoader = new GLTFLoader();
-                    // threeGLTFLoader.load('./Data/models/Duck/glTF/Duck.glb', (gltf) => {
+                        setmodel = nftAddTJS.addInteract2(gltf.scene, 'street', 80, false);
+                        console.log(typeof (gltf.scene));
+                        //interactionManager.add(setmodel);
 
-                    //     setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 80, false);
-                    //     console.log(typeof (gltf.scene));
-                    //     interactionManager.add(setmodel);
-                    //     //scene.add(setmodel);
+                        //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z); 0 0 0
 
-                    //     //console.log("setmodel : x=" + setModel.position.x + " y=" + setModel.position.y + " z=" + setModel.position.z); 0 0 0
-
-                    // });
+                    });
 
 
 
                     const tick = () => {
+                        window.requestAnimationFrame(tick);
                         sceneThreejs.draw();
-
-
-
-
-
-                        // controls.update();
 
                         //rotationJoystick.update();
 
                         //interactionManager.update();
 
                         //renderer.render(scene, camera);
-
-                        window.requestAnimationFrame(tick);
-
-
 
                         //updateAnimations();
                     }

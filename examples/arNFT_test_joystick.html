@@ -11,43 +11,29 @@
         { 
             "imports": {
                 "three": "../node_modules/three/build/three.module.js",
-                "three/": "../node_modules/three/",
-                "threeInteractive": "../node_modules/three.interactive/build/three.interactive.js",
-                "OrbitControls": "../node_modules/three/examples/jsm/controls/OrbitControls.js",
-                "GLTFLoader": "../node_modules/three/examples/jsm/loaders/GLTFLoader.js"
+                "three/": "../node_modules/three/"
             }
-        } 
+        }
     </script>
 </head>
 
 <body>
 
-    <a href="https://raw.githubusercontent.com/artoolkitx/artoolkit5/master/doc/Marker%20images/pinball.jpg"
-        class="ui marker" target="_blank">
-        🖼 Marker Image
-    </a>
-
     <script src="/examples/js/third_party/three.js/three.min.js"></script>
-    <script src="/myARthree/arnft-threejs/dist/ARnftThreejs.js"></script>
+    <script src="/js/myARthree/arnft-threejs/dist/ARnftThreejs.js"></script>
     <script src="/dist/ARnft.js"></script>
 
     <script type="module">
-        //import { RotationJoystickControls } from '../dist/three-joystick-master/src/index.js';
-        import RotationControls from '/threeRotate/index.js';
+        import RotationControls from '/js/threeRotate/index.js';
+        import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
         let width = 640;
         let height = 480;
+
+        let controls;
+
         ARnft.ARnft.init(width, height, [["public/arMarker/t101/street"]], [['street']], 'config.json', true)
             .then((nft) => {
-                let mat = new THREE.MeshLambertMaterial({
-                    color: 0xff0000
-                });
-                let boxGeom = new THREE.BoxGeometry(1, 1, 1);
-                let cube = new THREE.Mesh(boxGeom, mat);
-                cube.position.z = 90;
-                cube.scale.set(180, 180, 180);
-
-
 
                 document.addEventListener('containerEvent', function (ev) {
 
@@ -77,41 +63,101 @@
                         true);
                     sceneThreejs.initRenderer();
 
-                    // const scene = sceneThreejs.getScene();
+                    const threeGLTFLoader = new GLTFLoader();
+                    const renderer = sceneThreejs.getRenderer();
+                    const scene = sceneThreejs.getScene();
+                    let setmodel;
 
-                    //const camera = sceneThreejs.getCamera();
+                    renderer.outputEncoding = THREE.sRGBEncoding;
+                    renderer.physicallyCorrectLights = true;
+                    let directionalLight = new THREE.DirectionalLight('#fff', 0.4);
+                    directionalLight.position.set(0.5, 0, 0.866);
+                    scene.add(directionalLight)
 
-                    // const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                    // scene.add(camera);
-                    // camera.position.set(0, 0, 10);
-                    //camera.add(cube);
-
-                    // const rotationJoystick = new RotationJoystickControls(
-                    //     camera,
-                    //     scene,
-                    //     cube
-                    // );
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
-                    nftAddTJS.add(cube, 'street', false);
+                    //nftAddTJS.addModel('./Data/models/Duck/glTF/Duck.glb', 'street', 80, false);
 
-                    let controls = new RotationControls(cube, {
-                        amp: 2,
-                        lerpFactor: .05
-                    });
+                    let setModel;
+                    let modelPath = "../public/model3D/shiba.glb";
 
-                    const tick = () => {
-                        sceneThreejs.draw();
-                        // rotationJoystick.update();
-                        controls.update();
-                        window.requestAnimationFrame(tick)
+                    function modelLoader(modelPath) {
+                        return new Promise((resolve, reject) => {
+                            nftAddTJS.addModelWithCallback(modelPath, "street", (gltf) => {
+                                gltf.scene.scale.set(30, 30, 30);
+                                setModel = gltf.scene;
+                                //console.log("in modelLoader");
+                                resolve(setModel);
+
+                            }, false);
+                        });
                     }
-                    tick()
+
+                    modelLoader(modelPath)
+                        .then(function () {
+                            // console.log(a);
+                            controls = new RotationControls(setModel, {
+                                amp: 2,
+                                lerpFactor: .05
+                            });
+                        })
+                        .then(() => {
+                            const tick = () => {
+                                sceneThreejs.draw();
+                                // rotation Control
+                                controls.update();
+                                window.requestAnimationFrame(tick);
+                            };
+                            tick();
+                        })
+
+
+                    // threeGLTFLoader.load('../public/model3D/shiba.glb', (gltf) => {
+                    //     setmodel = nftAddTJS.addInteract2(gltf.scene, 'street', 55, false);
+                    // });
+
+
+                    // controls = new RotationControls(gltf.scene, {
+                    //     amp: 2,
+                    //     lerpFactor: .05
+                    // });
+
+                    // function modelLoader(url) {
+                    //     return new Promise((resolve, reject) => {
+                    //         threeGLTFLoader.load(url, data => resolve(data), null, reject);
+                    //     });
+                    // }
+
+                    // async function sss() {
+                    //     let ttt = await modelLoader("../public/model3D/shiba.glb");
+                    //     setmodel = ttt.scene;
+                    //     console.log(setmodel);
+                    //     controls = new RotationControls(setmodel, {
+                    //         amp: 2,
+                    //         lerpFactor: .05
+                    //     });
+                    //     let modle2 = nftAddTJS.addInteract2(setmodel, 'street', 55, false);
+                    // }
+
+                    // sss();
+
+
+                    // console.log(setmodel);
+
+                    // let ttt = hi();
+                    // console.log(ttt);
+
+
 
                 })
             }).catch((error) => {
                 console.log(error);
             });
+
+        document.addEventListener('onInitThreejsRendering', (ev) => {
+            // set here extra rendering settings after init
+            console.log('onInitThreejsRendering is available only outside containerEvent!');
+        });
     </script>
 
 </body>
