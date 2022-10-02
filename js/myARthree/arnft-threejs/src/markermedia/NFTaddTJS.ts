@@ -382,6 +382,8 @@ export default class NFTaddTJS {
             });
             callback(gltf);
             root.add(model);
+
+            console.log(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
