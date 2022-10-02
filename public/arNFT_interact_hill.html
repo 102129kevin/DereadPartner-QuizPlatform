@@ -83,9 +83,9 @@
                     function modelLoader(modelPath, size) {
                         return new Promise((resolve, reject) => {
                             nftAddTJS.addModelWithCallback(modelPath, "street", (model) => {
-                                model.scale.set(size, size, size);
+                                model.scene.scale.set(size, size, size);
                                 // console.log("in modelLoader");
-                                resolve(model);
+                                resolve(model.scene);
                             }, false);
                         });
                     }
