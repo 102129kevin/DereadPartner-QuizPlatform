@@ -10,6 +10,7 @@ import {
     MathUtils
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { Utils } from "../utils/Utils";
 import { ARnftFilter } from "../filters/ARnftFilter";
 import SceneRendererTJS from "../SceneRendererTJS";
@@ -311,6 +312,51 @@ export default class NFTaddTJS {
         return model;
     }
 
+    public addFBX(url: string, name: string, callback: (object: any) => {}, objVisibility: boolean) {
+        const root = new Object3D();
+        root.name = "root-" + name;
+        this.scene.add(root);
+        let model: any;
+        /* Load Model */
+        const fbxLoader = new FBXLoader();
+        fbxLoader.load(url, (obj) => {
+            model = obj;
+            //model.scale.set(2, 2, 2);
+            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+                var msg = ev.detail;
+                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+                model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+                //model.position.z = 20;
+            });
+            callback(obj);
+            root.add(model);
+        });
+        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+            root.visible = true;
+            model.visible = true;
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
+                root.rotation.setFromVector3(filter[1]);
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
+            } else {
+                root.matrixAutoUpdate = false;
+                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
+                Utils.setMatrix(root.matrix, matrix);
+            }
+        });
+        this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
+            root.visible = objVisibility;
+            model.visible = objVisibility;
+        });
+        this.names.push(name);
+    }
+
     /**
      * The addModelWithCallback function will add a model to the Renderer root. You need to associate a name of the Entity.
      * You can modify the model rotation, scale and other properties with the callback.
@@ -333,7 +379,7 @@ export default class NFTaddTJS {
                 model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
                 model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
             });
-            callback(gltf);
+            callback(model);
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {

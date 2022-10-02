@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>ARnft example showing a simple red cube</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
-    <link rel="stylesheet" href="/examples/css/nft-style.css">
+    <link rel="stylesheet" href="../examples/css/nft-style.css">
 
     <script type="importmap">
         { 
@@ -24,8 +24,10 @@
     <script src="/dist/ARnft.js"></script>
 
     <script type="module">
+        //import THREE from 'three'
         import RotationControls from '/js/threeRotate/index.js';
         import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+        // import { FBXLoader } from '../node_modules/three/examples/jsm/loaders/FBXLoader.js'
 
         let width = 640;
         let height = 480;
@@ -63,59 +65,46 @@
                         true);
                     sceneThreejs.initRenderer();
 
-                    const threeGLTFLoader = new GLTFLoader();
+
                     const renderer = sceneThreejs.getRenderer();
                     const scene = sceneThreejs.getScene();
-                    let setmodel;
-
                     renderer.outputEncoding = THREE.sRGBEncoding;
                     renderer.physicallyCorrectLights = true;
-                    let directionalLight = new THREE.DirectionalLight('#fff', 0.4);
-                    directionalLight.position.set(0.5, 0, 0.866);
-                    scene.add(directionalLight)
+
+                    let light = new THREE.AmbientLight(0xffffff, 0.9);
+                    scene.add(light);
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
 
                     let setModel;
-                    let size;
-                    let modelPath = "/public/model3D/planet.glb";
+                    let modelPath = "../public/model3D/flatGround.glb";
 
                     function modelLoader(modelPath, size) {
                         return new Promise((resolve, reject) => {
-                            nftAddTJS.addModelWithCallback(modelPath, "street", (gltf) => {
-                                gltf.scene.scale.set(size, size, size);
-                                setModel = gltf.scene;
-                                //console.log("in modelLoader");
-                                resolve(setModel);
-
+                            nftAddTJS.addModelWithCallback(modelPath, "street", (model) => {
+                                model.scale.set(size, size, size);
+                                // console.log("in modelLoader");
+                                resolve(model);
                             }, false);
                         });
                     }
 
-                    modelLoader(modelPath, 50)
-                        .then(function () {
-                            // console.log(a);
-                            controls = new RotationControls(setModel, {
-                                amp: 3,
-                                lerpFactor: .05
-                            });
-                        })
-                        .then(() => {
-                            const tick = () => {
-                                sceneThreejs.draw();
-                                // rotation Control
-                                controls.update();
-                                window.requestAnimationFrame(tick);
-                            };
-                            tick();
-                        })
-
-
-                    // threeGLTFLoader.load('../public/model3D/shiba.glb', (gltf) => {
-                    // this will return error
-                    //     setmodel = nftAddTJS.addInteract2(gltf.scene, 'street', 55, false);
-                    // });
+                    modelLoader(modelPath, 2000).then((objOK) => {
+                        //console.log(a);
+                        controls = new RotationControls(objOK, {
+                            amp: 2,
+                            lerpFactor: .05
+                        });
+                    }).then(() => {
+                        const tick = () => {
+                            sceneThreejs.draw();
+                            // rotation Control
+                            controls.update();
+                            window.requestAnimationFrame(tick);
+                        };
+                        tick();
+                    })
 
                 })
             }).catch((error) => {
