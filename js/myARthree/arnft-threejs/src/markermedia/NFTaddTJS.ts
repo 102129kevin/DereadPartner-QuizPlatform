@@ -322,6 +322,7 @@ export default class NFTaddTJS {
         fbxLoader.load(url, (obj) => {
             model = obj;
             //model.scale.set(2, 2, 2);
+            console.log(model);
             this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
                 var msg = ev.detail;
                 model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
@@ -379,7 +380,7 @@ export default class NFTaddTJS {
                 model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
                 model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
             });
-            callback(model);
+            callback(gltf);
             root.add(model);
         });
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
