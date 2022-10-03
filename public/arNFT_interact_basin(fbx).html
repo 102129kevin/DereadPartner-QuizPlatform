@@ -91,16 +91,36 @@
                                 obj.scale.set(size, size, size);
                                 // console.log("in modelLoader");
 
-                                obj.traverse(function (child) {
-                                    if (child.isMesh) {
-                                        if (child.material) {
-                                            child.material.transparent = false
-                                            child.material.polygonOffset = true
-                                            child.material.polygonOffsetFactor = 0.0
-                                            child.material.polygonOffsetUnits = -1.0
-                                        }
-                                    }
-                                })
+                                // obj.traverse(function (child) {
+                                //     if (child.isMesh) {
+                                //         if (child.material) {
+                                //             child.material.transparent = false
+                                //             child.material.polygonOffset = true
+                                //             child.material.polygonOffsetFactor = 0.0
+                                //             child.material.polygonOffsetUnits = -1.0
+                                //         }
+                                //     }
+                                // })
+
+
+                                obj.children[0].children[0].material.transparent = false
+                                obj.children[0].children[0].material.polygonOffset = true
+                                obj.children[0].children[0].material.polygonOffsetFactor = 0.0
+                                obj.children[0].children[0].material.polygonOffsetUnits = -1.0
+
+                                obj.children[0].children[1].material.transparent = false
+                                obj.children[0].children[1].material.polygonOffset = true
+                                obj.children[0].children[1].material.polygonOffsetFactor = 0.0
+                                obj.children[0].children[1].material.polygonOffsetUnits = -1.0
+
+                                obj.children[0].children[2].material.transparent = false
+                                obj.children[0].children[2].material.polygonOffset = true
+                                obj.children[0].children[2].material.polygonOffsetFactor = 0.0
+                                obj.children[0].children[2].material.polygonOffsetUnits = -1.0
+
+
+
+
 
                                 resolve(obj);
                             }, false);
