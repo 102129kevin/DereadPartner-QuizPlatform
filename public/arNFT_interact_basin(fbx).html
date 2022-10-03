@@ -90,12 +90,24 @@
                             nftAddTJS.addFBX(modelPath, "street", (obj) => {
                                 obj.scale.set(size, size, size);
                                 // console.log("in modelLoader");
+
+                                obj.traverse(function (child) {
+                                    if (child.isMesh) {
+                                        if (child.material) {
+                                            child.material.transparent = false
+                                            child.material.polygonOffset = true
+                                            child.material.polygonOffsetFactor = 0.0
+                                            child.material.polygonOffsetUnits = -1.0
+                                        }
+                                    }
+                                })
+
                                 resolve(obj);
                             }, false);
                         });
                     }
 
-                    modelLoader(modelPath, 2).then((objOK) => {
+                    modelLoader(modelPath, 3).then((objOK) => {
                         //console.log(a);
                         controls = new RotationControls(objOK, {
                             amp: 2,
