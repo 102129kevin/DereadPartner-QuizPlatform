@@ -375,6 +375,9 @@ export default class NFTaddTJS {
         const threeGLTFLoader = new GLTFLoader();
         threeGLTFLoader.load(url, (gltf) => {
             model = gltf.scene;
+
+            console.log("load's model visible:", model.visible);
+
             this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
                 var msg = ev.detail;
                 model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
@@ -388,6 +391,7 @@ export default class NFTaddTJS {
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = true;
             model.visible = true;
+            console.log("getMatrixGL_RH's model visible:", model.visible);
             if (this._oef === true) {
                 let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
                 filter = this._filter.update(ev.detail.matrixGL_RH);
@@ -407,6 +411,7 @@ export default class NFTaddTJS {
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
             model.visible = objVisibility;
+            console.log("nftTrackingLost's model visible:", model.visible);
         });
         this.names.push(name);
     }

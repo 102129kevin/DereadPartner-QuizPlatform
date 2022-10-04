@@ -62,7 +62,7 @@
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
-                    nftAddTJS.addModel('../public/model3D/basin.glb', 'pinball', 2000, false);
+                    nftAddTJS.addModel('./data/models/Duck/glTF/Duck.glb', 'pinball', 55, false);
                     const tick = () => {
                         sceneThreejs.draw();
                         window.requestAnimationFrame(tick)
