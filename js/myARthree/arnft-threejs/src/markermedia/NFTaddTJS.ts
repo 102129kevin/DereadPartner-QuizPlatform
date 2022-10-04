@@ -324,7 +324,7 @@ export default class NFTaddTJS {
             return new Promise((resolve, reject) => {
                 fbxLoader.load(url, (obj) => {
                     model = obj;
-                    callback(obj);
+                    callback(model);
                     root.add(model);
                     resolve("fbxMaker done!");
                 });
