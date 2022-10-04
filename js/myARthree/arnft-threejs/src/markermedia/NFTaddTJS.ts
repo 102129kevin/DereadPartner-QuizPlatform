@@ -373,6 +373,7 @@ export default class NFTaddTJS {
         let model: any;
         /* Load Model */
         const threeGLTFLoader = new GLTFLoader();
+
         threeGLTFLoader.load(url, (gltf) => {
             model = gltf.scene;
 
@@ -414,6 +415,67 @@ export default class NFTaddTJS {
             console.log("nftTrackingLost's model visible:", model.visible);
         });
         this.names.push(name);
+    }
+
+    public addModelWithCallback2(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean) {
+        const root = new Object3D();
+        root.name = "root-" + name;
+        this.scene.add(root);
+        let model: any;
+        /* Load Model */
+        const threeGLTFLoader = new GLTFLoader();
+
+        function modelMaker() {
+            return new Promise((resolve, reject) => {
+                threeGLTFLoader.load(url, (gltf) => {
+                    model = gltf.scene;
+                    console.log("load's model visible:", model.visible);
+                    callback(gltf);
+                    root.add(model);
+                    console.log(model);
+                    resolve("sss");
+                });
+            });
+        }
+
+        modelMaker().then((done) => {
+            console.log(done);
+            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+                var msg = ev.detail;
+                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+                model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+            });
+
+            this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+                root.visible = true;
+                model.visible = true;
+                console.log("getMatrixGL_RH's model visible:", model.visible);
+                if (this._oef === true) {
+                    let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                    filter = this._filter.update(ev.detail.matrixGL_RH);
+                    root.position.setX(filter[0].x);
+                    root.position.setY(filter[0].y);
+                    root.position.setZ(filter[0].z);
+                    root.rotation.setFromVector3(filter[1]);
+                    root.scale.setX(filter[2].x);
+                    root.scale.setY(filter[2].y);
+                    root.scale.setZ(filter[2].z);
+                } else {
+                    root.matrixAutoUpdate = false;
+                    const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
+                    Utils.setMatrix(root.matrix, matrix);
+                }
+            });
+            this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
+                root.visible = objVisibility;
+                model.visible = objVisibility;
+                console.log("nftTrackingLost's model visible:", model.visible);
+            });
+            this.names.push(name);
+        })
+
+
+
     }
 
     /**

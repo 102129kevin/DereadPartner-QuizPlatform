@@ -25,6 +25,7 @@ export default class NFTaddTJS {
     addInteract2(model: Object3D, name: string, scale: number, objVisibility: boolean): Object3D<import("three").Event>;
     addFBX(url: string, name: string, callback: (object: any) => {}, objVisibility: boolean): void;
     addModelWithCallback(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean): void;
+    addModelWithCallback2(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean): void;
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     getNames(): string[];
