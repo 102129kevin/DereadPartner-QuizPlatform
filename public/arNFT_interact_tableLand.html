@@ -26,8 +26,7 @@
     <script type="module">
         //import THREE from 'three'
         import RotationControls from '/js/threeRotate/index.js';
-        import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-        // import { FBXLoader } from '../node_modules/three/examples/jsm/loaders/FBXLoader.js'
+        // import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
         let width = 640;
         let height = 480;
@@ -77,20 +76,28 @@
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
 
+                    // const gltfLoader = new GLTFLoader();
+                    // gltfLoader.load('../public/model3D/shiba.glb', (gltf) => {
+                    //     console.log(gltf);
+                    //     console.log(typeof gltf.scene);
+                    // });
+
                     let setModel;
-                    let modelPath = "../public/model3D/tableLand.glb";
+                    let modelPath = "../public/model3D/tableLand.fbx";
 
                     function modelLoader(modelPath, size) {
                         return new Promise((resolve, reject) => {
-                            nftAddTJS.addModelWithCallback(modelPath, "street", (model) => {
-                                model.scale.set(size, size, size);
-                                // console.log("in modelLoader");
-                                resolve(model);
+                            nftAddTJS.addFBX(modelPath, "street", (obj) => {
+                                obj.scale.set(size, size, size);
+
+                                console.log(obj);
+
+                                resolve(obj);
                             }, false);
                         });
                     }
 
-                    modelLoader(modelPath, 2000).then((objOK) => {
+                    modelLoader(modelPath, 3).then((objOK) => {
                         //console.log(a);
                         controls = new RotationControls(objOK, {
                             amp: 2,
