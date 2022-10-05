@@ -595,6 +595,61 @@ export default class NFTaddTJS {
         this.names.push(name);
     }
 
+    public addVideo2(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean, htmlEl: NodeListOf<Element>) {
+        const root = new Object3D();
+        root.name = "root-" + name;
+        this.scene.add(root);
+        const ARVideo: HTMLVideoElement = document.getElementById(id) as HTMLVideoElement;
+        const texture = new VideoTexture(ARVideo as HTMLVideoElement);
+        const mat = new MeshStandardMaterial({ color: 0xbbbbff, map: texture });
+        const planeGeom = new PlaneGeometry(configs.w, configs.h, configs.ws, configs.hs);
+        const plane = new Mesh(planeGeom, mat);
+        plane.scale.set(scale, scale, scale);
+        this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+            var msg = ev.detail;
+            plane.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+            plane.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+        });
+        root.add(plane);
+        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+            ARVideo.play();
+            root.visible = true;
+            plane.visible = true;
+
+            htmlEl.forEach(function (item) {
+                item.classList.remove("nftLost");
+                item.classList.add("nftFound");
+            });
+
+            if (this._oef === true) {
+                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                filter = this._filter.update(ev.detail.matrixGL_RH);
+                root.position.setX(filter[0].x);
+                root.position.setY(filter[0].y);
+                root.position.setZ(filter[0].z);
+                root.rotation.setFromVector3(filter[1]);
+                root.scale.setX(filter[2].x);
+                root.scale.setY(filter[2].y);
+                root.scale.setZ(filter[2].z);
+            } else {
+                root.matrixAutoUpdate = false;
+                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
+                Utils.setMatrix(root.matrix, matrix);
+            }
+        });
+        this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
+            root.visible = objVisibility;
+            plane.visible = objVisibility;
+            ARVideo.pause();
+
+            htmlEl.forEach(function (item) {
+                item.classList.remove("nftFound");
+                item.classList.add("nftLost");
+            });
+        });
+        this.names.push(name);
+    }
+
     /**
      * You can get the names of the entities used in your project.
      * @returns the names of the entities

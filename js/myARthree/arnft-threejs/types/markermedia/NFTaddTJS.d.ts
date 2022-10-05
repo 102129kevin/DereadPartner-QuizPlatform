@@ -32,6 +32,7 @@ export default class NFTaddTJS {
     addFBX(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean): void;
     addImage(imageUrl: string, name: string, color: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
     addVideo(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean): void;
+    addVideo2(id: string, name: string, scale: number, configs: IPlaneConfig, objVisibility: boolean, htmlEl: NodeListOf<Element>): void;
     getNames(): string[];
     set oef(enable: boolean);
     get oef(): boolean;
