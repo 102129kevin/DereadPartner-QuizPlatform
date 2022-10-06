@@ -612,7 +612,7 @@ export default class NFTaddTJS {
         });
         root.add(plane);
         this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
-            ARVideo.play();
+            //ARVideo.play();
             root.visible = true;
             plane.visible = true;
 

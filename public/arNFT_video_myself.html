@@ -6,24 +6,9 @@
     <title>ARnft example showing a video</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=1">
     <link rel="stylesheet" href="/examples/css/nft-style.css">
-
-    <style>
-        .pausee {
-            z-index: 20;
-            position: absolute;
-            bottom: 40px;
-            left: 170px;
-        }
-
-        .nftFound {
-            visibility: visible;
-        }
-
-        .nftLost {
-            visibility: hidden;
-        }
-    </style>
-
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/videoPage.css">
 </head>
 
 <body>
@@ -44,17 +29,75 @@
     </video>
 
     <script>
-        window.addEventListener("load", function (event) {
-            document.getElementById("unmuted").addEventListener("click", function () {
-                var vid = document.getElementById("arvideo");
-                vid.muted = false;
-            })
+        // function play(videoElement) {
+        //     //videoElement.play();
+        //     console.log("play");
+        // }
+
+        // function pause(videoElement) {
+        //     videoElement.pause();
+        //     console.log("pause");
+        // }
+
+        // function muted(videoElement) {
+        //     //videoElement.muted = true;
+        //     console.log("muted");
+        // }
+
+        // function unmuted(videoElement) {
+        //     //videoElement.muted = false;
+        //     console.log("unmuted");
+        // }
+
+        window.addEventListener("load", function () {
+            let vid = document.getElementById("arvideo");
+            let toolbar = document.querySelector(".toolbar");
+
+            //只是為了叫出那東西，不是很好寫法
+            vid.play();
+            vid.pause();
+
+            let pauseOrPlay = document.getElementById("pauseOrPlay");
+            let mutedOrUnmuted = document.getElementById("mutedOrUnmuted");
+
+            toolbar.addEventListener("click", function (ev) {
+
+                // //pauseOrPlay
+
+                if (ev.target.id === "pauseOrPlay") {
+                    if (ev.target.innerHTML === "play") {
+                        vid.play();
+                        ev.target.innerHTML = "pause";
+                    }
+                    else {
+                        vid.pause();
+                        ev.target.innerHTML = "play";
+                    }
+                }
+
+                //mutedOrUnmuted
+                if (ev.target.id === "mutedOrUnmuted") {
+                    if (ev.target.innerHTML === "unmuted") {
+                        vid.muted = false;
+                        ev.target.innerHTML = "muted";
+                    }
+                    else {
+                        vid.muted = true;
+                        ev.target.innerHTML = "unmuted";
+                    }
+                }
+
+
+            }, false);
+
+
         });
 
     </script>
 
-    <div class="nftLost">
-        <button id="unmuted" class="pausee">取消禁音</button>
+    <div class="nftLost toolbar cAlign">
+        <button id="pauseOrPlay" class="pause">play</button>
+        <button id="mutedOrUnmuted" class="pause">unmuted</button>
     </div>
 
     <script src="/examples/js/third_party/three.js/three.min.js"></script>

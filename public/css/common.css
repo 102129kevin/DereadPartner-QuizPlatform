@@ -1,0 +1,35 @@
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul {
+    list-style: none;
+}
+
+a,
+a:visited {
+    text-decoration: none;
+}
+
+.lAlign {
+    text-align: center;
+}
+
+.rAlign {
+    text-align: right;
+}
+
+.cAlign {
+    text-align: center;
+}
+
+.cFlexAlign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.color-gray {
+    color: #333131;
+}

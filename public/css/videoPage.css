@@ -1,0 +1,16 @@
+.toolbar {
+    z-index: 20;
+    position: absolute;
+    bottom: 80px;
+    width: 100%;
+}
+
+.pause {}
+
+.nftFound {
+    visibility: visible;
+}
+
+.nftLost {
+    visibility: hidden;
+}
