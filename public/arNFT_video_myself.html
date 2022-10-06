@@ -18,62 +18,18 @@
         🖼 Marker Image
     </a>
 
-    <!--
-    <video loop autoplay webkit-playsinline playsinline crossOrigin="anonymous" id="arvideo">
-        <source src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/sea4.mp4?v=1661482537916" type='video/mp4'>
-    </video>
-    -->
-
     <video id="arvideo" muted loop autoplay webkit-playsinline playsinline crossOrigin="anonymous">
-        <source src="assest/video/sea4.mp4" type='video/mp4'>
+        <source src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/sea4.mp4?v=1665071703639"
+            type='video/mp4'>
     </video>
 
     <script>
-        // function play(videoElement) {
-        //     //videoElement.play();
-        //     console.log("play");
-        // }
-
-        // function pause(videoElement) {
-        //     videoElement.pause();
-        //     console.log("pause");
-        // }
-
-        // function muted(videoElement) {
-        //     //videoElement.muted = true;
-        //     console.log("muted");
-        // }
-
-        // function unmuted(videoElement) {
-        //     //videoElement.muted = false;
-        //     console.log("unmuted");
-        // }
-
         window.addEventListener("load", function () {
             let vid = document.getElementById("arvideo");
             let toolbar = document.querySelector(".toolbar");
-
-            //只是為了叫出那東西，不是很好寫法
-            vid.play();
-            vid.pause();
-
-            let pauseOrPlay = document.getElementById("pauseOrPlay");
             let mutedOrUnmuted = document.getElementById("mutedOrUnmuted");
 
             toolbar.addEventListener("click", function (ev) {
-
-                // //pauseOrPlay
-
-                if (ev.target.id === "pauseOrPlay") {
-                    if (ev.target.innerHTML === "play") {
-                        vid.play();
-                        ev.target.innerHTML = "pause";
-                    }
-                    else {
-                        vid.pause();
-                        ev.target.innerHTML = "play";
-                    }
-                }
 
                 //mutedOrUnmuted
                 if (ev.target.id === "mutedOrUnmuted") {
@@ -86,17 +42,11 @@
                         ev.target.innerHTML = "unmuted";
                     }
                 }
-
-
             }, false);
-
-
         });
-
     </script>
 
     <div class="nftLost toolbar cAlign">
-        <button id="pauseOrPlay" class="pause">play</button>
         <button id="mutedOrUnmuted" class="pause">unmuted</button>
     </div>
 
