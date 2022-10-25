@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            let regBtn = document.getElementById("regBtn");
+            regBtn.addEventListener("click", function () {
+                //抓取元素內容
+                let regName = document.getElementsByName("regName")[0].value;
+                let regID = document.getElementsByName("regID")[0].value;
+                let regPasswd = document.getElementsByName("regPasswd")[0].value;
+                let regPasswd2 = document.getElementsByName("regPasswd2")[0].value;
+                let regClass = document.getElementById("regClassList");
+                let regClassValue = regClass.options[regClass.selectedIndex].value;
+
+                //送出前檢查值是否都有填入
+                if ((regName == "") || (regID == "") ||
+                    (regPasswd == "") || (regPasswd2 == "") ||
+                    (regClassValue == "defaultClass")) {
+                    alert("請確認是否填妥註冊資料!");
+                }
+                else {
+                    let regClassText = regClass.options[regClass.selectedIndex].text;
+
+                    //製作資料
+                    let mdata = {
+                        regName: regName,
+                        regID: regID,
+                        regPasswd: regPasswd,
+                        regPasswd2: regPasswd2,
+                        regClassText: regClassText
+                    }
+
+                    //發出request送到server端
+                    $.ajax({
+                        type: "post",
+                        url: "/reg/register",
+                        cache: false,
+                        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                        data: mdata,
+                        success: function (msg) {
+                            alert(msg);
+                            if (msg == "新增帳號成功，請重新登入唷") {
+                                window.location.href = "/";
+                                console.log("hi");
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h1>註冊頁面</h1>
+    <hr />
+
+    <div>
+        姓名:<input type="text" name="regName" />
+    </div>
+
+    <div>
+        帳號:<input type="text" name="regID" />
+    </div>
+
+    <div>
+        密碼:<input type="password" name="regPasswd" />
+    </div>
+
+    <div>
+        確認密碼:<input type="password" name="regPasswd2" />
+    </div>
+
+    <div>
+        班級:<select id="regClassList">
+            <option value="defaultClass">請選擇您的班級</option>
+            <option>一年一班</option>
+            <option>一年二班</option>
+            <option>一年三班</option>
+        </select>
+    </div>
+
+    <div>
+        <button id="regBtn">註冊</button>
+    </div>
+
+
+</body>
+
+
+</html>

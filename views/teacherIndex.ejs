@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>老師主控台</title>
+
+    <style>
+        .classBoard {
+            border: 1px solid;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>您好， 老師</h1>
+    <form action="/login/logout" method="post">
+        <button>登出</button>
+    </form>
+    <hr />
+
+    <h2>班級資訊</h2>
+
+    <% if(r_classInfo) { %>
+        <% Object.entries(r_classInfo).forEach(([key, value])=> { %>
+            <div class="classBoard">
+                <%= value.cName %>
+                    <ul>
+                        <% value.cMember.forEach((stuID)=> { %>
+                            <li>
+                                <%= stuID %>
+                            </li>
+                            <% }) %>
+                    </ul>
+            </div>
+            <% }) %>
+                <%} %>
+
+</body>
+
+</html>

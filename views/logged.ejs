@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>登入狀態測試頁面(可模擬為首頁)</title>
+</head>
+
+<body>
+    <% if (name) { %>
+        <h1>我的id是: <%= name %>
+        </h1>
+        <form action="/login/logout" method="post">
+            <button id="logOut">登出</button>
+        </form>
+        <% } else { %>
+            <h1>您尚未登入</h1>
+            <a href="/public/login.html">
+                <button>登入</button>
+            </a>
+            <a href="/public/register.html">
+                <button>加入會員</button>
+            </a>
+
+            <% } %>
+                <ul>我喜歡的東西:</ul>
+</body>
+
+</html>
