@@ -11,12 +11,21 @@
             margin-bottom: 10px;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="module" src="/public/js/view/teacherIndex.js"></script>
 </head>
 
 <body>
-    <h1>您好， 老師</h1>
+    <h1>您好， <%= r_trData["name"] %>老師</h1>
     <form action="/login/logout" method="post">
         <button>登出</button>
+    </form>
+    <hr />
+
+    <h2>常用功能</h2>
+    <form action="/teacher/addClass" method="post">
+        新的班級名稱:<input type="text" name="newClassName">
+        <button>新增班級</button>
     </form>
     <hr />
 
@@ -25,14 +34,31 @@
     <% if(r_classInfo) { %>
         <% Object.entries(r_classInfo).forEach(([key, value])=> { %>
             <div class="classBoard">
-                <%= value.cName %>
+                <div>
+                    班級名稱:<%= value.cName %>
+                </div>
+                <div>
+                    學生名單:
+                </div>
+
+                <% if (value.cMember.length> 0){ %>
                     <ul>
+
                         <% value.cMember.forEach((stuID)=> { %>
                             <li>
                                 <%= stuID %>
                             </li>
                             <% }) %>
                     </ul>
+                    <% } %>
+
+                        <hr />
+                        <h3>班級操作</h3>
+                        <form class="addStuForm" action="/teacher/addStu/<%= value.cID %>" method="get">
+                            新增學生(學號):
+                            <input type="text" name="newStuId" />
+                            <button>加入</button>
+                        </form>
             </div>
             <% }) %>
                 <%} %>

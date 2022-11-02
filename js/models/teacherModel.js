@@ -6,6 +6,10 @@ function isKeyExist(obj, key) {
     return key in obj;
 }
 
+function isFieldUndefined(obj, field) {
+    return (obj[field] == undefined)
+}
+
 function makeClassData(classRecord) {
     let result = {};
     for (key in classRecord) {
@@ -15,20 +19,13 @@ function makeClassData(classRecord) {
 }
 
 module.exports = class TeacherModel {
-    // 取得老師整個資料
-    // 回傳
-    // 名字、班級...
-    // 統一由這個方法取得整包資料
-    // 有什麼做什麼
-    // 回傳給controller後render
+
     getTeacherData(req) {
         let docRef = firestore.doc(firebaseDB, "teachers", req.session.name);
+
         return new Promise(function (resolve, reject) {
             firestore.getDoc(docRef).then((snapshot) => {
                 let trData = snapshot.data();
-                if (!isKeyExist(trData, "cIDList")) {
-                    trData["cIDList"] = undefined;
-                }
                 resolve(trData);
             }).catch((err) => {
                 console.log("(teacherModel)not found this teacher..");
@@ -37,10 +34,12 @@ module.exports = class TeacherModel {
         })
     }
 
+    // 欠改 應該可合併至classModel
     getClassCMember(list) {
         let colRef = firestore.collection(firebaseDB, "classes");
         let q = firestore.where("cID", "in", list);
         let classInfo = {};
+
         return new Promise(function (resolve, reject) {
             firestore.getDocs(firestore.query(colRef, q)).then((snapshot) => {
                 snapshot.forEach((doc) => {
@@ -53,5 +52,39 @@ module.exports = class TeacherModel {
                 reject(err);
             })
         })
+    }
+
+    preprocessTeacherData(trData) {
+        if (!isKeyExist(trData, "cIDList")) {
+            trData["cIDList"] = undefined;
+        }
+
+        return trData;
+    }
+
+    addcIdList(req, cId, trData) {
+        let docRef = firestore.doc(firebaseDB, "teachers", req.session.name);
+
+        // 判斷cIDList欄位經過preprocessTeacherData處理後是否為undefined
+        if (!isFieldUndefined(trData, "cIDList")) {
+            trData["cIDList"].push(cId);
+        }
+        else {
+            trData["cIDList"] = [];
+            trData["cIDList"].push(cId);
+        }
+
+        return new Promise(function (resolve, reject) {
+            firestore.setDoc(docRef, trData, { merge: true })
+                .then(() => {
+                    console.log("done in teacherModel");
+                    resolve("done");
+                })
+                .catch((err) => {
+                    console.log("(teacherModel) addcIdList Failed");
+                    reject(err);
+                })
+        })
+
     }
 };
