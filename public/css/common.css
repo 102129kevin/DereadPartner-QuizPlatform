@@ -30,6 +30,10 @@ a:visited {
     align-items: center;
 }
 
+.flexDirectionColumn {
+    flex-direction: column;
+}
+
 .color-gray {
     color: #333131;
 }
