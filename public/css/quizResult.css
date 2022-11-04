@@ -1,0 +1,49 @@
+.quizResult_logo {
+    width: 40%;
+}
+
+.quizResult_head {
+    margin: 48px 0 0 12px;
+}
+
+.quizResult_head div {
+    margin: 7px 0;
+}
+
+.quizResult_hello {
+    font-size: 26px;
+}
+
+.quizResult_word {
+    font-size: 18px;
+}
+
+.quizResult_body {
+    font-size: 18px;
+    margin: 40px auto;
+}
+
+.quizResult_question {
+    padding: 2px 0;
+    border-bottom: 1px solid #797878;
+}
+
+.quizResult-w-1 {
+    width: 15%;
+}
+
+.quizResult-w-2 {
+    width: 45%;
+}
+
+.quizResult-w-3 {
+    width: 40%;
+}
+
+.retry {
+    width: 80%;
+}
+
+.change {
+    width: 60%;
+}

@@ -1,0 +1,48 @@
+.stu_hello {
+    font-size: 40px;
+}
+
+.stu_learn_text {
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.stu_func {
+    margin: 25px 0;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.stu_func button {
+    background: transparent;
+}
+
+.stu_func div {
+    box-sizing: border-box;
+    padding: 3px;
+}
+
+.stu_history_text {
+    font-size: 24px;
+}
+
+.stu_course {
+    background-image: url("../assest/student/history.png");
+    background-size: cover;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 7px 0;
+}
+
+.area1 {
+    width: 28%;
+}
+
+.area2 {
+    padding: 32px 0;
+    width: 72%;
+}
+
+.area2 div {
+    padding: 4px 0;
+}

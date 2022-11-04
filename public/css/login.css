@@ -1,0 +1,55 @@
+.input_field {
+    width: 100%;
+    margin: 9px auto;
+    padding: 7px 0 7px 12px;
+    background-image: url("../assest/login/inputText.png");
+    background-size: 100% 100%;
+    font-size: 16px;
+}
+
+.login_block {
+    padding-top: 35%;
+}
+
+.login_title {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.login_input_box {
+    width: 60%;
+}
+
+.login_hint {
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.login_text_color {
+    color: #3E3A39;
+}
+
+.login_footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.login_container {
+    width: 50%;
+    position: relative;
+}
+
+.login_taiwan {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: none;
+    width: 300px;
+}
+
+.login_btn {
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    width: 65%;
+}

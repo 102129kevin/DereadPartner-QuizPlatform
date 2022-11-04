@@ -12,8 +12,16 @@ a:visited {
     text-decoration: none;
 }
 
+.borderNone {
+    border-style: none;
+}
+
+.background-trasparent {
+    background: transparent;
+}
+
 .lAlign {
-    text-align: center;
+    text-align: left;
 }
 
 .rAlign {
@@ -24,8 +32,25 @@ a:visited {
     text-align: center;
 }
 
+.jAlign {
+    text-align: justify;
+}
+
+.mAlign {
+    margin: 0 auto;
+}
+
 .cFlexAlign {
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flexAlignCneter {
     justify-content: center;
     align-items: center;
 }
@@ -34,6 +59,78 @@ a:visited {
     flex-direction: column;
 }
 
+.flexDirectionRow {
+    flex-direction: row;
+}
+
+.flex-newline-wrap {
+    flex-wrap: wrap;
+}
+
 .color-gray {
-    color: #333131;
+    color: #353535;
+}
+
+.color-gray1 {
+    color: #3e3a39;
+}
+
+.color-green {
+    color: #5a7016;
+}
+
+.color-red {
+    color: #f04a41;
+}
+
+.color-blue {
+    color: #8b9cc5;
+}
+
+.color-blue1 {
+    color: #1673ff;
+}
+
+.background-main {
+    background-color: #DCDDDD;
+}
+
+.background-white {
+    background-color: white;
+}
+
+.font-default {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.font-weight-400 {
+    font-weight: 400;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.font-weight-700 {
+    font-weight: 700;
+}
+
+.font-weight-900 {
+    font-weight: 900;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.margin-0-auto {
+    margin: 0 auto;
+}
+
+.margin-auto-0 {
+    margin: auto 0;
 }

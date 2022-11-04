@@ -1,0 +1,28 @@
+.content {
+    margin: 20px;
+}
+
+.stu_title {
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 80%;
+}
+
+.icon {
+    width: 30%;
+}
+
+.unit_icon {
+    width: 55%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.quiz_unitIcon {
+    position: relative;
+}
