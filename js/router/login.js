@@ -14,6 +14,8 @@ function checkAuth(req, res, next) {
 
 let loginController = new LoginController();
 
+loginAPI.get("/", loginController.renderPage);
+
 loginAPI.post("/post", loginController.Login);
 
 loginAPI.post("/logout", checkAuth, loginController.logout);

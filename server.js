@@ -8,6 +8,7 @@ let cors = require('cors');
 let loginAPI = require("./js/router/login");
 let regAPI = require("./js/router/register");
 let teacherAPI = require("./js/router/teacher");
+let studentAPI = require("./js/router/student");
 
 //cors
 let corsOption = {
@@ -54,6 +55,7 @@ app.use('/js', express.static(path.join(__dirname, 'js')));
 app.use("/login", loginAPI);
 app.use("/reg", regAPI);
 app.use("/teacher", teacherAPI);
+app.use("/student", studentAPI);
 
 //get Index request
 app.get('/', (req, res) => {

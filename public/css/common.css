@@ -50,6 +50,10 @@ a:visited {
     display: flex;
 }
 
+.d-none {
+    display: none;
+}
+
 .flexAlignCneter {
     justify-content: center;
     align-items: center;
@@ -81,6 +85,10 @@ a:visited {
 
 .color-red {
     color: #f04a41;
+}
+
+.color-red1 {
+    color: #c30d23;
 }
 
 .color-blue {

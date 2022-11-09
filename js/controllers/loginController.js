@@ -25,6 +25,10 @@ function createSession(req) {
 
 module.exports = class LoginController {
 
+    renderPage(req, res, next) {
+        res.render("login");
+    }
+
     Login(req, res, next) {
         // model查詢用戶資料
         loginModel.getUserData(req.body["userId"], req.body["logType"]).then(function (accData) {
@@ -43,7 +47,6 @@ module.exports = class LoginController {
             res.send("您尚未註冊");
         })
     }
-    // 如果正確 > 建立session > 登入系統(分老師與學生頁面(兩個view))
 
     // 登出
     logout(req, res, next) {

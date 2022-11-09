@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/quizTest.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="/public/js/frontEndJS/studentTestPage.js"></script>
+</head>
+
+<body class="font-default content background-main">
+    <div class="d-none" id="qUnit">
+        <%= r_unit %>
+    </div>
+
+    <div class="d-flex stu_title flexDirectionRow">
+        <div class="w-50 lAlign">
+            <img src="/public/assest/Logo.png" class="logo" />
+        </div>
+
+        <div class="w-50 rAlign quiz_unitIcon">
+            <img src="/public/assest/stu_quiz_test/unitIcon.png" class="unit_icon" />
+        </div>
+    </div>
+
+    <div class="outer color-gray1 font-weight-500 font-size-16">
+        <div class="quizTest_question jAlign  background-white" id="qTopic"></div>
+
+        <div class="quizTest_answer">
+            <div class="quizTest_option d-flex flexDirectionRow">
+                <div class="quizTest_left cAlign">(A)</div>
+                <div class="quizTest_right" id="qChoice1"></div>
+            </div>
+            <div class="quizTest_option d-flex flexDirectionRow">
+                <div class="quizTest_left cAlign">(B)</div>
+                <div class="quizTest_right" id="qChoice2"></div>
+            </div>
+            <div class="quizTest_option d-flex flexDirectionRow">
+                <div class="quizTest_left cAlign">(C)</div>
+                <div class="quizTest_right" id="qChoice3"></div>
+            </div>
+            <div class="quizTest_option d-flex flexDirectionRow">
+                <div class="quizTest_left cAlign">(D)</div>
+                <div class="quizTest_right" id="qChoice4"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cFlexAlign flexDirectionRow quizTest_controll_container">
+        <div class="quizTest_controll">
+            <button class="borderNone background-trasparent" id="prev">
+                <img src="/public/assest/stu_quiz_test/leftArrow.png">
+            </button>
+        </div>
+
+        <div class="quizTest_progress cFlexAlign flexDirectionRow color-gray1">
+            <div class="quizTest_progress_num cAlign" id="qIndex"></div>
+            <div>/</div>
+            <div class="quizTest_progress_num cAlign" id="qNum"></div>
+        </div>
+
+        <div class="quizTest_controll">
+            <button class="borderNone background-trasparent" id="next">
+                <img src="/public/assest/stu_quiz_test/rightArrow.png">
+            </button>
+        </div>
+    </div>
+
+
+    <div class="cAlign">
+        <button id="qSubmit" hidden="true">提交</button>
+    </div>
+
+    <!--<form enctype="multipart/form-data" action="/student/quiz/unit1/answer" method="post"><input type="hidden" name="" value=""></form>-->
+
+</body>
+
+</html>

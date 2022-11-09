@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/lightbox.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/quizResult.css" />
+    <script src="/public/js/frontEndJS/studentQuizResultPage.js"></script>
+</head>
+
+<body class="font-default content background-main">
+
+    <div class="d-none" id="qUnit">
+        <%= r_unit %>
+    </div>
+
+    <div class="d-flex stu_title flexDirectionRow">
+        <div class="lAlign">
+            <img src="/public/assest/Logo.png" class="quizResult_logo" />
+        </div>
+    </div>
+
+    <div class="quizResult_head">
+        <div class="color-gray1 font-weight-700 quizResult_hello">
+            <%= r_stuName %>同學，你答對了<%= r_resultCorrectNum %>題!
+        </div>
+        <div class="color-green quizResult_word">很厲害喔!</div>
+    </div>
+
+    <div class="color-gray1 quizResult_body w-50">
+
+        <% for (let i=0; i < r_resultList.length; i++) { %>
+            <div class="cFlexAlign quizResult_question">
+                <div class="quizResult-w-1 font-weight-700 rAlign">
+                    <%=(i+1)%>
+                </div>
+
+                <% if(r_resultList[i].qCorrect==true){ %>
+                    <div class="quizResult-w-2 cAlign">O</div>
+                    <div class="quizResult-w-3">
+                        <button class="borderNone background-trasparent cFlexAlign">
+                            <img src="/public/assest/stu_quiz_end/lookQuestion_correct.png" />
+                        </button>
+                    </div>
+                    <% } else { %>
+                        <div class="quizResult-w-2 cAlign color-red1">X</div>
+                        <div class="quizResult-w-3">
+                            <a href="#<%=r_resultList[i].qId %>">
+                                <button class="borderNone background-trasparent cFlexAlign">
+                                    <img src="/public/assest/stu_quiz_end/lookQuestion_failed.png" />
+                                </button>
+                            </a>
+
+                            <a href="#" class="lightbox" id="<%=r_resultList[i].qId %>">
+                                <div class="background-white">
+                                    <%= r_resultList[i].qTopic %>
+                                        <img src="/public/assest/stu_quiz_end/lookQuestion_failed.png" />
+                                </div>
+
+                            </a>
+                        </div>
+                        <% } %>
+
+
+            </div>
+            <% } %>
+
+    </div>
+
+    <div class="cFlexAlign w-50 margin-0-auto">
+        <div class="w-50">
+            <button class="borderNone background-trasparent" id="testAgain">
+                <img src="/public/assest/stu_quiz_end/retry.png" class="retry" />
+            </button>
+        </div>
+
+        <div class="w-50">
+            <button class="borderNone background-trasparent" id="changeUnit">
+                <img src="/public/assest/stu_quiz_end/change.png" class="change" />
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>

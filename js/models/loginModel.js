@@ -13,7 +13,7 @@ module.exports = class LoginModel {
                 resolve(data);
             }).catch(function (err) {
                 reject(err);
-            })
+            });
         })
     }
 }

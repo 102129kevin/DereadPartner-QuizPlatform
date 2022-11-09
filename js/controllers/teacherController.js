@@ -39,17 +39,23 @@ module.exports = class TeacherController {
     // (if cMemeber.length == 0 --> 砍掉cMember欄位)
 
     async renderPage(req, res, next) {
+        if (req.session.name) {
+            try {
+                let trData = await teacherModel.getTeacherData(req);
+                let trName = trData["name"];
+                trData = teacherModel.preprocessTeacherData(trData);
+                let classInfo = await getClassInfo(trData);
 
-        try {
-            let trData = await teacherModel.getTeacherData(req);
-            trData = teacherModel.preprocessTeacherData(trData);
-            let classInfo = await getClassInfo(trData);
+                res.render("teacher", { r_trName: trName });
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+        else {
+            res.redirect("/login");
+        }
 
-            res.render("teacherIndex", { r_trData: trData, r_classInfo: classInfo });
-        }
-        catch (err) {
-            console.log(err);
-        }
     };
 
     async addClass(req, res, next) {

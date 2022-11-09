@@ -1,7 +1,7 @@
 // let check = require("./check");
 // let checkSIDFormat = check.checkSIDFormat;
 // let checkInputTextEmpty = check.checkInputTextEmpty;
-import { checkSIDFormat, checkInputTextEmpty } from "./check.js";
+import { checkSIDFormat, checkInputTextEmpty, checkTIDFormat } from "./check.js";
 
 function checksID(form) {
     let newStuId = form.newStuId.value;

@@ -6,44 +6,47 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" href="css/header.css" />
-    <link rel="stylesheet" type="text/css" href="css/student.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/student.css" />
+    <script src="/public/js/frontEndJS/studentPage.js"></script>
 </head>
 
 <body class="font-default content background-main">
     <div class="d-flex stu_title flexDirectionRow">
         <div class="w-50 lAlign">
-            <img src="./assest/Logo.png" class="logo" />
+            <img src="/public/assest/Logo.png" class="logo" />
         </div>
 
         <div class="w-50 rAlign">
-            <img src="./assest/stu_icon.png" class="icon" />
+            <img src="/public/assest/stu_icon.png" class="icon" />
         </div>
     </div>
 
     <div>
-        <div class="stu_hello font-weight-700 color-gray1">嗨!<span>楚瑜</span>同學。</div>
+        <div class="stu_hello font-weight-700 color-gray1">
+            嗨!<%= r_stuName %>同學。
+        </div>
         <div class="stu_learn_text color-green">開始學習吧!</div>
     </div>
 
     <div class="d-flex stu_func flex-newline-wrap">
         <div class="w-50">
-            <button class="borderNone">
-                <img src="./assest/student/quiz.png">
+            <button class="borderNone" id="quiz">
+                <img src="/public/assest/student/quiz.png">
             </button>
         </div>
 
         <div class="w-50">
             <button class="borderNone">
-                <img src="./assest/student/review.png">
+                <img src="/public/assest/student/review.png">
             </button>
         </div>
 
         <div class="w-50">
             <button class="borderNone">
-                <img src="./assest/student/scan.png">
+                <img src="/public/assest/student/scan.png">
             </button>
         </div>
     </div>

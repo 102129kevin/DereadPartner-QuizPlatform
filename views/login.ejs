@@ -6,21 +6,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" href="css/login.css" />
-    <!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>-->
-    <!--<script src="js/loginPage.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/login.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="module" src="/public/js/frontEndJS/loginPage.js"></script>
 </head>
 
 <body class="background-main font-default">
     <div class="login_block cAlign">
         <div class="login_title login_text_color font-weight-900">會員登入</div>
         <div class="login_input_box mAlign">
-            <input type="text" class="input_field borderNone" placeholder="帳號" name="">
+            <input type="text" class="input_field borderNone" placeholder="帳號" name="userid">
         </div>
         <div class="login_input_box mAlign">
-            <input type="password" class="input_field borderNone" placeholder="密碼" name="">
+            <input type="password" class="input_field borderNone" placeholder="密碼" name="userpasswd">
         </div>
 
         <div class="login_hint font-weight-700 login_text_color">若不知您的帳號，請向教師詢問。</div>
@@ -28,11 +28,11 @@
 
     <footer class="login_footer">
         <div class="login_container">
-            <img src="./assest/login/taiwan.png" class="login_taiwan" />
+            <img src="/public/assest/login/taiwan.png" class="login_taiwan" />
         </div>
         <div class="login_container">
-            <button class="login_btn borderNone background-trasparent">
-                <img src="./assest/login/login.png">
+            <button class="login_btn borderNone background-trasparent" id="loginButton">
+                <img src="/public/assest/login/login.png">
             </button>
         </div>
 

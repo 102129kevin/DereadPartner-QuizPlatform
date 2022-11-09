@@ -6,43 +6,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="css/common.css" />
-    <link rel="stylesheet" type="text/css" href="css/header.css" />
-    <link rel="stylesheet" type="text/css" href="css/student.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/student.css" />
 </head>
 
 <body class="font-default content background-main">
     <div class="d-flex stu_title flexDirectionRow">
         <div class="w-50 lAlign">
-            <img src="./assest/Logo.png" class="logo" />
+            <img src="/public/assest/Logo.png" class="logo" />
         </div>
 
         <div class="w-50 rAlign">
-            <img src="./assest/tr_icon.png" class="icon" />
+            <img src="/public/assest/tr_icon.png" class="icon" />
         </div>
     </div>
 
     <div>
-        <div class="stu_hello font-weight-700 color-gray1"><span></span>殷菀老師，您好。</div>
+        <div class="stu_hello font-weight-700 color-gray1">
+            <%=r_trName%>老師，您好。
+        </div>
         <div class="stu_learn_text color-red">開始教學吧!</div>
     </div>
     <div class="d-flex stu_func flex-newline-wrap">
         <div class="w-50">
             <button class="borderNone">
-                <img src="./assest/teacher/analysis.png">
+                <img src="/public/assest/teacher/analysis.png">
             </button>
         </div>
 
         <div class="w-50">
             <button class="borderNone">
-                <img src="./assest/teacher/exam.png">
+                <img src="/public/assest/teacher/exam.png">
             </button>
         </div>
 
         <div class="w-50">
             <button class="borderNone">
-                <img src="./assest/teacher/classManage.png">
+                <img src="/public/assest/teacher/classManage.png">
             </button>
         </div>
     </div>
