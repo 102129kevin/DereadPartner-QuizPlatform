@@ -14,4 +14,17 @@ studentAPI.get("/quiz/question/:unit", studentController.updataQuestion);
 
 studentAPI.post("/quiz/answer/:unit", studentController.handleAnswer);
 
+studentAPI.get("/review", studentController.renderReviewPage);
+
+studentAPI.get("/review/unit/:unit", studentController.renderReview);
+
+studentAPI.get("/review/question/:unit", studentController.updataReview);
+
+studentAPI.get("/state", studentController.renderStatePage);
+
+studentAPI.get("/state/chart", studentController.getChartData);
+
+studentAPI.get("/scan", studentController.renderScanPage);
+
+
 module.exports = studentAPI;

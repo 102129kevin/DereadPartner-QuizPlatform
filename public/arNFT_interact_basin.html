@@ -64,14 +64,21 @@
                         true);
                     sceneThreejs.initRenderer();
 
-
                     const renderer = sceneThreejs.getRenderer();
                     const scene = sceneThreejs.getScene();
                     renderer.outputEncoding = THREE.sRGBEncoding;
                     renderer.physicallyCorrectLights = true;
+                    renderer.shadowMap.enabled = true // 設定需渲染陰影效果
+                    renderer.shadowMap.type = 2 // THREE.PCFSoftShadowMap
 
-                    let light = new THREE.AmbientLight(0xffffff, 0.9);
+
+                    let light = new THREE.AmbientLight(0xffffff, .5);
                     scene.add(light);
+
+                    let spoltLight = new THREE.SpotLight(0xFFFFFF, 10);
+                    // 設定光源位置
+                    spoltLight.position.set(3, 3, 3)
+
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
@@ -83,21 +90,49 @@
                     // });
 
                     let setModel;
-                    let modelPath = "../public/model3D/basin.fbx";
+                    let modelPath = "../public/model3D/basin_v1.fbx";
 
                     function modelLoader(modelPath, size) {
                         return new Promise((resolve, reject) => {
                             nftAddTJS.addFBX(modelPath, "street", (obj) => {
                                 obj.scale.set(size, size, size);
+                                // spoltLight.target = obj;
+                                // scene.add(spoltLight);
+                                // console.log("something in front end page");
+                                // console.log(obj);
+
+                                // console.log(obj);
+                                // console.log("---------");
+
+                                // obj.traverse(function (child) {
+
+                                //     if (child.isMesh) {
+
+                                //         // console.log(child.geometry.attributes.uv);
+                                //         // child.material.map = texture; // assign your diffuse texture here
+
+                                //         // child.material.color.r = 1;
+                                //         // child.material.color.g = 1;
+                                //         // child.material.color.b = 1;
+
+                                //         // child.material.color = new THREE.Color("rgb(6, 135, 58)");
+                                //         child.castShadow = true;
+                                //         child.receiveShadow = true;
+                                //         child.material.needsupdate = true;
+
+                                //     }
+
+                                // });
 
                                 console.log(obj);
+                                console.log("---------");
 
                                 resolve(obj);
                             }, false);
                         });
                     }
 
-                    modelLoader(modelPath, 3).then((objOK) => {
+                    modelLoader(modelPath, 1).then((objOK) => {
                         //console.log(a);
                         controls = new RotationControls(objOK, {
                             amp: 2,

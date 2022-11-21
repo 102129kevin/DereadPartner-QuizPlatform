@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/quizTest.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="/public/js/frontEndJS/studentTestPage.js"></script>
+    <script type="module" src="/public/js/frontEndJS/studentTestPage.js"></script>
 </head>
 
 <body class="font-default content background-main">
@@ -26,12 +26,17 @@
         </div>
 
         <div class="w-50 rAlign quiz_unitIcon">
-            <img src="/public/assest/stu_quiz_test/unitIcon.png" class="unit_icon" />
+            <img src="/public/assest/stu_quiz_test/<%= r_reqUnitPicName %>.png" class="unit_icon" />
         </div>
     </div>
 
     <div class="outer color-gray1 font-weight-500 font-size-16">
+        
         <div class="quizTest_question jAlign  background-white" id="qTopic"></div>
+
+        <div class="quizTest_pic_container cAlign">
+            <img src="" class="d-none" id="qImg" />
+        </div>
 
         <div class="quizTest_answer">
             <div class="quizTest_option d-flex flexDirectionRow">
@@ -54,31 +59,37 @@
     </div>
 
     <div class="cFlexAlign flexDirectionRow quizTest_controll_container">
-        <div class="quizTest_controll">
+        <div id="prevArea" class="quizTest_controll">
             <button class="borderNone background-trasparent" id="prev">
-                <img src="/public/assest/stu_quiz_test/leftArrow.png">
+                <img src="/public/assest/stu_quiz_test/leftArrow.png" class="quizTest_arrow" />
             </button>
         </div>
 
-        <div class="quizTest_progress cFlexAlign flexDirectionRow color-gray1">
+        <div id="progressArea" class="quizTest_progress cFlexAlign flexDirectionRow color-gray1">
             <div class="quizTest_progress_num cAlign" id="qIndex"></div>
             <div>/</div>
             <div class="quizTest_progress_num cAlign" id="qNum"></div>
         </div>
 
-        <div class="quizTest_controll">
+        <div id="nextArea" class="quizTest_controll rAlign">
             <button class="borderNone background-trasparent" id="next">
-                <img src="/public/assest/stu_quiz_test/rightArrow.png">
+                <img src="/public/assest/stu_quiz_test/rightArrow.png" class="quizTest_arrow">
+            </button>
+        </div>
+
+        <!--此頁面js在提交時會動態創建form進行提交，將資料包裝-->
+        <div id="submitArea" class="quizTest_submit d-none rAlign">
+            <button id="qSubmit" class="borderNone background-trasparent">
+                <img src="/public/assest/stu_quiz_end/submit.png" class="quizTest_submitBtn"/>
             </button>
         </div>
     </div>
 
-
-    <div class="cAlign">
-        <button id="qSubmit" hidden="true">提交</button>
+    <div id="exitArea" class="quizTest_exit">
+        <button class="borderNone background-trasparent" id="exit">
+            <img src="/public/assest/stu_quiz_test/exit.png" class="quizTest_exitBtn" />
+        </button>
     </div>
-
-    <!--<form enctype="multipart/form-data" action="/student/quiz/unit1/answer" method="post"><input type="hidden" name="" value=""></form>-->
 
 </body>
 

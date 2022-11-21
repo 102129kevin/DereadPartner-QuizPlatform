@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/sliderMenu.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/teacherExamUploadImg.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/teacherExamListPage.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="module" src="/public/js/frontEndJS/teacherExamListPage.js"></script>
+
+</head>
+
+<body class="font-default content background-main">
+    <div class="d-flex stu_title flexDirectionRow">
+        <div class="w-50 lAlign">
+            <img src="/public/assest/Logo.png" class="logo" />
+        </div>
+
+        <div class="w-50 rAlign">
+            <img src="/public/assest/tr_icon.png" class="icon" />
+        </div>
+    </div>
+
+    <h1 class="font-weight-700 trExamList_title">題目列表</h1>
+
+    <% for(let i=0 ; i < r_qData.length ; i++) { %>
+        <section>
+            <div class="menuPanel background-white">
+                <div class="menuOuter margin-0-auto">
+                    <div class="menuTitle d-flex flexDirectionRow">
+                        <div class="sTitle ellipsis">
+                            <%= r_qData[i].topic %>
+                        </div>
+                        <button class="titleToggle cAlign cursorPoint borderNone background-trasparent">
+                            <img src="/public/assest/tr_exam/extend.png" />
+                        </button>
+                    </div>
+                    <div class="menuContent d-none">
+                        <input name="qID" type="hidden" value="<%= r_qData[i].qId %>">
+    
+                        <form class="uploadForm margin-0-auto">
+                            <div class="font-weight-500">
+                                <div class="m-10-0 font-size-14">請輸入題目:</div>
+                                <textarea name="topic" rows="5" class="borderNone b-box pd-topic w-100 upload_topic font-default font-size-16"><%= r_qData[i].topic %></textarea>
+                            </div>
+
+                            <div class="m-10-0">
+                                <div class="cFlexAlign upload_choice font-weight-500">
+                                    <div class="trExamList_upload_choice_left font-size-14">選項(A)</div>
+                                    <div class="upload_choice_right">
+                                        <input 
+                                            name="choose1" 
+                                            type="text" 
+                                            value="<%= r_qData[i].options[0].option %>" 
+                                            class="borderNone background-trasparent upload_choice_input pd-choice-input b-box margin-auto-0 font-default font-size-16"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="cFlexAlign upload_choice font-weight-500">
+                                    <div class="trExamList_upload_choice_left font-size-14">選項(B)</div>
+                                    <div class="upload_choice_right">
+                                        <input 
+                                            name="choose2" 
+                                            type="text" 
+                                            value="<%= r_qData[i].options[1].option %>" 
+                                            class="borderNone background-trasparent upload_choice_input pd-choice-input b-box margin-auto-0 font-default font-size-16"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="cFlexAlign upload_choice font-weight-500">
+                                    <div class="trExamList_upload_choice_left font-size-14">選項(C)</div>
+                                    <div class="upload_choice_right">
+                                        <input 
+                                            name="choose3" 
+                                            type="text" 
+                                            value="<%= r_qData[i].options[2].option %>" 
+                                            class="borderNone background-trasparent upload_choice_input pd-choice-input b-box margin-auto-0 font-default font-size-16"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="cFlexAlign upload_choice font-weight-500">
+                                    <div class="trExamList_upload_choice_left font-size-14">選項(D)</div>
+                                    <div class="upload_choice_right">
+                                        <input
+                                            name="choose4" 
+                                            type="text" 
+                                            value="<%= r_qData[i].options[3].option %>" 
+                                            class="borderNone background-trasparent upload_choice_input pd-choice-input b-box margin-auto-0 font-default font-size-16"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="font-weight-500 m-5-0 font-size-14">請輸入詳解:</div>
+                                <textarea name="explain" rows="2" class="borderNone b-box pd-3 w-100 upload_explain font-default font-size-16 pd-topic"><% if(r_qData[i].explain) { %><%= r_qData[i].explain %><% } %></textarea>
+                            </div>
+
+                            <div class="cFlexAlign upload_panel flexDirectionRow m-5-0">
+                                <div class="upload_panel_left font-weight-500">附圖</div>
+                                <div class="upload_panel_mid">
+                                    <label for="<%= r_qData[i].qId+"uploadPic" %>" class="upload_panel_label">
+                                        <img src="/public/assest/tr_exam/uploadPic.png" class="upload_panel_inputImg"/>
+                                    </label>
+                                    <input hidden type="file" accept="image/jpg,image/png" id="<%= r_qData[i].qId+"uploadPic" %>" class="inputImg"/>
+                                </div>
+                                <div class="upload_state upload_panel_right">未選擇任何檔案</div>
+                            </div>
+    
+                            <div class="background-white1 uploadArea color-gray1 cFlexAlign flexDirectionRow">
+                                <% if(r_qData[i].img) { %>
+                                    <div class="uploadHint d-none">未上傳圖片檔案</div>
+                                    <div class="uploadInfo cFlexAlign flexDirectionRow">
+                                        <div class="trExam_qImg cFlexAlign">
+                                            <img class="inputImgPreview" src="/public/qPic/<%= r_qData[i].img %>" />
+                                        </div>
+                                        <div class="w-50">
+                                            <ul class="font-size-14">
+                                                <div>檔名:</div>
+                                                <div class="fileName">
+                                                    <%= r_qData[i].img %>
+                                                </div>
+                                                <div class="fileSize"></div>
+                                            </ul>
+                                        </div>
+                                        <div class="w-20 cAlign">
+                                            <button class="clearInputImg">清除</button>
+                                        </div>
+                                    </div>
+                                <% } else { %>
+                                    <div class="uploadHint">未上傳圖片檔案</div>
+                                    <div class="uploadInfo cFlexAlign flexDirectionRow d-none">
+                                        <div class="trExam_qImg cFlexAlign">
+                                            <img class="inputImgPreview" src="" />
+                                        </div>
+                                        <div class="w-50">
+                                            <ul class="font-size-14">
+                                                <div>檔名:</div>
+                                                <div class="fileName"></div>
+                                                <div class="fileSize"></div>
+                                            </ul>
+                                        </div>
+                                        <div class="w-20 cAlign">
+                                            <button class="clearInputImg">清除</button>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+    
+                            <section class="m-10-0">
+                                <div class="font-weight-500 font-size-14">
+                                    正確選項:
+                                    <select name="correctChoose">
+                                        <option value="1" <%=r_correctChoices[i][0] %>>A</option>
+                                        <option value="2" <%=r_correctChoices[i][1] %>>B</option>
+                                        <option value="3" <%=r_correctChoices[i][2] %>>C</option>
+                                        <option value="4" <%=r_correctChoices[i][3] %>>D</option>
+                                    </select>
+                                </div>
+        
+                                <div class="font-weight-500 font-size-14">
+                                    單元:
+                                    <select name="unit" class="font-weight-600">
+                                        <option value="1" <%=r_units[i][0] %>>1</option>
+                                        <option value="2" <%=r_units[i][1] %>>2</option>
+                                        <option value="3" <%=r_units[i][2] %>>3</option>
+                                        <option value="4" <%=r_units[i][3] %>>4</option>
+                                    </select>
+                                </div>
+                            </section>
+    
+                            <div class="cAlign">
+                                <button class="examEditQuestion borderNone background-trasparent">
+                                    <img src="/public/assest/tr_exam/store.png" class="trExamList_upload_btn"/>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+
+    <% } %>
+
+
+</body>
+
+</html>

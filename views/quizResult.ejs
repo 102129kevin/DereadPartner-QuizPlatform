@@ -45,45 +45,178 @@
                 <% if(r_resultList[i].qCorrect==true){ %>
                     <div class="quizResult-w-2 cAlign">O</div>
                     <div class="quizResult-w-3">
-                        <button class="borderNone background-trasparent cFlexAlign">
-                            <img src="/public/assest/stu_quiz_end/lookQuestion_correct.png" />
-                        </button>
-                    </div>
-                    <% } else { %>
-                        <div class="quizResult-w-2 cAlign color-red1">X</div>
-                        <div class="quizResult-w-3">
-                            <a href="#<%=r_resultList[i].qId %>">
-                                <button class="borderNone background-trasparent cFlexAlign">
-                                    <img src="/public/assest/stu_quiz_end/lookQuestion_failed.png" />
-                                </button>
-                            </a>
+                        <a href="#<%=r_resultList[i].qId %>">
+                            <button class="borderNone background-trasparent cFlexAlign">
+                                <img src="/public/assest/stu_quiz_end/lookQuestion_correct.png" />
+                            </button>
+                        </a>
 
-                            <a href="#" class="lightbox" id="<%=r_resultList[i].qId %>">
-                                <div class="background-white">
-                                    <%= r_resultList[i].qTopic %>
-                                        <img src="/public/assest/stu_quiz_end/lookQuestion_failed.png" />
+                        <a href="#" class="lightbox" id="<%=r_resultList[i].qId %>">
+                            <div class="quizResult_panel quizResult-w-90">
+
+                                <div class="quieResult_content">
+                                    <div class="jAlign quizResult_lineHeight">
+                                        <%= r_resultList[i].qTopic %>
+                                    </div>
+    
+                                    <div class="quizResult_pic">
+                                        <% if(r_resultList[i].qImg) { %>
+                                            <img src="/public/qPic/<%=r_resultList[i].qImg%>">
+                                        <% } %>
+                                    </div>
+    
+                                    <hr />
+    
+                                    <ul class="quizResult_option quizResult_lineHeight">
+                                        <% if(r_resultList[i].qOptions[0].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[0].color %> jAlign">
+                                                (A)<%= r_resultList[i].qOptions[0].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (A)<%= r_resultList[i].qOptions[0].option %>
+                                            </li>
+                                        <% } %>
+
+                                        <% if(r_resultList[i].qOptions[1].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[1].color %> jAlign">
+                                                (B)<%= r_resultList[i].qOptions[1].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (B)<%= r_resultList[i].qOptions[1].option %>
+                                            </li>
+                                        <% } %>
+        
+                                        <% if(r_resultList[i].qOptions[2].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[2].color %> jAlign">
+                                                (C)<%= r_resultList[i].qOptions[2].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (C)<%= r_resultList[i].qOptions[2].option %>
+                                            </li>
+                                        <% } %>
+        
+                                        <% if(r_resultList[i].qOptions[3].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[3].color %> jAlign">
+                                                (D)<%= r_resultList[i].qOptions[3].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (D)<%= r_resultList[i].qOptions[3].option %>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                    
+                                    <% if (r_resultList[i].qExplain) { %>
+                                        <div class="quizResult_explan color-red1 quizResult_lineHeight jAlign">解析:<%= r_resultList[i].qExplain %></div>
+                                    <% } %>
                                 </div>
 
-                            </a>
-                        </div>
-                        <% } %>
+                            </div>
+                        </a>
+                        
+                    </div>
+                <% } else { %>
+                    <div class="quizResult-w-2 cAlign color-red1">X</div>
+                    <div class="quizResult-w-3">
+                        <a href="#<%=r_resultList[i].qId %>">
+                            <button class="borderNone background-trasparent cFlexAlign">
+                                <img src="/public/assest/stu_quiz_end/lookQuestion_failed.png" />
+                            </button>
+                        </a>
 
+                        <a href="#" class="lightbox" id="<%=r_resultList[i].qId %>">
+                            <div class="quizResult_panel quizResult-w-90">
+
+                                <div  class="quieResult_content">
+                                    <div class="jAlign quizResult_lineHeight">
+                                        <%= r_resultList[i].qTopic %>
+                                    </div>
+
+                                    <div class="quizResult_pic">
+                                        <% if(r_resultList[i].qImg) { %>
+                                            <img src="/public/qPic/<%=r_resultList[i].qImg%>">
+                                        <% } %>
+                                    </div>
+
+                                    <hr />
+
+                                    <ul class="quizResult_option quizResult_lineHeight">
+                                        <% if(r_resultList[i].qOptions[0].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[0].color %> jAlign">
+                                                (A)<%= r_resultList[i].qOptions[0].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (A)<%= r_resultList[i].qOptions[0].option %>
+                                            </li>
+                                        <% } %>
+
+                                        <% if(r_resultList[i].qOptions[1].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[1].color %> jAlign">
+                                                (B)<%= r_resultList[i].qOptions[1].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (B)<%= r_resultList[i].qOptions[1].option %>
+                                            </li>
+                                        <% } %>
+        
+                                        <% if(r_resultList[i].qOptions[2].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[2].color %> jAlign">
+                                                (C)<%= r_resultList[i].qOptions[2].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (C)<%= r_resultList[i].qOptions[2].option %>
+                                            </li>
+                                        <% } %>
+
+                                        <% if(r_resultList[i].qOptions[3].color) { %>
+                                            <li class="<%= r_resultList[i].qOptions[3].color %> jAlign">
+                                                (D)<%= r_resultList[i].qOptions[3].option %>
+                                            </li>
+                                        <% } else { %>
+                                            <li class="jAlign">
+                                                (D)<%= r_resultList[i].qOptions[3].option %>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+
+                                    <% if (r_resultList[i].qExplain) { %>
+                                        <div class="quizResult_explan color-red1 quizResult_lineHeight jAlign">解析:<%= r_resultList[i].qExplain %></div>
+                                    <% } %>
+
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                <% } %>
 
             </div>
             <% } %>
 
     </div>
 
-    <div class="cFlexAlign w-50 margin-0-auto">
-        <div class="w-50">
+    <div class="cFlexAlign margin-0-auto quizResult-w-80">
+        <div class="quizResult-w-33">
             <button class="borderNone background-trasparent" id="testAgain">
                 <img src="/public/assest/stu_quiz_end/retry.png" class="retry" />
             </button>
         </div>
 
-        <div class="w-50">
+        <div class="quizResult-w-33">
             <button class="borderNone background-trasparent" id="changeUnit">
                 <img src="/public/assest/stu_quiz_end/change.png" class="change" />
+            </button>
+        </div>
+
+        <div class="quizResult-w-33">
+            <button class="borderNone background-trasparent" id="goIndex">
+                <img src="/public/assest/stu_quiz_end/home.png" class="index" />
             </button>
         </div>
     </div>

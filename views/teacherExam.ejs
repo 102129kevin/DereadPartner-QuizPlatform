@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/teacherExamUploadImg.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/teacherExam.css" />
+    <script type="module" src="/public/js/frontEndJS/teacherExamPage.js"></script>
+</head>
+
+<body class="font-default content background-main">
+    <div class="d-flex stu_title flexDirectionRow">
+        <div class="w-50 lAlign">
+            <img src="/public/assest/Logo.png" class="logo" />
+        </div>
+
+        <div class="w-50 rAlign">
+            <img src="/public/assest/tr_icon.png" class="icon" />
+        </div>
+    </div>
+
+    <form action="" method="" enctype="multipart/form-data" class="tr_exam_form color-gray2">
+        <div class="font-weight-600">
+            <div class="m-10-0">請輸入題目:</div>
+            <textarea name="topic" rows="8" class="borderNone b-box pd-3 w-100 upload_topic font-default font-size-16"></textarea>
+        </div>
+
+        <div class="m-10-0">
+            <div class="cFlexAlign upload_choice font-weight-600">
+                <div class="upload_choice_left">選項(A)</div>
+                <div class="upload_choice_right">
+                    <input type="text" name="choose1" value="" class="borderNone background-trasparent upload_choice_input trExam_choice_input b-box margin-auto-0 font-default font-size-16"/>
+                </div>
+            </div>
+            <div class="cFlexAlign upload_choice font-weight-600">
+                <div class="upload_choice_left">選項(B)</div>
+                <div class="upload_choice_right">
+                    <input type="text" name="choose2" value="" class="borderNone background-trasparent upload_choice_input trExam_choice_input b-box margin-auto-0 font-default font-size-16"/>
+                </div>
+            </div>
+            <div class="cFlexAlign upload_choice font-weight-600">
+                <div class="upload_choice_left">選項(C)</div>
+                <div class="upload_choice_right">
+                    <input type="text" name="choose3" value="" class="borderNone background-trasparent upload_choice_input trExam_choice_input b-box margin-auto-0 font-default font-size-16"/>
+                </div>
+            </div>
+            <div class="cFlexAlign upload_choice font-weight-600">
+                <div class="upload_choice_left">選項(D)</div>
+                <div class="upload_choice_right">
+                    <input type="text" name="choose4" value="" class="borderNone background-trasparent upload_choice_input trExam_choice_input b-box margin-auto-0 font-default font-size-16"/>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div>
+            <div class="font-weight-600 m-5-0">請輸入詳解:</div>
+            <textarea name="explain" rows="3" class="borderNone b-box pd-3 w-100 upload_explain font-default font-size-16"></textarea>
+        </div>
+
+        <div class="cFlexAlign upload_panel flexDirectionRow m-5-0">
+            <div class="upload_panel_left font-weight-500">附圖</div>
+            <div class="upload_panel_mid">
+                <label for="inputImg" class="upload_panel_label">
+                    <img src="/public/assest/tr_exam/uploadPic.png" class="upload_panel_inputImg"/>
+                </label>
+                <input hidden type="file" accept="image/jpg,image/png" id="inputImg"/>
+            </div>
+            <div id="upload_state" class="upload_panel_right">未選擇任何檔案</div>
+        </div>
+
+        <section class="background-white uploadArea color-gray1 cFlexAlign flexDirectionRow">
+
+            <div id="uploadHint" class="">
+                未上傳圖片檔案
+            </div>
+
+            <div id="uploadInfo" class="uploadInfoArea cFlexAlign flexDirectionRow d-none">
+                <div class="trExam_qImg cFlexAlign">
+                    <img id="inputImgPreview" src="" />
+                </div>
+
+                <div class="w-50">
+                    <ul class="font-size-14">
+                        <div>檔名:</div>
+                        <div id="fileName" class="fileName"></div>
+                        <div id="fileSize"></div>
+                    </ul>
+                </div>
+                <div class="w-20 cAlign">
+                    <button id="clearInputImg">清除</button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="m-10-0">
+            <div class="font-weight-600">
+                正確選項:
+                <select name="correctChoose">
+                    <option value="1" selected>A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                </select>
+            </div>
+    
+            <div class="font-weight-600">
+                單元:
+                <select name="unit">
+                    <option value="1" selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </section>
+        
+        <div class="cAlign">
+            <button id="examUpload" class="borderNone background-trasparent">
+                <img src="/public/assest/tr_exam/send.png" class="trExam_upload_btn"/>
+            </button>
+        </div>
+        
+    </form>
+
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/student_state.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/public/js/frontEndJS/studentStatePage.js"></script>
+</head>
+
+<body class="font-default content background-main">
+    <div class="d-flex stu_title flexDirectionRow">
+        <div class="w-50 lAlign">
+            <img src="/public/assest/Logo.png" class="logo" />
+        </div>
+
+        <div class="w-50 rAlign">
+            <img src="/public/assest/stu_icon.png" class="icon" />
+        </div>
+    </div>
+
+    <div class="chartContainer">
+        <img src="/public/assest/stu_state/correctRate.png" class="chartTitle" />
+        <canvas id="lineChart" width="250" height="250" class="background-white"></canvas>
+    </div>
+    <div class="chartContainer">
+        <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" />
+        <canvas id="radarChart" width="250" height="250"></canvas>
+    </div>
+
+
+</body>
+
+</html>

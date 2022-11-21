@@ -3,6 +3,7 @@ let express = require('express');
 let session = require("express-session");
 let path = require('path');
 let cors = require('cors');
+let fileupload = require('express-fileupload');
 
 //Load Router
 let loginAPI = require("./js/router/login");
@@ -28,6 +29,10 @@ app.set('views', path.join(__dirname, '/views'))  //設定檔案所在的目錄
 // middleware中介軟體設置
 //config cors
 app.use(cors(corsOption));
+app.use(fileupload({
+    createParentPath: true,
+    defParamCharset: "utf8"
+}));
 
 // bodyParser
 app.use(express.json());

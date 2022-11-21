@@ -1,0 +1,28 @@
+.trExamList_title{
+    font-size: 34px;
+}
+
+.sTitle {
+    width: 78%;
+}
+
+.uploadForm{
+    width: 94%;
+}
+
+.pd-topic{
+    padding-left: 5%;
+    padding-right: 5px;
+}
+
+.trExamList_upload_choice_left{
+    width: 50px;
+}
+
+.pd-choice-input{
+    padding: 0 0 0 7px;
+}
+
+.trExamList_upload_btn{
+    width: 56px;
+}

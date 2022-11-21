@@ -1,338 +1,286 @@
 <html>
-  <head>
-    
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    
-    
-    
-    <script src="js/alphaVideo.js"></script>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <script>
-      AFRAME.registerComponent("registerevents", {
-        init: function () {
-          let marker = this.el;
-          let vid1 = document.querySelector("#vid-1");
-          let vid2 = document.querySelector("#vid-2");
 
-          marker.setAttribute("emitevents", "true");
+<head>
 
-          marker.addEventListener(
-            "markerFound",
-            function () {
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 
-              document.querySelector("#avid1").setAttribute("visible", true);
-              document.querySelector("#avid2").setAttribute("visible", true);
-              
-              //vid1.play();
-              //vid2.play();
-              
-            }.bind(this)
-          );
+  <script src="js/alphaVideo.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <script>
+    AFRAME.registerComponent("registerevents", {
+      init: function () {
+        let marker = this.el;
+        let vid1 = document.querySelector("#vid-1");
+        let vid2 = document.querySelector("#vid-2");
 
-          marker.addEventListener(
-            "markerLost",
-            function () {
-              document.querySelector("#avid1").setAttribute("visible", false);
-              document.querySelector("#avid2").setAttribute("visible", false);
-              
-              vid1.pause();
-              vid1.currentTime = 0;
+        marker.setAttribute("emitevents", "true");
 
-              vid2.pause();
-              vid2.currentTime = 0;
-              
-            }.bind(this)
-          );
-        },
-      });
-    </script>
-    <style>
-      * {
-        font-family: Microsoft YaHei;
-      }
+        marker.addEventListener(
+          "markerFound",
+          function () {
 
-      .myloader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
+            document.querySelector("#avid1").setAttribute("visible", true);
+            document.querySelector("#avid2").setAttribute("visible", true);
 
-      .myloader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-      }
-      /* default loading box */
+            //vid1.play();
+            //vid2.play();
 
-      .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-      }
+          }.bind(this)
+        );
 
-      .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
-      }
+        marker.addEventListener(
+          "markerLost",
+          function () {
+            document.querySelector("#avid1").setAttribute("visible", false);
+            document.querySelector("#avid2").setAttribute("visible", false);
 
-      .myLightbox {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.75);
-        z-index: -1;
-        opacity: 0;
-      }
+            vid1.pause();
+            vid1.currentTime = 0;
 
-      .myLightbox:target {
-        /*z-index設2是為了蓋過全部z-index:1的區塊，營造燈箱至上效果*/
-        z-index: 1;
-        opacity: 1;
-        transition: 0.5s;
-      }
+            vid2.pause();
+            vid2.currentTime = 0;
 
-      #setTimePanel {
-        width: 300px;
-        height: 250px;
-        background-color: white;
-        border-radius: 5px;
-      }
+          }.bind(this)
+        );
+      },
+    });
+  </script>
+  <style>
+    * {
+      font-family: Microsoft YaHei;
+    }
 
-      #setTimePanel h1 {
-        width: 100%;
-        text-align: center;
-      }
+    .myloader {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
 
-      .setTimePanelLine {
-        margin-left: 40px;
-        line-height: 40px;
-        height: 40px;
-        font-size: 20px;
-      }
+    .myloader div {
+      text-align: center;
+      font-size: 1.25em;
+      color: white;
+    }
 
-      #setTimeDiv {
-        margin-left: 70px;
-        font-size: 16px;
-      }
+    /* default loading box */
 
-      #setTimeBtnLine {
-        text-align: center;
-      }
+    .arjs-loader {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
 
-      #modelControl {
-        opacity: 0.5;
-        position: fixed;
-        bottom: 30px;
-        left: 10px;
-        z-index: 1;
-      }
+    .arjs-loader div {
+      text-align: center;
+      font-size: 1.25em;
+      color: white;
+    }
 
-      #whole {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        opacity: 1;
-        position: fixed;
-        bottom: 0px;
-        left: 0px;
-        z-index: 1;
-        margin-block-start: 0px;
-        margin-block-end: 0px;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
-      }
+    .myLightbox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.75);
+      z-index: -1;
+      opacity: 0;
+    }
 
-      #top {
-        height: 85%;
-      }
+    .myLightbox:target {
+      /*z-index設2是為了蓋過全部z-index:1的區塊，營造燈箱至上效果*/
+      z-index: 1;
+      opacity: 1;
+      transition: 0.5s;
+    }
 
-      #down {
-        height: 15%;
-      }
+    #setTimePanel {
+      width: 300px;
+      height: 250px;
+      background-color: white;
+      border-radius: 5px;
+    }
 
-      #nft2Info {
-        display: flex;
-        height: 100%;
-        align-items: flex-end;
-      }
+    #setTimePanel h1 {
+      width: 100%;
+      text-align: center;
+    }
 
-      #lonBoard {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        height: 150px;
-      }
+    .setTimePanelLine {
+      margin-left: 40px;
+      line-height: 40px;
+      height: 40px;
+      font-size: 20px;
+    }
 
-      #board {
-        display: flex;
-        flex-wrap: wrap;
-        width: 242px;
-        height: 150px;
-        background-image: url("assest/image/board.jpg");
-        background-size: 242px 150px;
-        color: white;
-      }
+    #setTimeDiv {
+      margin-left: 70px;
+      font-size: 16px;
+    }
 
-      .item1 {
-        flex-basis: 35%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+    #setTimeBtnLine {
+      text-align: center;
+    }
 
-      .item2 {
-        flex-basis: 65%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-grow: 1;
-      }
+    #modelControl {
+      opacity: 0.5;
+      position: fixed;
+      bottom: 30px;
+      left: 10px;
+      z-index: 1;
+    }
 
-      #countryData {
-        display: flex;
-        justify-content: flex-start;
-      }
+    #whole {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      position: fixed;
+      bottom: 0px;
+      left: 0px;
+      z-index: 1;
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+    }
 
-      #countryPic {
-        width: 45px;
-        height: 30px;
-        background-size: 45px 30px;
-        flex-grow: 0;
-        flex-shrink: 0;
-        flex-basis: 45px;
-      }
+    #top {
+      height: 85%;
+    }
 
-      #countryName {
-        flex-grow: 1;
-        flex-shrink: 1;
-        margin-left: 5px;
-      }
+    #down {
+      height: 15%;
+    }
 
-      #nft2Control {
-        height: 100%;
-        display: flex;
-        align-items: center;
-      }
-    </style>
-  </head>
+    #nft2Info {
+      display: flex;
+      height: 100%;
+      align-items: flex-end;
+    }
 
-  <body style="margin: 0px; overflow: hidden; height: 100%">
-    <div class="arjs-loader">
-      <div>Loading, please wait...</div>
-    </div>
+    #lonBoard {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      height: 150px;
+    }
 
-    <a-scene
-      scenemanager="longitude:0"
-      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-      embedded
-      renderer="logarithmicDepthBuffer: true;"
-      vr-mode-ui="enabled: false"
-      id="scene"
-    >
-      <a-assets timeout="30000">
-        <video
-          id="vid-1"
-          src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/sea4.mp4?v=1661482537916"
-          crossorigin="Anonymous"
-          preload="auto"
-          autoplay="false"
-          loop="false"
-          playsinline
-          webkit-playsinline
-        ></video>
+    #board {
+      display: flex;
+      flex-wrap: wrap;
+      width: 242px;
+      height: 150px;
+      background-image: url("assest/image/board.jpg");
+      background-size: 242px 150px;
+      color: white;
+    }
 
-        <video
-          id="vid-2"
-          src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/alphatest.webm?v=1660822165592"
-          crossorigin="Anonymous"
-          preload="auto"
-          autoplay="false"
-          loop="false"
-          playsinline
-          webkit-playsinline
-        ></video>
+    .item1 {
+      flex-basis: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        <a-asset-item
-          id="earth"
-          response-type="arraybuffer"
-          src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/earth.glb?v=1658501505193"
-        ></a-asset-item>
-      </a-assets>
+    .item2 {
+      flex-basis: 65%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+    }
 
-      <a-nft
-        id="nft1"
-        type="nft"
-        url="arMarker/trex/t1"
-        smooth="true"
-        smoothcount="10"
-        smoothtolerance=".1"
-        smooththreshold="5"
-        raycaster="objects: .clickable"
-        emitevents="true"
-        cursor="fuse: false; rayOrigin: mouse;"
-        registerevents
-      >
-        <a-video
-          alpha-video
-          play-on-click
-          width="160"
-          height="90"
-          rotation="270 180 180"
-          position="80 0 -80"
-          id="avid1"
-          src="#vid-1"
-          material="transparent: true"
-        ></a-video>
+    #countryData {
+      display: flex;
+      justify-content: flex-start;
+    }
 
-        <a-video
-          alpha-video
-          play-on-click
-          width="160"
-          height="90"
-          rotation="270 180 180"
-          position="80 0 -80"
-          id="avid2"
-          src="#vid-2"
-          material="transparent: true"
-        ></a-video>
+    #countryPic {
+      width: 45px;
+      height: 30px;
+      background-size: 45px 30px;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 45px;
+    }
 
-        <a-entity light="type: ambient; color: #fff; intensity: 7.0"></a-entity>
-      </a-nft>
+    #countryName {
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin-left: 5px;
+    }
 
-      <a-entity camera id="mycamera">
-        <!--use sceneManager.js to generate hello text-->
-        <!--<a-text value="Hello" position="0 -1 -5" align="center"></a-text>-->
-      </a-entity>
+    #nft2Control {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
 
-      <div id="whole">
-        <div id="top">
-          <!--use sceneManager.js to generate NFT2 lonBoard-->
-          <!--
+<body style="margin: 0px; overflow: hidden; height: 100%">
+  <div class="arjs-loader">
+    <div>Loading, please wait...</div>
+  </div>
+
+  <a-scene scenemanager="longitude:0" arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" embedded
+    renderer="logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false" id="scene">
+    <a-assets timeout="30000">
+      <video id="vid-1" src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/sea4.mp4?v=1661482537916"
+        crossorigin="Anonymous" preload="auto" autoplay="false" loop="false" playsinline webkit-playsinline></video>
+
+      <video id="vid-2"
+        src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/alphatest.webm?v=1660822165592"
+        crossorigin="Anonymous" preload="auto" autoplay="false" loop="false" playsinline webkit-playsinline></video>
+
+      <a-asset-item id="earth" response-type="arraybuffer"
+        src="https://cdn.glitch.global/51191c79-6a52-47a6-b10a-b74d0c895582/earth.glb?v=1658501505193"></a-asset-item>
+    </a-assets>
+
+    <a-nft id="nft1" type="nft" url="arMarker/trex/t1" smooth="true" smoothcount="10" smoothtolerance=".1"
+      smooththreshold="5" raycaster="objects: .clickable" emitevents="true" cursor="fuse: false; rayOrigin: mouse;"
+      registerevents>
+      <a-video alpha-video play-on-click width="160" height="90" rotation="270 180 180" position="80 0 -80" id="avid1"
+        src="#vid-1" material="transparent: true"></a-video>
+
+      <a-video alpha-video play-on-click width="160" height="90" rotation="270 180 180" position="80 0 -80" id="avid2"
+        src="#vid-2" material="transparent: true"></a-video>
+
+      <a-entity light="type: ambient; color: #fff; intensity: 7.0"></a-entity>
+    </a-nft>
+
+    <a-entity camera id="mycamera">
+      <!--use sceneManager.js to generate hello text-->
+      <!--<a-text value="Hello" position="0 -1 -5" align="center"></a-text>-->
+    </a-entity>
+
+    <div id="whole">
+      <div id="top">
+        <!--use sceneManager.js to generate NFT2 lonBoard-->
+        <!--
         <div id="nft2Info">
           <div id="lonBoard">
             <div id="board">
@@ -348,11 +296,12 @@
             </div>
           </div>
         </div>
-        --></div>
+        -->
+      </div>
 
-        <div id="down">
-          <!--use sceneManager.js to generate NFT2 Slider and btn * 2 -->
-          <!--
+      <div id="down">
+        <!--use sceneManager.js to generate NFT2 Slider and btn * 2 -->
+        <!--
         <div id="nft2Control">
           <input type="range" min="0" max="360" step="1" value="0" />
           <button>往東</button>
@@ -360,51 +309,40 @@
           <a href="#setTimeLightbox"><button>設定時區</button></a>
         </div>
         -->
-          <button id="earthTest">地球</button>
-          <button id="dogTest">柴犬</button>
-          <button id="frankTest">墮天使</button>
-          <button id="hologram_consoleTest">電腦</button>
-          <button id="blender_chanTest">二次元</button>
-          <button id="japanTest">動漫人物</button>
+        <button id="earthTest">地球</button>
+        <button id="dogTest">柴犬</button>
+        <button id="frankTest">墮天使</button>
+        <button id="hologram_consoleTest">電腦</button>
+        <button id="blender_chanTest">二次元</button>
+        <button id="japanTest">動漫人物</button>
+      </div>
+    </div>
+
+    <div class="myLightbox" id="setTimeLightbox">
+      <div id="setTimePanel">
+        <h1>設定時間</h1>
+
+        <div class="setTimePanelLine">
+          <input type="radio" name="setTimeMode" id="manualTime" value="manualTime" />
+          <label>手動模式</label>
+        </div>
+        <div class="setTimePanelLine" id="setTimeDiv">
+          <label>指定時間:</label>
+          <input type="time" id="timeData" disabled />
+        </div>
+        <div class="setTimePanelLine">
+          <input type="radio" name="setTimeMode" id="autoTime" value="autoTime" checked />
+          <label>自動模式</label>
+        </div>
+        <div id="setTimeBtnLine">
+          <a href="#">
+            <button id="setConfirm">確認</button>
+          </a>
         </div>
       </div>
+    </div>
+  </a-scene>
+</body>
 
-      <div class="myLightbox" id="setTimeLightbox">
-        <div id="setTimePanel">
-          <h1>設定時間</h1>
 
-          <div class="setTimePanelLine">
-            <input
-              type="radio"
-              name="setTimeMode"
-              id="manualTime"
-              value="manualTime"
-            />
-            <label>手動模式</label>
-          </div>
-          <div class="setTimePanelLine" id="setTimeDiv">
-            <label>指定時間:</label>
-            <input type="time" id="timeData" disabled />
-          </div>
-          <div class="setTimePanelLine">
-            <input
-              type="radio"
-              name="setTimeMode"
-              id="autoTime"
-              value="autoTime"
-              checked
-            />
-            <label>自動模式</label>
-          </div>
-          <div id="setTimeBtnLine">
-            <a href="#">
-              <button id="setConfirm">確認</button>
-            </a>
-          </div>
-        </div>
-      </div>
-    </a-scene>
-  </body>
-  
-  
 </html>

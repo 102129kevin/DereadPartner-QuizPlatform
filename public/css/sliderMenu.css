@@ -1,0 +1,33 @@
+.menuPanel {
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+    border-radius: 18px;
+    margin: 18px 0;
+}
+
+.menuPanel_borderOpen {
+    border: 1px solid rgba(0,0,0,0.4);
+}
+
+.menuOuter{
+    width: 94%;
+}
+
+.menuTitle {
+    height: 44px;
+    line-height: 44px;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleToggle {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.titleToggle img{
+    width: 66px;
+}
+
+.menuContent {
+    margin: 0 0 10px 0;
+}

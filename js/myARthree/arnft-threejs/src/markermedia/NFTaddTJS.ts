@@ -323,10 +323,14 @@ export default class NFTaddTJS {
         function fbxMaker() {
             return new Promise((resolve, reject) => {
                 fbxLoader.load(url, (obj) => {
+                    // console.log("something in the ts files");
+                    // console.log(obj.children[0]);
+
                     model = obj;
+                    // model = obj.children[0];
                     callback(model);
                     root.add(model);
-                    resolve("fbxMaker done!");
+                    resolve("fbxMaker done!sssss");
                 });
             });
         }

@@ -7,10 +7,46 @@ function makeQuestionObject(recordID, recordData) {
         qId: recordID,
         topic: recordData["topic"],
         options: recordData["options"],
-        unit: recordData["unit"]
+        explain: recordData["explain"],
+        unit: recordData["unit"],
+        img: recordData["img"]
     }
 
     return obj;
+}
+
+function makeQuestionDoc(req) {
+    let data = req.body;
+    let qDoc = {};
+    qDoc["topic"] = replaceSpace(data["topic"]);
+    qDoc["unit"] = parseInt(data["unit"]);
+    qDoc["tID"] = req.session.name;
+
+    let options = [];
+    let correctChoice = parseInt(data["correctChoose"]);
+    for (let i = 1; i <= 4; i++) {
+        let option = {};
+        let curIndex = "choose" + i;
+        option["option"] = replaceSpace(data[curIndex]);
+        if (i == correctChoice) {
+            option["value"] = true;
+        } else {
+            option["value"] = false;
+        }
+        options.push(option);
+    }
+    qDoc["options"] = options;
+
+    // 詳解
+    if(data["explain"]){
+        qDoc["explain"] = replaceSpace(data["explain"]);
+    }
+
+    return qDoc;
+}
+
+function replaceSpace(str) {
+    return str.replace(/\s+/g, "");
 }
 
 module.exports = class QuestionModel {
@@ -62,5 +98,77 @@ module.exports = class QuestionModel {
                     reject(err);
                 });
         })
+    }
+
+    getQuestionBytID(tID) {
+        let colRef = firestore.collection(firebaseDB, "question");
+        let q = firestore.where("tID", "==", tID);
+
+        return new Promise((resolve, reject) => {
+            firestore.getDocs(firestore.query(colRef, q))
+                .then((snapshot) => {
+                    let qList = [];
+                    snapshot.forEach((doc) => {
+                        qList.push(makeQuestionObject(doc.id, doc.data()));
+                    });
+                    resolve(qList);
+                })
+                .catch(function (err) {
+                    reject(err);
+                });
+        })
+    }
+
+    setQuestion(req) {
+        let qData = makeQuestionDoc(req);
+        let colRef = firestore.collection(firebaseDB, "question");
+
+        return new Promise((resolve, reject) => {
+            firestore.addDoc(colRef, qData)
+                .then((newDoc) => {
+                    console.log("(questionModel)setQuestion:done");
+                    resolve(newDoc.id);
+                })
+                .catch(function (err) {
+                    reject(err);
+                });
+        })
+    }
+
+    updateQuestion(req) {
+        let qData = makeQuestionDoc(req);
+        let qID = req.body["qID"];
+        let docRef = firestore.doc(firebaseDB, "question", qID);
+        
+        return new Promise((resolve, reject) => {
+            firestore.updateDoc(docRef, qData)
+                .then(() => {
+                    console.log("(questionModel)updateQuestion:done");
+                    resolve(qID);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
+
+    updateQuestionImg(qID, imgName) {
+        let docRef = firestore.doc(firebaseDB, "question", qID);
+        let data = {
+            img: imgName
+        };
+
+        return new Promise((resolve, reject) => {
+            firestore.updateDoc(docRef, data)
+                .then(() => {
+                    console.log("(questionModel)updateQuestionImg:done");
+                    resolve("updateQimage:done");
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    reject(err);
+                });
+        });
     }
 }
