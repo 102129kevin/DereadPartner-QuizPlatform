@@ -185,7 +185,7 @@ module.exports = class StudentController {
 
     }
 
-    renderReviewPage(req,res,next){
+    renderReviewPage(req, res, next) {
         if (req.session.name) {
             res.render("review");
         }
@@ -208,7 +208,7 @@ module.exports = class StudentController {
         }
     }
 
-    async updataReview(req,res,next){
+    async updataReview(req, res, next) {
         // 獲取請求單元(1、2..OR ALL)
         let reqUnit = req.params.unit;
         let qList;
@@ -257,7 +257,7 @@ module.exports = class StudentController {
         res.send(exRecData);
     }
 
-    renderScanPage(req,res,next){
+    renderScanPage(req, res, next) {
         if (req.session.name) {
             res.render("stu_ar");
         }

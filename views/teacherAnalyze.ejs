@@ -9,10 +9,10 @@
     <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
-    <link rel="stylesheet" type="text/css" href="/public/css/sliderMenu.css" />
-    <link rel="stylesheet" type="text/css" href="/public/css/teacherAnalyzePage.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/student_state.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="/public/js/frontEndJS/teacherAnalyzePage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/public/js/frontEndJS/teacherAnalyzePage.js"></script>
 
 </head>
 
@@ -30,38 +30,39 @@
     <h1 class="font-weight-700 trAnalyze_title">學習狀況分析</h1>
     <hr />
 
-    <section>
-        <div class="menuPanel background-white">
-            <div class="menuOuter margin-0-auto">
-                <div class="menuTitle d-flex flexDirectionRow">
-                    <div>s13110340xx陳楚瑜</div>
-                    <button class="titleToggle cAlign borderNone background-trasparent">
-                        <img src="/public/assest/tr_exam/extend.png" />
-                    </button>
-                </div>
-                <div class="menuContent d-none">
-                    <div class="chartContainer">
-                        <img src="/public/assest/stu_state/correctRate.png" class="chartTitle" />
-                        <canvas width="250" height="250" class="lineChart background-white"></canvas>
-                    </div>
-                    <div class="chartContainer">
-                        <img src="/public/assest/stu_state/radarChart.png" class="lineChart chartTitle" />
-                        <canvas width="250" height="250"></canvas>
-                    </div>
-                    <div class="totalNum">總作答次數:</div>
-                    <div class="totalQNum">總作答題數:</div>
-                    <div class="totalRate">總答對率:</div>
-                    <div class="lastTestTime">上次測驗時間:</div>
-                    <div>各單元作答次數:</div>
-                    <div class="unitAllNum">總複習作答次數:</div>
-                    <div class="unit1Num">單元1作答次數:</div>
-                    <div class="unit2Num">單元2作答次數:</div>
-                    <div class="unit3Num">單元3作答次數:</div>
-                    <div class="unit4Num">單元4作答次數:</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="chartContainer">
+        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+        <div>班級各單元能力雷達圖</div>
+        <canvas id="radarChart" width="250" height="250"></canvas>
+    </div>
+    <div class="chartContainer">
+        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+        <div>總複習答對率分佈圖</div>
+        <canvas id="unitAllHist" width="250" height="250"></canvas>
+    </div>
+    <div class="chartContainer">
+        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+        <div>單元1答對率分佈圖</div>
+        <canvas id="unit1Hist" width="250" height="250"></canvas>
+    </div>
+    <div class="chartContainer">
+        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+        <div>單元2答對率分佈圖</div>
+        <canvas id="unit2Hist" width="250" height="250"></canvas>
+    </div>
+    <div class="chartContainer">
+        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+        <div>單元3答對率分佈圖</div>
+        <canvas id="unit3Hist" width="250" height="250"></canvas>
+    </div>
+    <div class="chartContainer">
+        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+        <div>單元4答對率分佈圖</div>
+        <canvas id="unit4Hist" width="250" height="250"></canvas>
+    </div>
+    <div class="analyzeHint d-none">
+        您的班級目前尚未有作答紀錄唷~
+    </div>
 
 </body>
 

@@ -19,9 +19,12 @@ teacherAPI.post("/exam/addQuestion", teacherController.addQuestion);
 
 teacherAPI.post("/exam/editQuestion", teacherController.editQuestion);
 
+teacherAPI.get("/class", teacherController.renderClassPage);
+
+teacherAPI.post("/class/getInitData", teacherController.getStudentsAnalyzeData);
+
 teacherAPI.get("/analyze", teacherController.renderAnalyzePage);
 
-teacherAPI.post("/analyze/getInitData", teacherController.getAnalyzeData);
-
+teacherAPI.post("/analyze/getInitData", teacherController.getClassAnalyzeData);
 
 module.exports = teacherAPI;

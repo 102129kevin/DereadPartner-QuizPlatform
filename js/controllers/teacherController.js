@@ -281,19 +281,19 @@ module.exports = class TeacherController {
         }
     }
 
-    renderAnalyzePage(req, res, next) {
+    renderClassPage(req, res, next) {
         if (req.session.name) {
-            res.render("teacherAnalyze");
+            res.render("teacherClass");
         }
         else {
             res.redirect("/login");
         }
     }
 
-    async getAnalyzeData(req, res, next) {
+    async getStudentsAnalyzeData(req, res, next) {
         try {
             let classStudentData = await studentModel.getStudentsDataByTID(req.session.name);
-            let analyzeData = classStudentData.map((data) => ({
+            let statData = classStudentData.map((data) => ({
                 sID: data.sID,
                 name: data.name,
                 barData: undefined,
@@ -305,25 +305,99 @@ module.exports = class TeacherController {
                 unitNum: undefined
             }));
 
-            for (let i = 0; i < analyzeData.length; i++) {
+            for (let i = 0; i < statData.length; i++) {
+
+                console.log(classStudentData[i].sID);
+
                 if (classStudentData[i].exRec) {
                     let stat = await examRecordModel.calcStudentExamRecords(classStudentData[i].exRec);
-                    analyzeData[i].barData = stat.barData;
-                    analyzeData[i].radarData = stat.radarData;
-                    analyzeData[i].totalRate = stat.totalRate;
-                    analyzeData[i].totalNum = stat.totalNum;
-                    analyzeData[i].totalQNum = stat.totalQNum;
-                    analyzeData[i].lastTestTime = stat.lastTestTime;
-                    analyzeData[i].unitNum = stat.unitNum;
+                    statData[i].barData = stat.barData;
+                    statData[i].radarData = stat.radarData;
+                    statData[i].totalRate = stat.totalRate;
+                    statData[i].totalNum = stat.totalNum;
+                    statData[i].totalQNum = stat.totalQNum;
+                    statData[i].lastTestTime = stat.lastTestTime;
+                    statData[i].unitNum = stat.unitNum;
                 }
+
+                console.log("---endController");
             };
 
-            res.send(analyzeData);
+            res.send(statData);
         }
         catch (err) {
             console.log(err);
             res.send(err);
         }
 
+    }
+
+    renderAnalyzePage(req, res, next) {
+        if (req.session.name) {
+            res.render("teacherAnalyze");
+        }
+        else {
+            res.redirect("/login");
+        }
+    }
+
+    async getClassAnalyzeData(req, res, next) {
+        try {
+
+            let classStudentData = await studentModel.getStudentsDataByTID(req.session.name);
+
+            let classRadar = [];
+            let unitAccuracyHist = {
+                unit1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                unit2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                unit3: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                unit4: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                unitAll: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            };
+
+            for (let i = 0; i < classStudentData.length; i++) {
+                if (classStudentData[i].exRec) {
+                    // 獲取統計資料
+                    let stat = await examRecordModel.calcClassStat(classStudentData[i].exRec);
+
+                    // 雷達圖
+                    classRadar.push(stat.radarData);
+
+                    // 統計各單元作答次數
+                    stat.unitAccuracyList.forEach((rec) => {
+                        let index = Math.floor(rec.accuracy * 10) - 1;
+                        if (index < 0) {
+                            index = 0;
+                        }
+
+                        unitAccuracyHist[rec.unit][index]++;
+                    })
+                }
+            };
+
+            // 雷達圖
+            let classRadarData = [0, 0, 0, 0];
+
+            for (let i = 0; i < classRadar.length; i++) {
+                for (let j = 0; j < classRadarData.length; j++) {
+                    classRadarData[j] += classRadar[i][j];
+                }
+            }
+            for (let j = 0; j < classRadarData.length; j++) {
+                classRadarData[j] = classRadarData[j] / classStudentData.length;
+            }
+
+            // 回傳資料
+            let result = {
+                classRadarData: classRadarData,
+                unitAccuracyHist: unitAccuracyHist
+            };
+
+            res.send(result);
+        }
+        catch (err) {
+            console.log(err);
+            res.send(err);
+        }
     }
 };

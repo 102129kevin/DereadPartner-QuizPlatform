@@ -1,10 +1,23 @@
 let myDB = require("../firebase/myDB");
+let MobileDetect  = require("mobile-detect");
 let firebaseDB = myDB.myDatabase;
 let firestore = myDB.firestore;
 
-function getDateAndTime() {
+function getDateAndTime(req) {
     let now = new Date();
-    return now.toLocaleString("ja-JP");
+    let md = new MobileDetect(req.headers['user-agent']);
+    let offset = now.getTimezoneOffset() / 60;
+    let dt;
+    if(md.is('iPhone')){
+        dt = now.setHours(now.getHours() + 8);
+    }
+    else{
+        dt = now.setHours(now.getHours());
+    }
+
+    let newDate = new Date(dt);
+
+    return newDate.toLocaleString("ja-JP");
 }
 
 function getExamRecordByExRecID(exRecID) {
@@ -46,7 +59,7 @@ function makeExamRecordUnitCal(resultList) {
 
 function makeExamRecordData(req, correctNum, resultList) {
     let record = {};
-    record["timeInfo"] = getDateAndTime();
+    record["timeInfo"] = getDateAndTime(req);
     record["sID"] = req.session.name;
     record["qCorrectNum"] = correctNum;
     record["qNum"] = resultList.length;
@@ -55,6 +68,36 @@ function makeExamRecordData(req, correctNum, resultList) {
     });
     record["qUnitCal"] = makeExamRecordUnitCal(resultList);
     return record;
+}
+
+function getExRecUint(qUnitCal) {
+    let quizUnit = qUnitCal.filter((unit) => {
+        return unit.qNum == 10
+    });
+
+    let unit = "";
+
+    // 此處測驗為總複習
+    if (quizUnit.length === 0) {
+        unit = "unitAll";
+    }
+    else {
+        // 此處測驗為單元測驗
+        if (quizUnit[0].unit == 1) {
+            unit = "unit1";
+        }
+        if (quizUnit[0].unit == 2) {
+            unit = "unit2";
+        }
+        if (quizUnit[0].unit == 3) {
+            unit = "unit3";
+        }
+        if (quizUnit[0].unit == 4) {
+            unit = "unit4";
+        }
+    }
+
+    return unit;
 }
 
 function dealRadarData(exRecords) {
@@ -77,7 +120,15 @@ function dealRadarData(exRecords) {
 
     for (let i = 0; i < 4; i++) {
         let unitIndex = "unit" + (i + 1);
-        unitAccuracy.push(unitCal[unitIndex].qCorNum / unitCal[unitIndex].qNum);
+
+        // 避免讓被除數=0
+        if (unitCal[unitIndex].qNum == 0) {
+            unitAccuracy.push(0);
+        }
+        else {
+            unitAccuracy.push(unitCal[unitIndex].qCorNum / unitCal[unitIndex].qNum);
+        }
+
     }
 
     return unitAccuracy;
@@ -86,29 +137,33 @@ function dealRadarData(exRecords) {
 function dealUnitNum(exRecords) {
     let unitNumResult = { unit1: 0, unit2: 0, unit3: 0, unit4: 0, unitAll: 0 };
     exRecords.forEach(rec => {
-        let quizUnit = rec.filter((unit) => {
-            return unit.qNum == 10
-        });
 
-        // 此處測驗為總複習
-        if (quizUnit.length === 0) {
-            unitNumResult.unitAll++;
-        }
-        else {
-            // 此處測驗為單元測驗
-            if (quizUnit[0].unit == 1) {
-                unitNumResult.unit1++;
-            }
-            if (quizUnit[0].unit == 2) {
-                unitNumResult.unit2++;
-            }
-            if (quizUnit[0].unit == 3) {
-                unitNumResult.unit3++;
-            }
-            if (quizUnit[0].unit == 4) {
-                unitNumResult.unit4++;
-            }
-        }
+        let unit = getExRecUint(rec);
+        unitNumResult[unit]++;
+
+        // let quizUnit = rec.filter((unit) => {
+        //     return unit.qNum == 10
+        // });
+
+        // // 此處測驗為總複習
+        // if (quizUnit.length === 0) {
+        //     unitNumResult.unitAll++;
+        // }
+        // else {
+        //     // 此處測驗為單元測驗
+        //     if (quizUnit[0].unit == 1) {
+        //         unitNumResult.unit1++;
+        //     }
+        //     if (quizUnit[0].unit == 2) {
+        //         unitNumResult.unit2++;
+        //     }
+        //     if (quizUnit[0].unit == 3) {
+        //         unitNumResult.unit3++;
+        //     }
+        //     if (quizUnit[0].unit == 4) {
+        //         unitNumResult.unit4++;
+        //     }
+        // }
 
     });
 
@@ -184,29 +239,6 @@ module.exports = class ExamRecordModel {
     }
 
     async calcStudentExamRecords(examRecords) {
-        // 圖表*2
-        // 折線圖:最近五次的紀錄的答對率、作答時間
-        // 雷達圖:每次測驗個單元答對率加總後平均
-        // 總作答次數:
-        // 總作答題數:
-        // 總答對率:
-        // 上次測驗時間:
-        // 各單元測驗次數:單元1、單元2、單元3、單元4、單元ALL
-        // 排序:可按學號，總答對率、上次測驗時間。
-
-        // barData: undefined,
-        // radarData: undefined,
-        // totalRate: undefined,
-        // totalNum: undefined,
-        // totalQNum: undefined,
-        // lastTestTime: undefined,
-        // unitNum: {
-        //     "unit1": 0,
-        //     "unit2": 0,
-        //     "unit3": 0,
-        //     "unit4": 0,
-        //     "unitAll": 0,
-        // }
 
         let barData = {};
         let radarData = [];
@@ -221,6 +253,7 @@ module.exports = class ExamRecordModel {
 
         for (let i = 0; i < examRecords.length; i++) {
             let exRecData = await getExamRecordByExRecID(examRecords[i]);
+            // console.log(exRecData);
             totalNum += exRecData["qNum"];
             totalQNum += exRecData["qCorrectNum"];
             unitCalList.push(exRecData["qUnitCal"]);
@@ -247,6 +280,36 @@ module.exports = class ExamRecordModel {
             unitNum: unitNum,
             barData: barData,
             lastTestTime: lastTestTime
+        }
+
+        return calcData;
+
+    }
+
+    async calcClassStat(examRecords) {
+
+        let radarData = [];
+        let unitCalList = [];
+        let unitAccuracyList = [];
+
+        for (let i = 0; i < examRecords.length; i++) {
+            let exRecData = await getExamRecordByExRecID(examRecords[i]);
+            unitCalList.push(exRecData["qUnitCal"]);
+
+            // 分布圖
+            let unitAccuracy = {
+                accuracy: exRecData["qCorrectNum"] / exRecData["qNum"],
+                unit: getExRecUint(exRecData["qUnitCal"])
+            };
+            unitAccuracyList.push(unitAccuracy);
+        };
+
+        // 雷達圖
+        radarData = dealRadarData(unitCalList);
+
+        let calcData = {
+            radarData: radarData,
+            unitAccuracyList: unitAccuracyList
         }
 
         return calcData;

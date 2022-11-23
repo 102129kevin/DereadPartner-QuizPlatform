@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/student_state.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/public/js/frontEndJS/studentStatePage.js"></script>
+    <script type="module" src="/public/js/frontEndJS/studentStatePage.js"></script>
 </head>
 
 <body class="font-default content background-main">
@@ -26,13 +26,17 @@
         </div>
     </div>
 
-    <div class="chartContainer">
+    <div class="chartContainer d-none">
         <img src="/public/assest/stu_state/correctRate.png" class="chartTitle" />
         <canvas id="lineChart" width="250" height="250" class="background-white"></canvas>
     </div>
-    <div class="chartContainer">
+    <div class="chartContainer d-none">
         <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" />
         <canvas id="radarChart" width="250" height="250"></canvas>
+    </div>
+
+    <div class="stateHint d-none">
+        您還沒有做過測驗唷~
     </div>
 
 
