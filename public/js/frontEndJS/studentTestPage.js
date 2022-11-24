@@ -23,6 +23,8 @@ function markSelect(list, index, optionDOM) {
 
 window.addEventListener("load", () => {
 
+    let logo = document.querySelector(".logo");
+
     let topicIndex = 0;
     let qList = [];
     let answerList = [];
@@ -43,6 +45,11 @@ window.addEventListener("load", () => {
     let qSubmit = document.getElementById("qSubmit");
     let qSubmitArea = document.getElementById("submitArea");
     let exit = document.getElementById("exit");
+    let waiting = document.querySelector(".waiting");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/student";
+    })
 
     // 基本路由設置
     let reqQUrl = "/student/quiz/question/";
@@ -130,6 +137,10 @@ window.addEventListener("load", () => {
     }
 
     qSubmit.addEventListener("click", () => {
+        // 叫出等待畫面
+        waiting.classList.remove("d-none");
+        waiting.classList.add("d-flex");
+
         // 送出前先將目前題目儲存
         storeAnswer(topicIndex, answerList);
 

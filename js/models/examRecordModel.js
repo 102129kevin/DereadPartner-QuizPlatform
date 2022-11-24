@@ -4,11 +4,13 @@ let firebaseDB = myDB.myDatabase;
 let firestore = myDB.firestore;
 
 function getDateAndTime(req) {
+    // https://worldtimeapi.org/api/timezone/Asia/Taipei
     let now = new Date();
+    
     let md = new MobileDetect(req.headers['user-agent']);
-    let offset = now.getTimezoneOffset() / 60;
+    // let offset = now.getTimezoneOffset() / 60;
     let dt;
-    if(md.is('iPhone')){
+    if( (md.is('iPhone')) || ( md.os() === "iOS" ) || ( md.os() === "iPadOS" ) ){
         dt = now.setHours(now.getHours() + 8);
     }
     else{
@@ -16,7 +18,6 @@ function getDateAndTime(req) {
     }
 
     let newDate = new Date(dt);
-
     return newDate.toLocaleString("ja-JP");
 }
 

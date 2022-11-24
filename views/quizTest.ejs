@@ -11,11 +11,13 @@
     <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/quizTest.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/waiting.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="module" src="/public/js/frontEndJS/studentTestPage.js"></script>
 </head>
 
 <body class="font-default content background-main">
+
     <div class="d-none" id="qUnit">
         <%= r_unit %>
     </div>
@@ -89,6 +91,10 @@
         <button class="borderNone background-trasparent" id="exit">
             <img src="/public/assest/stu_quiz_test/exit.png" class="quizTest_exitBtn" />
         </button>
+    </div>
+
+    <div class="waiting d-none">
+        <img src="/public/assest/loading.gif" />
     </div>
 
 </body>

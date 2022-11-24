@@ -33,7 +33,7 @@
 
         let controls;
 
-        ARnft.ARnft.init(width, height, [["public/arMarker/nftT3/nftT3"]], [['street']], 'config.json', true)
+        ARnft.ARnft.init(width, height, [["public/arMarker/nftT3/nftT3"]], [['pic']], 'config.json', true)
             .then((nft) => {
 
                 document.addEventListener('containerEvent', function (ev) {
@@ -94,7 +94,7 @@
 
                     function modelLoader(modelPath, size) {
                         return new Promise((resolve, reject) => {
-                            nftAddTJS.addFBX(modelPath, "street", (obj) => {
+                            nftAddTJS.addFBX(modelPath, "pic", (obj) => {
                                 obj.scale.set(size, size, size);
                                 // spoltLight.target = obj;
                                 // scene.add(spoltLight);

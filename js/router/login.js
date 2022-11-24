@@ -18,6 +18,6 @@ loginAPI.get("/", loginController.renderPage);
 
 loginAPI.post("/post", loginController.Login);
 
-loginAPI.post("/logout", checkAuth, loginController.logout);
+loginAPI.get("/logout", checkAuth, loginController.logout);
 
 module.exports = loginAPI;

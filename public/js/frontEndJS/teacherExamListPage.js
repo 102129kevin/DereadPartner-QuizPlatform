@@ -1,4 +1,5 @@
 import { checkInputTextEmpty } from "./check.js";
+import { resetImage } from "./examInput.js";
 import {preview , format_float , makeQData} from './uploadPic.js';
 
 function initImgState(imgPreviewDOM){
@@ -93,16 +94,8 @@ window.addEventListener("load", () => {
         clearInputImg.addEventListener("click",(e)=>{
             e.preventDefault();
 
-            // 檔案文字區塊
-            inputText.innerHTML = "未選擇任何檔案";
-
-            // 檔案上傳區塊
-            inputImg.value="";
-            imgPreviewDOM.setAttribute("src","");
-            fileName.innerHTML = "";
-            fileSize.innerHTML = "";
-            uploadInfo.classList.add("d-none");
-            uploadHint.classList.remove("d-none");
+            // 清除圖片
+            resetImage(inputText,inputImg,imgPreviewDOM,fileName,fileSize,uploadHint,uploadInfo);
 
             // 更新圖片狀態
             imgState.next = "";
@@ -126,6 +119,13 @@ window.addEventListener("load", () => {
                 alert("請將此題目敘述、選項填寫完整!");
             }
             else{
+                // 更新進度視窗
+                Swal.fire({
+                    title: "更新中...",
+                    html: "Please wait a moment"
+                });
+                Swal.showLoading();
+
                 let qData = makeQData(topic,choose1,choose2,choose3,choose4,corChoose,unit,inputImg,explain);
                 // 更新題目需要加入qID
                 qData.append("qID", qID.value);
@@ -145,9 +145,11 @@ window.addEventListener("load", () => {
                 fetch("/teacher/exam/editQuestion", {
                     method: "POST",
                     body: qData
-                }).then((res) => {
+                })
+                .then((res) => {
                     return res.text();
-                }).then((newPicName) => {
+                })
+                .then((newPicName) => {
                     // 更新完成，更新imgPreviewDOM
                     // 實驗與思考
                     // console.log(imgState); //空或有圖片兩種狀況
@@ -160,10 +162,25 @@ window.addEventListener("load", () => {
                     
                     imgState = initImgState(imgPreviewDOM);
                     
-                    // console.log(imgState); //空或有圖片兩種狀況
-                    // console.log("***********");
+                    // 更新提示窗
+                    Swal.showLoading();
+                    Swal.fire({
+                        icon: 'success',
+                        title: "更新題目成功",
+                        text: '快通知學生做題目吧!'
+                    });
 
-                    alert("成功更新題目!");
+                })
+                .catch(err=>{
+                    console.log(err);
+
+                    // 更新提示窗
+                    Swal.showLoading();
+                    Swal.fire({
+                        icon: 'error',
+                        title: "更新題目失敗",
+                        text: 'something error occured...'
+                    });
                 });
             }
 

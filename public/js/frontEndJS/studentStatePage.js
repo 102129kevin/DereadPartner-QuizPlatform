@@ -1,9 +1,19 @@
 import {setBarChartData , drawBarChart , setRadarChartData , drawRadarChart , splitTimeInfo} from "./stateChart.js"
 
 window.addEventListener("load", () => {
+    let logo = document.querySelector(".logo");
+    let logout = document.querySelector(".icon");
     let lineChartDOM = document.getElementById("lineChart").getContext("2d");
     let radarChartDOM = document.getElementById("radarChart").getContext("2d");
     let container = document.getElementsByClassName("chartContainer");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/student";
+    })
+
+    logout.addEventListener("click",()=>{
+        window.location.href = "/login/logout";
+    })
 
     // 要資料
     $.ajax({

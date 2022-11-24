@@ -177,6 +177,7 @@ module.exports = class StudentController {
             }
             catch (err) {
                 console.log(err);
+                res.send(err);
             }
         }
         else {

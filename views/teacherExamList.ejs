@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/public/css/teacherExamUploadImg.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/teacherExamListPage.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="/public/js/frontEndJS/teacherExamListPage.js"></script>
 
 </head>
@@ -29,6 +30,7 @@
     </div>
 
     <h1 class="font-weight-700 trExamList_title">題目列表</h1>
+    <hr />
 
     <% if(r_qData.length > 0) { %>
         <% for(let i=0 ; i < r_qData.length ; i++) { %>
@@ -196,7 +198,9 @@
     
         <% } %>
     <% } else { %>
-        您目前尚未出過題目唷~
+        <div class="font-size-18">
+            您目前尚未出過題目唷~
+        </div>
     <% } %>
 
     

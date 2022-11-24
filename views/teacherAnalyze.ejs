@@ -6,11 +6,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/waiting.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/student_state.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/teacherAnalyzePage.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="/public/js/frontEndJS/teacherAnalyzePage.js"></script>
 
@@ -30,38 +34,42 @@
     <h1 class="font-weight-700 trAnalyze_title">學習狀況分析</h1>
     <hr />
 
-    <div class="chartContainer">
-        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+    <div class="chartContainer d-none">
+        <img src="/public/assest/tr_analyze/radar.png" class="chartTitle" />
         <div>班級各單元能力雷達圖</div>
         <canvas id="radarChart" width="250" height="250"></canvas>
     </div>
-    <div class="chartContainer">
-        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+    <div class="chartContainer d-none">
+        <img src="/public/assest/tr_analyze/unitAll.png" class="chartTitle" />
         <div>總複習答對率分佈圖</div>
         <canvas id="unitAllHist" width="250" height="250"></canvas>
     </div>
-    <div class="chartContainer">
-        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+    <div class="chartContainer d-none">
+        <img src="/public/assest/tr_analyze/unit1.png" class="chartTitle" />
         <div>單元1答對率分佈圖</div>
         <canvas id="unit1Hist" width="250" height="250"></canvas>
     </div>
-    <div class="chartContainer">
-        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+    <div class="chartContainer d-none">
+        <img src="/public/assest/tr_analyze/unit2.png" class="chartTitle" />
         <div>單元2答對率分佈圖</div>
         <canvas id="unit2Hist" width="250" height="250"></canvas>
     </div>
-    <div class="chartContainer">
-        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+    <div class="chartContainer d-none">
+        <img src="/public/assest/tr_analyze/unit3.png" class="chartTitle" />
         <div>單元3答對率分佈圖</div>
         <canvas id="unit3Hist" width="250" height="250"></canvas>
     </div>
-    <div class="chartContainer">
-        <!-- <img src="/public/assest/stu_state/radarChart.png" class="chartTitle" /> -->
+    <div class="chartContainer d-none">
+        <img src="/public/assest/tr_analyze/unit4.png" class="chartTitle" />
         <div>單元4答對率分佈圖</div>
         <canvas id="unit4Hist" width="250" height="250"></canvas>
     </div>
     <div class="analyzeHint d-none">
         您的班級目前尚未有作答紀錄唷~
+    </div>
+
+    <div class="waiting d-flex">
+        <img src="/public/assest/loading.gif" />
     </div>
 
 </body>

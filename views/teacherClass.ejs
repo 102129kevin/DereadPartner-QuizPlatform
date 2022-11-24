@@ -6,13 +6,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/sliderMenu.css" />
-    <link rel="stylesheet" type="text/css" href="/public/css/teacherAnalyzePage.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/waiting.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/student_state.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/teacherClassPage.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="module" src="/public/js/frontEndJS/teacherClassPage.js"></script>
 
 </head>
@@ -28,11 +32,11 @@
         </div>
     </div>
 
-    <h1 class="font-weight-700 trAnalyze_title">班級管理</h1>
+    <h1 class="font-weight-700 trClass_title">班級管理</h1>
     <hr />
 
     <section>
-        <!-- <div class="menuPanel background-white">
+        <div class="menuPanel background-white">
             <div class="menuOuter margin-0-auto">
                 <div class="menuTitle d-flex flexDirectionRow">
                     <div>s13110340xx陳楚瑜</div>
@@ -49,20 +53,78 @@
                         <img src="/public/assest/stu_state/radarChart.png" class="lineChart chartTitle" />
                         <canvas width="250" height="250"></canvas>
                     </div>
-                    <div class="totalNum">總作答次數:</div>
-                    <div class="totalQNum">總作答題數:</div>
-                    <div class="totalRate">總答對率:</div>
-                    <div class="lastTestTime">上次測驗時間:</div>
-                    <div>各單元作答次數:</div>
-                    <div class="unitAllNum">總複習作答次數:</div>
-                    <div class="unit1Num">單元1作答次數:</div>
-                    <div class="unit2Num">單元2作答次數:</div>
-                    <div class="unit3Num">單元3作答次數:</div>
-                    <div class="unit4Num">單元4作答次數:</div>
+
+                    <div class="w-80 trClass-m-10-0">
+                        <div class="tr_wrap">
+                            <table class="font-size-18 w-100 trClass_table">
+                                <thead class="color-white trClass_tHead trClass_table_high1">
+                                    <tr>
+                                        <th colspan="2">作答概況</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="trClass_tBody">
+                                    <tr class="background-white2 trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">總作答題數</td>
+                                        <td class="w-40 rAlign b-box">930</td>
+                                    </tr>
+                                    <tr class="trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">總答對題數</td>
+                                        <td class="w-40 rAlign b-box">93</td>
+                                    </tr>
+                                    <tr class="background-white2 trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">總答對率</td>
+                                        <td class="w-40 rAlign b-box">10%</td>
+                                    </tr>
+                                    <tr class="trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">上次測驗時間</td>
+                                        <td class="w-40 rAlign b-box">
+                                            2022/11/24<br />
+                                            13:15
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="w-80 trClass-m-10-0">
+                        <div class="tr_wrap">
+                            <table class="font-size-18 w-100 trClass_table">
+                                <thead class="color-white trClass_tHead trClass_table_high1">
+                                    <tr>
+                                        <th colspan="2">各單元作答次數</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="trClass_tBody">
+                                    <tr class="background-white2 trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">單元1</td>
+                                        <td class="w-40 rAlign b-box">100</td>
+                                    </tr>
+                                    <tr class="trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">單元2</td>
+                                        <td class="w-40 rAlign b-box">93</td>
+                                    </tr>
+                                    <tr class="background-white2 trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">單元3</td>
+                                        <td class="w-40 rAlign b-box">10</td>
+                                    </tr>
+                                    <tr class="trClass_table_high">
+                                        <td class="w-60 trClass_tBody_title b-box">單元4</td>
+                                        <td class="w-40 rAlign b-box">10</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div> -->
+        </div>
     </section>
+
+    <div class="waiting d-flex">
+        <img src="/public/assest/loading.gif" />
+    </div>
 
 </body>
 

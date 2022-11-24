@@ -23,6 +23,8 @@ function markCorrect(corIndex, optionDOM) {
 
 window.addEventListener("load", () => {
 
+    let logo = document.querySelector(".logo");
+
     let topicIndex = 0;
     let qList = [];
     let allQNum = 0;
@@ -44,6 +46,10 @@ window.addEventListener("load", () => {
     let qSubmit = document.getElementById("qSubmit");
     let qSubmitArea = document.getElementById("submitArea");
     let exit = document.getElementById("exit");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/student";
+    })
 
     // 基本路由設置
     let reqQUrl = "/student/review/question/";
