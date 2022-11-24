@@ -33,6 +33,8 @@ window.addEventListener("load", () => {
     };
     toastr["info"]("正在處理資料中", "請稍後......");
 
+    let logo = document.querySelector(".logo");
+    let logout = document.querySelector(".icon");
 
     let chartContainer = document.getElementsByClassName("chartContainer");
 
@@ -44,6 +46,14 @@ window.addEventListener("load", () => {
     let unit4Hist = document.getElementById("unit4Hist");
 
     let waiting = document.querySelector(".waiting");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/teacher";
+    })
+
+    logout.addEventListener("click",()=>{
+        window.location.href = "/login/logout";
+    })
 
     $.ajax({
         url: "/teacher/analyze/getInitData",

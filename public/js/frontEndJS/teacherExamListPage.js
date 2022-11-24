@@ -14,8 +14,19 @@ function initImgState(imgPreviewDOM){
 }
 
 window.addEventListener("load", () => {
+    let logo = document.querySelector(".logo");
+    let logout = document.querySelector(".icon");
+
     let titleToggle = document.getElementsByClassName("titleToggle");
     let menuContent = document.getElementsByClassName("menuContent");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/teacher";
+    })
+
+    logout.addEventListener("click",()=>{
+        window.location.href = "/login/logout";
+    })
 
     Array.prototype.forEach.call(titleToggle, el => {
         el.addEventListener("click", (e) => {

@@ -3,6 +3,9 @@ import { resetInput , resetImage } from "./examInput.js";
 import { preview, format_float, makeQData } from './uploadPic.js';
 
 window.addEventListener("load", () => {
+    let logo = document.querySelector(".logo");
+    let logout = document.querySelector(".icon");
+
     // 基本欄位
     let topic = document.querySelector("textarea[name='topic']");
     let choose1 = document.querySelector("input[name='choose1']");
@@ -22,6 +25,14 @@ window.addEventListener("load", () => {
     let examUploadButton = document.getElementById("examUpload");
     let fileName = document.getElementById("fileName");
     let fileSize = document.getElementById("fileSize");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/teacher";
+    })
+
+    logout.addEventListener("click",()=>{
+        window.location.href = "/login/logout";
+    })
 
     inputImgButton.addEventListener("change", (e) => {
         // 取得檔案資訊

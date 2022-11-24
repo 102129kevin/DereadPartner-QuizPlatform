@@ -1,11 +1,22 @@
 import { setBarChartData, drawBarChart, setRadarChartData, drawRadarChart, splitTimeInfo } from "./stateChart.js"
 
 window.addEventListener("load", () => {
+    let logo = document.querySelector(".logo");
+    let logout = document.querySelector(".icon");
+
     let initData;
     let titleToggle;
     let barChart;
     let radarChart;
     let waiting = document.querySelector(".waiting");
+
+    logo.addEventListener("click",()=>{
+        window.location.href = "/teacher";
+    })
+
+    logout.addEventListener("click",()=>{
+        window.location.href = "/login/logout";
+    })
 
     // 提示訊息
     toastr.options = {
@@ -122,7 +133,7 @@ window.addEventListener("load", () => {
 function renderPage(data) {
     for (let i = 0; i < data.length; i++) {
         if (data[i].lastTestTime) {
-            let correctRate = (Math.round(data[i].totalRate * 1000) / 1000) * 100;
+            let correctRate = ((Math.round(data[i].totalRate * 1000) / 1000) * 100).toFixed(2);
             let lastTestTime = data[i].lastTestTime.split(" ");
 
             $("section").append(
@@ -244,7 +255,7 @@ function renderPage(data) {
                                                         .append(
                                                             $("<td/>")
                                                             .addClass("w-40 rAlign b-box")
-                                                            .html(correctRate)
+                                                            .html(correctRate + "%")
                                                         )
                                                     )
                                                     .append(
