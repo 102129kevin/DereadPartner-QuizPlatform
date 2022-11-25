@@ -64,11 +64,7 @@ app.use("/student", studentAPI);
 
 //get Index request
 app.get('/', (req, res) => {
-    // console.log(req.session);
-    // console.log(req.sessionID);
-    // console.log("----a round!!!!!!!!!!!!----");
-    console.log("logged:", req.session.name);
-    res.render("logged", { name: req.session.name });
+    res.render("index");
 })
 
 // Port website will run on
