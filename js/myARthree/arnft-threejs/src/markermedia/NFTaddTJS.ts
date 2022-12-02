@@ -181,22 +181,21 @@ export default class NFTaddTJS {
         let model: any;
         /* Load Model */
 
-        function gltfTest() {
-            return new Promise((resolve, reject) => {
-                const threeGLTFLoader = new GLTFLoader();
-                threeGLTFLoader.load(url, (gltf) => {
-                    model = gltf.scene;
-                    model.scale.set(scale, scale, scale);
-                    //model.rotation.x = Math.PI / 2;
-                    model.rotation.x = MathUtils.degToRad(rotationVector.x);
-                    model.rotation.y = MathUtils.degToRad(rotationVector.y);
-                    model.rotation.z = MathUtils.degToRad(rotationVector.z);
-                    // model.name = "ttt";
-                    //console.log(rotationVector);
-                    root.add(model);
-                    resolve("gltfdonessssss");
-                });
-            })
+        async function gltfTest() {
+            // return new Promise((resolve, reject) => {
+            const threeGLTFLoader = new GLTFLoader();
+            await threeGLTFLoader.load(url, (gltf) => {
+                model = gltf.scene;
+                model.scale.set(scale, scale, scale);
+                model.rotation.x = MathUtils.degToRad(rotationVector.x);
+                model.rotation.y = MathUtils.degToRad(rotationVector.y);
+                model.rotation.z = MathUtils.degToRad(rotationVector.z);
+
+                root.add(model);
+                // resolve("gltfdonessssss");
+                return "gltfdonessssss";
+            });
+            // })
         }
 
         gltfTest().then((res) => {

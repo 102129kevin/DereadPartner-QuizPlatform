@@ -356,7 +356,7 @@
         ARnft.ARnft.init(width, height, [["public/arMarker/nftT3/nftT3"]], [['pic']], 'config_gltf_myself.json', true)
             .then((nft) => {
                 document.addEventListener('containerEvent', function (ev) {
-
+                    let timeout;
                     let canvas = document.getElementById('canvas');
                     let fov = 0.8 * 180 / Math.PI;
                     let ratio = width / height;
@@ -407,15 +407,12 @@
                     directionalLight.position.set(0.5, 0, 0.866);
                     scene.add(directionalLight);
 
-                    // let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
-                    // nftAddTJS.add(cube, 'street', false);
-                    // nftAddTJS.addtest('./Data/models/Duck/glTF/Duck.glb', 'pinball', 80, false);
-
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
 
 
                     async function afterLoad() {
                         console.log("hi");
+                        window.clearInterval(timeout);
                         // 紀錄model位於場景的物件索引中位於第幾個
                         let modelIndex = 0;
 
@@ -430,8 +427,6 @@
                         // controlModel = scene.getObjectByName("root-pic").children[0];
                         controlModel = scene.children[modelIndex].children[0];
                         console.log(controlModel);
-
-
 
                         let textureLoader = new TextureLoader()
                         //add plane lon0board
@@ -456,17 +451,6 @@
                         lon180board.rotation.y = 0 - 180;
                         lon180board.material.visible = true;
                         scene.children[3].add(lon180board);
-
-                        //console.log(scene);
-
-                        // mesh.position.y = 0.0;
-                        // mesh.rotation.x = - Math.PI / 2;
-                        // mesh.receiveShadow = true;
-                        // scene.add(mesh);
-
-                        // //const material = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.DoubleSide });
-                        // const plane = new THREE.Mesh(geometry, material);
-                        // scene.add(plane);
 
                         //綁定btnEast事件
                         btnEast = document.getElementById("btnEast");
@@ -548,20 +532,19 @@
 
                     function modelLoader() {
                         return new Promise((resolve, reject) => {
-                            // const threeGLTFLoader = new GLTFLoader();
+
                             let okCode = 0;
 
-                            setmodel = nftAddTJS.addInteract("./model3D/planet.glb", 'pic', 60, false, rotationInit, nftLost);
+                            nftAddTJS.addInteract("./model3D/planet.glb", 'pic', 60, false, rotationInit, nftLost);
 
-                            let ttt = window.setTimeout(() => {
-                                resolve("modelLoader done");
-                            }, 10000);
+                            timeout = window.setInterval(() => {
+                                console.log("持續檢查中");
+                                if (scene.children[3].children[0] != undefined) {
+                                    resolve("modelLoader done");
+                                }
+                            }, 2000);
 
-                            // threeGLTFLoader.load('./model3D/planet.glb', async (gltf) => {
-                            // setmodel = await nftAddTJS.addInteract(gltf.scene, 'pic', 60, false, rotationInit, nftLost);
 
-
-                            // });
 
 
                         });
