@@ -6,6 +6,7 @@ window.addEventListener("load", () => {
     let stateButton = document.getElementById("state");
     let reviewButton = document.getElementById("review");
     let today = document.getElementById("today");
+    let learnMap = document.getElementById("learnMap");
 
     logo.addEventListener("click",()=>{
         window.location.href = "/student";
@@ -30,6 +31,10 @@ window.addEventListener("load", () => {
     reviewButton.addEventListener("click", () => {
         window.location.href = "/student/review";
     });
+
+    learnMap.addEventListener("click", ()=> {
+        window.location.href = "/student/learnMap";
+    })
     
     today.innerHTML = getToday();
 });

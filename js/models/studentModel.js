@@ -12,9 +12,6 @@ function makeStuData(record) {
 }
 
 module.exports = class StudentModel {
-    // 新增班級前先檢查是否有該班級
-    // 有 > 已經有此班級
-    // 無 > 新增班級
 
     getStudentData(sID) {
         let docRef = firestore.doc(firebaseDB, "students", sID);

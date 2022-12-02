@@ -172,100 +172,81 @@ export default class NFTaddTJS {
         this.names.push(name);
     }
 
-    public addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean, rotationVector: RotateVector, htmlEl: NodeListOf<Element>) {
+    public addInteract(url: string, name: string, scale: number, objVisibility: boolean, rotationVector: RotateVector, htmlEl: NodeListOf<Element>) {
         const root = new Object3D();
         console.log(htmlEl.length);
         root.name = "root-" + name;
         this.scene.add(root);
-        //let model: any;
+
+        let model: any;
         /* Load Model */
-        //const threeGLTFLoader = new GLTFLoader();
-        //threeGLTFLoader.load(url, (gltf) => {
-        //model = gltf.scene;
-        model.scale.set(scale, scale, scale);
-        //model.rotation.x = Math.PI / 2;
-        model.rotation.x = MathUtils.degToRad(rotationVector.x);
-        model.rotation.y = MathUtils.degToRad(rotationVector.y);
-        model.rotation.z = MathUtils.degToRad(rotationVector.z);
 
-        //console.log(rotationVector);
+        function gltfTest() {
+            return new Promise((resolve, reject) => {
+                const threeGLTFLoader = new GLTFLoader();
+                threeGLTFLoader.load(url, (gltf) => {
+                    model = gltf.scene;
+                    model.scale.set(scale, scale, scale);
+                    //model.rotation.x = Math.PI / 2;
+                    model.rotation.x = MathUtils.degToRad(rotationVector.x);
+                    model.rotation.y = MathUtils.degToRad(rotationVector.y);
+                    model.rotation.z = MathUtils.degToRad(rotationVector.z);
+                    // model.name = "ttt";
+                    //console.log(rotationVector);
+                    root.add(model);
+                    resolve("gltfdonessssss");
+                });
+            })
+        }
 
-        this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
-            var msg = ev.detail;
-            model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
-            model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
-            console.log("insideTS : x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
-        });
+        gltfTest().then((res) => {
+            console.log(res);
 
-        model.traverse((child: any) => {
-
-            child.addEventListener("click", (event: any) => {
-                console.log("hiinclick");
+            this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
+                var msg = ev.detail;
+                model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
+                model.position.x = ((msg.width / msg.dpi) * 2.54 * 10) / 2.0;
+                console.log("insideTS : x=" + model.position.x + " y=" + model.position.y + " z=" + model.position.z);
             });
+            this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
+                root.visible = true;
+                model.visible = true;
+                htmlEl.forEach(function (item) {
+                    item.classList.remove("nftLost");
+                    item.classList.add("nftFound");
+                });
 
-        });
-
-        model.addEventListener('mouseover', (event: any) => {
-            console.log(event);
-            document.body.style.cursor = 'pointer';
-        });
-
-        model.addEventListener('mouseout', (event: any) => {
-            console.log(event);
-            document.body.style.cursor = 'default';
-        });
-
-        model.addEventListener('mouseover', (event: any) => {
-            console.log(event);
-            document.body.style.cursor = 'pointer';
-        });
-
-        model.addEventListener('mousedown', (event: any) => {
-            console.log(event);
-            console.log(event.target.name);
-            event.stopPropagation();
-        });
-
-        root.add(model);
-        //});
-        this.target.addEventListener("getMatrixGL_RH-" + this.uuid + "-" + name, (ev: any) => {
-            root.visible = true;
-            model.visible = true;
-            htmlEl.forEach(function (item) {
-                item.classList.remove("nftLost");
-                item.classList.add("nftFound");
+                if (this._oef === true) {
+                    let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
+                    filter = this._filter.update(ev.detail.matrixGL_RH);
+                    root.position.setX(filter[0].x);
+                    root.position.setY(filter[0].y);
+                    root.position.setZ(filter[0].z);
+                    root.rotation.setFromVector3(filter[1]);
+                    root.scale.setX(filter[2].x);
+                    root.scale.setY(filter[2].y);
+                    root.scale.setZ(filter[2].z);
+                } else {
+                    root.matrixAutoUpdate = false;
+                    const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
+                    Utils.setMatrix(root.matrix, matrix);
+                }
             });
-
-            if (this._oef === true) {
-                let filter = [new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0)];
-                filter = this._filter.update(ev.detail.matrixGL_RH);
-                root.position.setX(filter[0].x);
-                root.position.setY(filter[0].y);
-                root.position.setZ(filter[0].z);
-                root.rotation.setFromVector3(filter[1]);
-                root.scale.setX(filter[2].x);
-                root.scale.setY(filter[2].y);
-                root.scale.setZ(filter[2].z);
-            } else {
-                root.matrixAutoUpdate = false;
-                const matrix = Utils.interpolate(ev.detail.matrixGL_RH);
-                Utils.setMatrix(root.matrix, matrix);
-            }
-        });
-        this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
-            root.visible = objVisibility;
-            model.visible = objVisibility;
-            htmlEl.forEach(function (item) {
-                item.classList.remove("nftFound");
-                item.classList.add("nftLost");
+            this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
+                root.visible = objVisibility;
+                model.visible = objVisibility;
+                htmlEl.forEach(function (item) {
+                    item.classList.remove("nftFound");
+                    item.classList.add("nftLost");
+                });
             });
-        });
-        this.names.push(name);
+            this.names.push(name);
 
-        //
-        //this.entities.push({name});
+            console.log("dead AR...");
+            // console.log(model);
+            return model;
+        })
 
-        return model;
     }
 
     public addInteract2(model: Object3D, name: string, scale: number, objVisibility: boolean) {
@@ -275,6 +256,7 @@ export default class NFTaddTJS {
         this.scene.add(root);
         model.scale.set(scale, scale, scale);
         model.rotation.x = Math.PI / 2;
+
         this.target.addEventListener("getNFTData-" + this.uuid + "-" + name, (ev: any) => {
             var msg = ev.detail;
             model.position.y = ((msg.height / msg.dpi) * 2.54 * 10) / 2.0;
@@ -302,10 +284,10 @@ export default class NFTaddTJS {
                 Utils.setMatrix(root.matrix, matrix);
             }
         });
+
         this.target.addEventListener("nftTrackingLost-" + this.uuid + "-" + name, (ev: any) => {
             root.visible = objVisibility;
             model.visible = objVisibility;
-
         });
         this.names.push(name);
 
@@ -330,7 +312,7 @@ export default class NFTaddTJS {
                     // model = obj.children[0];
                     callback(model);
                     root.add(model);
-                    resolve("fbxMaker done!sssss");
+                    resolve("fbxMaker done!");
                 });
             });
         }

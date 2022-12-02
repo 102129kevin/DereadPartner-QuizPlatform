@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/waiting.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/studentLearnMap.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://kit.fontawesome.com/a75761cb08.js" crossorigin="anonymous"></script>
+    <script src="/public/js/frontEndJS/stuLearnMap.js"></script>
+
+</head>
+
+<body class="font-default content background-main">
+    <div class="d-flex stu_title flexDirectionRow">
+        <div class="w-50 lAlign">
+            <img src="/public/assest/Logo.png" class="logo" />
+        </div>
+
+        <div class="w-50 rAlign">
+            <img src="/public/assest/stu_icon.png" class="icon" />
+        </div>
+    </div>
+
+    <h1 class="font-weight-700 stuLearnMapTitle">學習狀況分析</h1>
+    <hr />
+
+    <div class="calendar background-white">
+        <div class="w-90 margin-0-auto">
+            <div class="calendarTitle d-flex flexAlignCneter flexDirectionRow">
+                <div class="calendarControl">
+                    <button id="prev" class="background-trasparent borderNone">
+                        <i class="fa-sharp fa-solid fa-arrow-left font-size-18"></i>
+                    </button>
+                </div>
+                <div class="calendarHead cAlign color-green font-weight-600">
+                    <div class="monthText">Month</div>
+                    <div class="yearText">Year</div>
+                </div>
+                <div class="calendarControl rAlign">
+                    <button id="next" class="background-trasparent borderNone">
+                        <i class="fa-sharp fa-solid fa-arrow-right font-size-18"></i>
+                    </button>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="calendarBody" id="calendarBody">
+                <div class="calendarBody_item">
+                    <ul class="d-flex flexDirectionRow">
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                        <li>Sun</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="learnHint" class="learnHint"></div>
+
+    <div class="waiting d-flex">
+        <img src="/public/assest/loading.gif" />
+    </div>
+
+</body>
+
+</html>

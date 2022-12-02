@@ -26,5 +26,8 @@ studentAPI.get("/state/chart", studentController.getChartData);
 
 studentAPI.get("/scan", studentController.renderScanPage);
 
+studentAPI.get("/learnMap", studentController.renderLearnMapPage);
+
+studentAPI.get("/learnMap/data", studentController.getLearnMap);
 
 module.exports = studentAPI;

@@ -1,0 +1,54 @@
+.stuLearnMapTitle {
+    font-size: 34px;
+}
+
+.calendar {
+    border-radius: 15px;
+    border: 1px solid rgba(45, 45, 45, 0.3);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
+}
+
+.calendarTitle {
+    margin: 12px 0;
+
+}
+
+.calendarControl {
+    width: 20%;
+}
+
+.calendarHead {
+    flex-grow: 1;
+}
+
+.monthText {
+    font-size: 24px;
+}
+
+.calendarBody_item {
+    margin: 16px 0;
+    border-bottom: 1px solid black;
+    height: 30px;
+}
+
+.calendarBody_item:last-of-type {
+    border-bottom: none;
+}
+
+.calendarBody_item ul li {
+    width: 14.28%;
+    text-align: center;
+}
+
+.calendarBody_item ul li:last-of-type {
+    border-right: none;
+}
+
+.calendar_mark {
+    border-bottom: 5px solid rgba(90, 112, 22, 0.3);
+    width: 75%;
+}
+
+.learnHint {
+    margin: 16px 0;
+}

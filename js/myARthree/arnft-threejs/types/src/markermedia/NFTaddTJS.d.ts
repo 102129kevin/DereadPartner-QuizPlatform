@@ -21,7 +21,7 @@ export default class NFTaddTJS {
     constructor(uuid: string);
     add(mesh: Object3D, name: string, objVisibility: boolean): void;
     addModel(url: string, name: string, scale: number, objVisibility: boolean): void;
-    addInteract(model: Object3D, name: string, scale: number, objVisibility: boolean, rotationVector: RotateVector, htmlEl: NodeListOf<Element>): Object3D<import("three").Event>;
+    addInteract(url: string, name: string, scale: number, objVisibility: boolean, rotationVector: RotateVector, htmlEl: NodeListOf<Element>): void;
     addInteract2(model: Object3D, name: string, scale: number, objVisibility: boolean): Object3D<import("three").Event>;
     addFBX(url: string, name: string, callback: (object: any) => {}, objVisibility: boolean): void;
     addModelWithCallback(url: string, name: string, callback: (gltf: any) => {}, objVisibility: boolean): void;

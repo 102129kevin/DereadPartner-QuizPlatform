@@ -5,6 +5,8 @@ window.addEventListener("load", function () {
     //取得按鈕
     let loginBtn = document.getElementById("loginButton");
 
+    alert("您好!\n體驗學生版功能，請輸入:\n帳號:s1311034099\n密碼:99\n\n體驗教師版功能，請輸入:\n帳號:tr005\n密碼:005\n\n另外，也可以使用手機開啟我們的網站唷~");
+
     loginBtn.addEventListener("click", function () {
 
         //取得輸入資料

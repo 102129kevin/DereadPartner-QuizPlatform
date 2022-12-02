@@ -353,7 +353,7 @@
         let lon0board, lon180board;
         let nftLost;
 
-        ARnft.ARnft.init(width, height, [["public/arMarker/t101/street"]], [['street']], 'config.json', true)
+        ARnft.ARnft.init(width, height, [["public/arMarker/nftT3/nftT3"]], [['pic']], 'config_gltf_myself.json', true)
             .then((nft) => {
                 document.addEventListener('containerEvent', function (ev) {
 
@@ -401,9 +401,7 @@
                     renderer.physicallyCorrectLights = true;
 
                     const scene = sceneThreejs.getScene();
-
-                    // const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
-                    // camera.position.set(0, 0, 10);
+                    // let camera = sceneThreejs.getCamera();
 
                     let directionalLight = new THREE.DirectionalLight('#fff', 0.4);
                     directionalLight.position.set(0.5, 0, 0.866);
@@ -415,19 +413,29 @@
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
 
-                    const threeGLTFLoader = new GLTFLoader();
-                    threeGLTFLoader.load('./model3D/planet.glb', (gltf) => {
-                        setmodel = nftAddTJS.addInteract(gltf.scene, 'street', 60, false, rotationInit, nftLost);
+
+                    async function afterLoad() {
+                        console.log("hi");
+                        // 紀錄model位於場景的物件索引中位於第幾個
+                        let modelIndex = 0;
 
                         for (let i = 0; i < scene.children.length; i++) {
-                            //console.log(scene.children[i]);
+                            // console.log(scene.children[i]);
                             if (scene.children[i].type === "Object3D") {
-                                controlModel = scene.children[i].children[0];
+                                // controlModel = scene.children[i].children[0];
+                                modelIndex = i;
                             }
                         }
 
+                        // controlModel = scene.getObjectByName("root-pic").children[0];
+                        controlModel = scene.children[modelIndex].children[0];
+                        console.log(controlModel);
+
+
+
+                        let textureLoader = new TextureLoader()
                         //add plane lon0board
-                        let texture = new TextureLoader().load('assest/image/lon0Board.jpg');
+                        let texture = await textureLoader.load('assest/image/lon0Board.jpg');
                         let material = new THREE.MeshPhongMaterial({ map: texture, side: THREE.FrontSide, flatShading: true });
                         let geometry = new THREE.PlaneGeometry(100, 60);
                         lon0board = new THREE.Mesh(geometry, material);
@@ -438,7 +446,7 @@
                         scene.children[3].add(lon0board);
 
                         //add plane lon180board
-                        texture = new TextureLoader().load('assest/image/lon180Board.jpg');
+                        texture = await textureLoader.load('assest/image/lon180Board.jpg');
                         material = new THREE.MeshPhongMaterial({ map: texture, side: THREE.FrontSide, flatShading: true });
                         geometry = new THREE.PlaneGeometry(100, 60);
                         lon180board = new THREE.Mesh(geometry, material);
@@ -531,20 +539,48 @@
                         // controlModel.rotation.x = THREE.MathUtils.degToRad(30);
                         // controlModel.rotation.y = THREE.MathUtils.degToRad(30);
                         // controlModel.rotation.z = THREE.MathUtils.degToRad(30);
-                        //console.log(controlModel);
-                    });
+                        // console.log(controlModel);
+                        nftAddTJS.oef = true;
 
-                    nftAddTJS.oef = true;
+                        // resolve("done");
 
-                    const tick = () => {
-                        window.requestAnimationFrame(tick);
-                        sceneThreejs.draw();
-                        //renderer.render(scene, camera);
                     }
-                    tick()
+
+                    function modelLoader() {
+                        return new Promise((resolve, reject) => {
+                            // const threeGLTFLoader = new GLTFLoader();
+                            let okCode = 0;
+
+                            setmodel = nftAddTJS.addInteract("./model3D/planet.glb", 'pic', 60, false, rotationInit, nftLost);
+
+                            let ttt = window.setTimeout(() => {
+                                resolve("modelLoader done");
+                            }, 10000);
+
+                            // threeGLTFLoader.load('./model3D/planet.glb', async (gltf) => {
+                            // setmodel = await nftAddTJS.addInteract(gltf.scene, 'pic', 60, false, rotationInit, nftLost);
+
+
+                            // });
+
+
+                        });
+                    }
+
+                    modelLoader()
+                        .then((res) => {
+                            console.log(res);
+                            afterLoad();
+                        })
+                        .then(() => {
+                            const tick = () => {
+                                sceneThreejs.draw();
+                                window.requestAnimationFrame(tick);
+                            }
+                            tick();
+                        })
 
                     // window.addEventListener('resize', handleWindowResize, false);
-
                     // function handleWindowResize() {
                     //     camera.aspect = window.innerWidth / window.innerHeight;
                     //     camera.updateProjectionMatrix();

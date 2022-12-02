@@ -267,4 +267,54 @@ module.exports = class StudentController {
         }
     }
 
-};
+    renderLearnMapPage(req, res, next) {
+        if (req.session.name) {
+            // 渲染
+            res.render("stu_learnMap");
+        }
+        else {
+            res.redirect("/login")
+        }
+    }
+
+    async getLearnMap(req, res, next) {
+
+        let exRecList = await examRecordModel.getExamRecord(req.session.name);
+
+        // 具有作答紀錄
+        if (exRecList) {
+
+            // 月份對照表
+            let month_name = {
+                "m01": "January", "m02": "Febrary", "m03": "March", "m04": "April",
+                "m05": "May", "m06": "June", "m07": "July", "m08": "Auguest",
+                "m09": "September", "m10": "October", "m11": "November", "m12": "December"
+            };
+
+            // 學習地圖物件
+            let learnMap = {};
+            Object.keys(month_name).forEach((key) => {
+                learnMap[month_name[key]] = [];
+            });
+
+            let timeList = exRecList.map((item) => {
+                let date = item["timeInfo"].split(" ");
+                return date[0];
+            })
+
+            // 產生獨立陣列，並去除重複
+            let uniqueDate = timeList.filter((item, index, arr) => {
+                return arr.indexOf(item) === index;
+            })
+
+            for (let i = 0; i < uniqueDate.length; i++) {
+                let dateSplit = uniqueDate[i].split("/");
+                let month = month_name["m" + dateSplit[1]];
+                learnMap[month].push(dateSplit[2]);
+            }
+            console.log(learnMap);
+            res.send(learnMap);
+        }
+
+    };
+}    
