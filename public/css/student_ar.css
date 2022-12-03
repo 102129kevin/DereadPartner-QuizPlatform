@@ -18,3 +18,17 @@
 .stuAR_pic{
     height: 42px;
 }
+@media screen and (min-width:1024px) {
+    .stuAR_hint{
+        font-size: 30px;
+        margin: 38px 0;
+    }
+
+    .stuAR_item{
+        font-size: 24px;
+    }
+
+    .stuAR_pic{
+        height: 50px;
+    }
+}

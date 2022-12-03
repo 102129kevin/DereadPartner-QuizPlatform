@@ -9,3 +9,20 @@
 .trExam_upload_btn{
     width: 68px;
 }
+
+@media screen and (min-width:1024px) {
+    .tr_exam_form{
+        margin: 0 auto;
+        width: 50%;
+    }
+
+    .trExam_choice_input{
+        padding: 4px 0 4px 12px;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .trExam_choice_input{
+        padding: 4px 0 4px 16px;
+    }
+}

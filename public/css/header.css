@@ -26,3 +26,35 @@
 .quiz_unitIcon {
     position: relative;
 }
+
+@media screen and (min-width:1024px) {
+    /* .content {
+        margin: px;
+    } */
+
+    .logo {
+        width: 40%;
+    }
+
+    .icon {
+        width: 15%;
+    }
+
+    .unit_icon {
+        width: 30%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .logo {
+        width: 30%;
+    }
+
+    .icon {
+        width: 10%;
+    }
+
+    .unit_icon {
+        width: 20%;
+    }
+}

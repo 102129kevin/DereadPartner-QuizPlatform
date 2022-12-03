@@ -26,7 +26,6 @@
     <script type="module">
         //import THREE from 'three'
         import RotationControls from '/js/threeRotate/index.js';
-        // import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
         let width = 640;
         let height = 480;
@@ -82,12 +81,6 @@
 
                     let nftAddTJS = new ARnftThreejs.NFTaddTJS(nft.uuid);
                     nftAddTJS.oef = true;
-
-                    // const gltfLoader = new GLTFLoader();
-                    // gltfLoader.load('../public/model3D/shiba.glb', (gltf) => {
-                    //     console.log(gltf);
-                    //     console.log(typeof gltf.scene);
-                    // });
 
                     let setModel;
                     let modelPath = "../public/model3D/basin_v1.fbx";

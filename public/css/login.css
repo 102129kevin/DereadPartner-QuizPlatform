@@ -32,10 +32,12 @@
 .login_footer {
     display: flex;
     flex-direction: row;
+    height: 65vh;
 }
 
 .login_container {
     width: 50%;
+    height: 100%;
     position: relative;
 }
 
@@ -47,9 +49,74 @@
     width: 300px;
 }
 
+.login_btn_container {
+    height: 12%;
+    align-items: flex-start;
+    justify-content: center;
+}
+
 .login_btn {
-    position: absolute;
+    /* position: absolute;
     left: 10px;
-    top: 30px;
+    top: 30px; */
     width: 65%;
+}
+
+.login_info_container {
+    flex-grow: 1;
+}
+
+.login_info {
+    width: 90%;
+    padding: 12px;
+    border: 5px solid #93ba2a;
+    border-radius: 16px;
+}
+
+.login_info_margin {
+    margin: 4px 0;
+}
+
+@media screen and (min-width:1024px) {
+    .login_block {
+        padding-top: 5%;
+    }
+
+    .login_input_box {
+        width: 35%;
+    }
+
+    .login_btn {
+        width: 40%;
+    }
+
+    .login_btn_container {
+        height: 16%;
+    }
+
+    .login_info {
+        width: 52%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .login_block {
+        padding-top: 2%;
+    }
+
+    .login_input_box {
+        max-width: 25%;
+    }
+
+    .login_btn {
+        width: 20%;
+    }
+
+    .login_btn_container {
+        max-height: 12%;
+    }
+
+    .login_info {
+        max-width: 40%;
+    }
 }

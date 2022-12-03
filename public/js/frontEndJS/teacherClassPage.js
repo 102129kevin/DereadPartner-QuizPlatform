@@ -164,218 +164,228 @@ function renderPage(data) {
                                     .addClass("menuContent d-none")
                                     .append(
                                         $("<div/>")
-                                            .addClass("chartContainer")
-                                            .append(
-                                                $("<img/>")
-                                                    .addClass("chartTitle")
-                                                    .attr("src", "/public/assest/stu_state/correctRate.png")
-                                            )
-                                            .append(
-                                                $("<canvas/>")
-                                                    .addClass("barChart background-white")
-                                                    .attr("width", "250")
-                                                    .attr("height", "250")
-                                            )
-                                    )
-                                    .append(
-                                        $("<div/>")
-                                            .addClass("chartContainer")
-                                            .append(
-                                                $("<img/>")
-                                                    .addClass("chartTitle")
-                                                    .attr("src", "/public/assest/stu_state/radarChart.png")
-                                            )
-                                            .append(
-                                                $("<canvas/>")
-                                                    .addClass("radarChart")
-                                                    .attr("width", "250")
-                                                    .attr("height", "250")
-                                            )
-                                    )
-                                    .append(
-                                        $("<div/>")
-                                        .addClass("w-80 trClass-m-10-0")
+                                        .addClass("d-flex flexAlignCneter outer")
                                         .append(
                                             $("<div/>")
-                                            .addClass("tr_wrap")
-                                            .append(
-                                                $("<table/>")
-                                                .addClass("font-size-18 w-100 trClass_table")
+                                                .addClass("chartContainer")
                                                 .append(
-                                                    $("<thead/>")
-                                                    .addClass("color-white trClass_tHead trClass_table_high1")
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .append(
-                                                            $("<th/>")
-                                                            .attr("colspan","2")
-                                                            .html("作答概況")
-                                                        )
-                                                    )
+                                                    $("<img/>")
+                                                        .addClass("chartTitle")
+                                                        .attr("src", "/public/assest/stu_state/correctRate.png")
                                                 )
                                                 .append(
-                                                    $("<tbody/>")
-                                                    .addClass("trClass_tBody")
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("background-white2 trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("總作答題數")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].totalNum)
-                                                        )
-                                                    )
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("總答對題數")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].totalQNum)
-                                                        )
-                                                    )
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("background-white2 trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("總答對率")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(correctRate + "%")
-                                                        )
-                                                    )
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("上次測驗時間")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(lastTestTime[0] + "<br/>" + lastTestTime[1])
-                                                        )
-                                                    )
+                                                    $("<canvas/>")
+                                                        .addClass("barChart background-white")
+                                                        .attr("width", "250")
+                                                        .attr("height", "250")
                                                 )
-                                            )
                                         )
-                                        
+                                        .append(
+                                            $("<div/>")
+                                                .addClass("chartContainer")
+                                                .append(
+                                                    $("<img/>")
+                                                        .addClass("chartTitle")
+                                                        .attr("src", "/public/assest/stu_state/radarChart.png")
+                                                )
+                                                .append(
+                                                    $("<canvas/>")
+                                                        .addClass("radarChart")
+                                                        .attr("width", "250")
+                                                        .attr("height", "250")
+                                                )
+                                        )
                                     )
                                     .append(
                                         $("<div/>")
-                                        .addClass("w-80 trClass-m-10-0")
+                                        .addClass("trClass_table_container")
                                         .append(
                                             $("<div/>")
-                                            .addClass("tr_wrap")
+                                            .addClass("tr_wrap_outer")
                                             .append(
-                                                $("<table/>")
-                                                .addClass("font-size-18 w-100 trClass_table")
+                                                $("<div/>")
+                                                .addClass("tr_wrap")
                                                 .append(
-                                                    $("<thead/>")
-                                                    .addClass("color-white trClass_tHead trClass_table_high1")
+                                                    $("<table/>")
+                                                    .addClass("font-size-18 w-100 trClass_table")
                                                     .append(
-                                                        $("<tr/>")
+                                                        $("<thead/>")
+                                                        .addClass("color-white trClass_tHead trClass_table_high1")
                                                         .append(
-                                                            $("<th/>")
-                                                            .attr("colspan","2")
-                                                            .html("各單元作答次數")
-                                                        )
-                                                    )
-                                                )
-                                                .append(
-                                                    $("<tbody/>")
-                                                    .addClass("trClass_tBody")
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("總複習")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].unitNum.unitAll)
+                                                            $("<tr/>")
+                                                            .append(
+                                                                $("<th/>")
+                                                                .attr("colspan","2")
+                                                                .html("作答概況")
+                                                            )
                                                         )
                                                     )
                                                     .append(
-                                                        $("<tr/>")
-                                                        .addClass("background-white2 trClass_table_high")
+                                                        $("<tbody/>")
+                                                        .addClass("trClass_tBody")
                                                         .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("單元1")
+                                                            $("<tr/>")
+                                                            .addClass("background-white2 trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("總作答題數")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].totalNum)
+                                                            )
                                                         )
                                                         .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].unitNum.unit1)
-                                                        )
-                                                    )
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("單元2")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].unitNum.unit2)
-                                                        )
-                                                    )
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("background-white2 trClass_table_high")
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("單元3")
+                                                            $("<tr/>")
+                                                            .addClass("trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("總答對題數")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].totalQNum)
+                                                            )
                                                         )
                                                         .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].unitNum.unit3)
+                                                            $("<tr/>")
+                                                            .addClass("background-white2 trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("總答對率")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(correctRate + "%")
+                                                            )
                                                         )
-                                                    )
-                                                    .append(
-                                                        $("<tr/>")
-                                                        .addClass("trClass_table_high")
                                                         .append(
-                                                            $("<td/>")
-                                                            .addClass("w-60 trClass_tBody_title b-box")
-                                                            .html("單元4")
-                                                        )
-                                                        .append(
-                                                            $("<td/>")
-                                                            .addClass("w-40 rAlign b-box")
-                                                            .html(data[i].unitNum.unit4)
+                                                            $("<tr/>")
+                                                            .addClass("trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("上次測驗時間")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(lastTestTime[0] + "<br/>" + lastTestTime[1])
+                                                            )
                                                         )
                                                     )
                                                 )
                                             )
+                                            
                                         )
-                                        
+                                        .append(
+                                            $("<div/>")
+                                            .addClass("tr_wrap_outer")
+                                            .append(
+                                                $("<div/>")
+                                                .addClass("tr_wrap")
+                                                .append(
+                                                    $("<table/>")
+                                                    .addClass("font-size-18 w-100 trClass_table")
+                                                    .append(
+                                                        $("<thead/>")
+                                                        .addClass("color-white trClass_tHead trClass_table_high1")
+                                                        .append(
+                                                            $("<tr/>")
+                                                            .append(
+                                                                $("<th/>")
+                                                                .attr("colspan","2")
+                                                                .html("各單元作答次數")
+                                                            )
+                                                        )
+                                                    )
+                                                    .append(
+                                                        $("<tbody/>")
+                                                        .addClass("trClass_tBody")
+                                                        .append(
+                                                            $("<tr/>")
+                                                            .addClass("trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("總複習")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].unitNum.unitAll)
+                                                            )
+                                                        )
+                                                        .append(
+                                                            $("<tr/>")
+                                                            .addClass("background-white2 trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("單元1")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].unitNum.unit1)
+                                                            )
+                                                        )
+                                                        .append(
+                                                            $("<tr/>")
+                                                            .addClass("trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("單元2")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].unitNum.unit2)
+                                                            )
+                                                        )
+                                                        .append(
+                                                            $("<tr/>")
+                                                            .addClass("background-white2 trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("單元3")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].unitNum.unit3)
+                                                            )
+                                                        )
+                                                        .append(
+                                                            $("<tr/>")
+                                                            .addClass("trClass_table_high")
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-60 trClass_tBody_title b-box")
+                                                                .html("單元4")
+                                                            )
+                                                            .append(
+                                                                $("<td/>")
+                                                                .addClass("w-40 rAlign b-box")
+                                                                .html(data[i].unitNum.unit4)
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                            
+                                        )
                                     )
+                                    
+                                    
                             )
                     )
             )

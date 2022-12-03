@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
@@ -21,7 +20,7 @@
         <%= r_unit %>
     </div>
 
-    <div class="d-flex stu_title flexDirectionRow">
+    <div class="d-flex flexDirectionRow">
         <div class="lAlign">
             <img src="/public/assest/Logo.png" class="quizResult_logo" />
         </div>
@@ -58,15 +57,15 @@
                                     <div class="jAlign quizResult_lineHeight">
                                         <%= r_resultList[i].qTopic %>
                                     </div>
-    
+
                                     <div class="quizResult_pic">
                                         <% if(r_resultList[i].qImg) { %>
                                             <img src="/public/qPic/<%=r_resultList[i].qImg%>">
-                                        <% } %>
+                                            <% } %>
                                     </div>
-    
+
                                     <hr />
-    
+
                                     <ul class="quizResult_option quizResult_lineHeight">
                                         <% if(r_resultList[i].qOptions[0].color) { %>
                                             <li class="<%= r_resultList[i].qOptions[0].color %> jAlign">
@@ -87,7 +86,7 @@
                                                 (B)<%= r_resultList[i].qOptions[1].option %>
                                             </li>
                                         <% } %>
-        
+
                                         <% if(r_resultList[i].qOptions[2].color) { %>
                                             <li class="<%= r_resultList[i].qOptions[2].color %> jAlign">
                                                 (C)<%= r_resultList[i].qOptions[2].option %>
@@ -97,7 +96,7 @@
                                                 (C)<%= r_resultList[i].qOptions[2].option %>
                                             </li>
                                         <% } %>
-        
+
                                         <% if(r_resultList[i].qOptions[3].color) { %>
                                             <li class="<%= r_resultList[i].qOptions[3].color %> jAlign">
                                                 (D)<%= r_resultList[i].qOptions[3].option %>
@@ -108,15 +107,16 @@
                                             </li>
                                         <% } %>
                                     </ul>
-                                    
+
                                     <% if (r_resultList[i].qExplain) { %>
-                                        <div class="quizResult_explan color-red1 quizResult_lineHeight jAlign">解析:<%= r_resultList[i].qExplain %></div>
+                                        <div class="quizResult_explan color-red1 quizResult_lineHeight jAlign">解析:<%= r_resultList[i].qExplain %>
+                                        </div>
                                     <% } %>
                                 </div>
 
                             </div>
                         </a>
-                        
+
                     </div>
                 <% } else { %>
                     <div class="quizResult-w-2 cAlign color-red1">X</div>
@@ -130,7 +130,7 @@
                         <a href="#" class="lightbox" id="<%=r_resultList[i].qId %>">
                             <div class="quizResult_panel quizResult-w-90">
 
-                                <div  class="quizResult_content">
+                                <div class="quizResult_content">
                                     <div class="jAlign quizResult_lineHeight">
                                         <%= r_resultList[i].qTopic %>
                                     </div>
@@ -163,7 +163,7 @@
                                                 (B)<%= r_resultList[i].qOptions[1].option %>
                                             </li>
                                         <% } %>
-        
+
                                         <% if(r_resultList[i].qOptions[2].color) { %>
                                             <li class="<%= r_resultList[i].qOptions[2].color %> jAlign">
                                                 (C)<%= r_resultList[i].qOptions[2].option %>
@@ -186,7 +186,8 @@
                                     </ul>
 
                                     <% if (r_resultList[i].qExplain) { %>
-                                        <div class="quizResult_explan color-red1 quizResult_lineHeight jAlign">解析:<%= r_resultList[i].qExplain %></div>
+                                        <div class="quizResult_explan color-red1 quizResult_lineHeight jAlign">解析:<%= r_resultList[i].qExplain %>
+                                        </div>
                                     <% } %>
 
                                 </div>
@@ -195,26 +196,25 @@
                         </a>
                     </div>
                 <% } %>
-
             </div>
-            <% } %>
+        <% } %>
 
     </div>
 
-    <div class="cFlexAlign margin-0-auto quizResult-w-80">
-        <div class="quizResult-w-33">
+    <div class="cFlexAlign margin-0-auto quizResult-w-80 quizResult_func">
+        <div class="quizResult-w-33 cAlign">
             <button class="borderNone background-trasparent" id="testAgain">
                 <img src="/public/assest/stu_quiz_end/retry.png" class="retry" />
             </button>
         </div>
 
-        <div class="quizResult-w-33">
+        <div class="quizResult-w-33 cAlign">
             <button class="borderNone background-trasparent" id="changeUnit">
                 <img src="/public/assest/stu_quiz_end/change.png" class="change" />
             </button>
         </div>
 
-        <div class="quizResult-w-33">
+        <div class="quizResult-w-33 cAlign">
             <button class="borderNone background-trasparent" id="goIndex">
                 <img src="/public/assest/stu_quiz_end/home.png" class="index" />
             </button>

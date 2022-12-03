@@ -18,6 +18,11 @@
     background-image: url("../assest/tr_exam/topic.png");
     background-repeat: no-repeat;
     background-size: cover;
+    /* background-size: 100%;
+
+    position: relative;
+	padding-right: 36%; 
+	margin: 0 auto; */
 }
 
 .upload_choice{
@@ -95,4 +100,21 @@
 .fileName {
     width: 100%;
     overflow: hidden;
+}
+
+@media screen and (min-width:1024px) {
+
+    .upload_choice{
+        margin: 8px auto;
+    }
+
+    .pd-3{
+        padding-left: 1.5%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .pd-3{
+        padding-left: 2.2%;
+    }
 }

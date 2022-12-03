@@ -1,3 +1,8 @@
+.outer{
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
 .chartContainer {
     margin-bottom: 32px;
 }
@@ -5,4 +10,26 @@
 .chartTitle {
     width: 45%;
     margin-bottom: 8px;
+}
+
+@media screen and (min-width:1024px){
+    .outer{
+        flex-direction: row;
+    }
+
+    .chartContainer{
+        width: 46%;
+        margin: 0 15px;
+    }
+
+    .chartTitle{
+        width: 40%;
+    }
+}
+
+@media screen and (min-width:1366px){
+    .chartContainer{
+        width: 40%;
+        margin: 0 30px;
+    }
 }

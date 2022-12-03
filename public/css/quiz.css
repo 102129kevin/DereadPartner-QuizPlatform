@@ -8,11 +8,27 @@
 }
 
 .quiz_unit div {
-    margin: 18px 0;
+    margin: 18px auto;
 }
 
 @media screen and (min-width:440px) {
     .quiz_text {
         font-size: 36px;
+    }
+}
+
+@media screen and (min-width:1024px) {
+    .quiz_text {
+        margin: 20px 0;
+    }
+
+    .quiz_unit div {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .quiz_unit div {
+        max-width: 45%;
     }
 }

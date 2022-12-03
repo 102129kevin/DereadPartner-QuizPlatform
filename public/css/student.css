@@ -27,6 +27,7 @@
 }
 
 .stu_course {
+    height: 12.5vh;
     background-image: url("../assest/student/history.png");
     background-size: cover;
     justify-content: flex-start;
@@ -39,10 +40,39 @@
 }
 
 .area2 {
-    padding: 32px 0;
+    /* padding: 32px 0; */
     width: 72%;
+    align-items: flex-start;
 }
 
 .area2 div {
     padding: 4px 0;
+}
+
+@media screen and (min-width:1024px) {
+    .stu_func div {
+        width: 25%;
+    }
+
+    .stu_course {
+        width: 35%;
+        height: 14vh;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .stu_func div {
+        width: 16%;
+    }
+
+    .stu_course {
+        width: 22%;
+        height: 12vh;
+    }
+}
+
+@media screen and (min-width:1536px) {
+    .stu_course {
+        height: 14vh;
+    }
 }

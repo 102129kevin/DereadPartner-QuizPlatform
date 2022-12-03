@@ -26,3 +26,29 @@
 .trExamList_upload_btn{
     width: 56px;
 }
+
+@media screen and (min-width:1024px) {
+    .uploadForm{
+        width: 60%;
+    }
+
+    .pd-choice-input{
+        padding: 0 0 0 12px;
+        height: 32px;
+    }
+
+    .pd-topic{
+        padding-left: 3%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .pd-topic{
+        padding-left: 2.4%;
+    }
+
+    .pd-choice-input{
+        padding: 0 0 0 16px;
+        height: 36px;
+    }
+}

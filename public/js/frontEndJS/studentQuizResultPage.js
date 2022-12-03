@@ -1,4 +1,11 @@
 window.addEventListener("load", () => {
+
+    // Get the browser window size
+    // let windowWidth = window.innerWidth;
+    // let windowHeight = window.innerHeight;
+    // console.log(windowWidth + "," + windowHeight);
+    
+
     let logo = document.querySelector(".quizResult_logo");
     let changeUnit = document.getElementById("changeUnit");
     let testAgain = document.getElementById("testAgain");

@@ -2,10 +2,13 @@
     font-size: 34px;
 }
 
+.outer{
+    flex-direction: column;
+}
+
 .calendar {
     border-radius: 15px;
     border: 1px solid rgba(45, 45, 45, 0.3);
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
 }
 
 .calendarTitle {
@@ -51,4 +54,16 @@
 
 .learnHint {
     margin: 16px 0;
+}
+
+@media screen and (min-width:1024px) {
+    .outer{
+        width: 50%;
+    }
+}
+
+@media screen and (min-width:1366px) {
+    .outer{
+        width: 40%;
+    }
 }
