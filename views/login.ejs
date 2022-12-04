@@ -8,13 +8,89 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/public/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/header.css" />
     <link rel="stylesheet" type="text/css" href="/public/css/login.css" />
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="module" src="/public/js/frontEndJS/loginPage.js"></script>
 </head>
 
-<body class="background-main font-default">
-    <div class="login_block cAlign">
+<body class="background-main font-default loginBody">
+
+    <div class="d-none mAlign login_head">
+        <img src="/public/assest/Logo.png" class="login_logo"/>
+    </div>
+
+    <div class="cAlign mAlign login_block">
+
+        <div class="d-none login_panel">
+            <img src="/public/assest/login/loginPanel_rwd.png" />
+            <div class="d-flex flexDirectionRow w-100 login_panel_outer">
+                <div class="login_panel_left">
+                </div>
+                <div class="login_panel_right">
+                    <div class="d-flex flexDirectionColumn b-box mAlign login_panel_container">
+                        <div class="login_panel_row font-weight-600 color-gray3 login_panel_title">會員登入</div>
+                        <div class="login_panel_row color-gray3 login_panel_hint">若不知您的帳號，請向教師詢問。</div>
+                        <div class="login_panel_row" >
+                            <div class="">
+                                <input type="text" class="b-box borderNone input_field" placeholder="帳號" name="userid_rwd">
+                            </div>
+                            <div class="">
+                                <input type="password" class="b-box borderNone input_field" placeholder="密碼" name="userpasswd_rwd">
+                            </div>
+                        </div>
+                        <div class="lAlign login_panel_row login_panel_info">
+                            <img src="/public/assest/login/loginInfo_rwd.png" />
+                        </div>
+                        <div class="d-flex flexDirectionRow login_panel_row">
+                            <div class="b-box login_panel_acc_left lAlign">
+                                <div class="background-white1 color-gray4 login_panel_acc">
+                                    <div class="color-green1">學生系統</div>
+                                    <div>
+                                        <span class="login_panel_acc_tick">帳號:</span>
+                                        <span class="login_panel_acc_item">s1311034099</span>
+                                    </div>
+                                    <div>
+                                        <span class="login_panel_acc_tick">密碼:</span>
+                                        <span class="login_panel_acc_item">99</span>
+                                    </div>
+                                </div>
+                                <div class="login_panel_fill lAlign">
+                                    <button class="borderNone background-trasparent" id="stuFill">
+                                        <img src="/public/assest/login/autoFill_rwd.png" />
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="b-box login_panel_acc_right rAlign">
+                                <div class="background-white1 color-gray4 login_panel_acc">
+                                    <div class="color-green1">教師系統</div>
+                                    <div>
+                                        <span class="login_panel_acc_tick">帳號:</span>
+                                        <span class="login_panel_acc_item">tr005</span>
+                                    </div>
+                                    <div>
+                                        <span class="login_panel_acc_tick">密碼:</span>
+                                        <span class="login_panel_acc_item">005</span>
+                                    </div>
+                                </div>
+                                <div class="login_panel_fill lAlign">
+                                    <button class="borderNone background-trasparent" id="trFill">
+                                        <img src="/public/assest/login/autoFill_rwd.png" />
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login_panel_row">
+                            <button class="borderNone background-trasparent login_panel_loginBtn" id="loginButton_rwd">
+                                <img src="/public/assest/login/login_rwd.png" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="login_title login_text_color font-weight-900">會員登入</div>
         <div class="login_input_box mAlign">
             <input type="text" class="input_field borderNone" placeholder="帳號" name="userid">

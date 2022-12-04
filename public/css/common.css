@@ -87,8 +87,20 @@ a:visited {
     color: #231815;
 }
 
+.color-gray3{
+    color: #242424;
+}
+
+.color-gray4{
+    color:#4a4a4a;
+}
+
 .color-green {
     color: #5a7016;
+}
+
+.color-green1 {
+    color: #5a6d2d;
 }
 
 .color-red {

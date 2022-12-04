@@ -41,3 +41,81 @@
     width: 40%;
   }
 }
+
+@media screen and (min-width:1024px) {
+  .index_body{
+    display: block;
+    height: 100vh;
+    background-image: url("/public/assest/index/indexBK_rwd.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .indexBlock{
+    width: 100%;
+  }
+
+  .index_head{
+    margin: 6% 0 0 6%;
+    text-align: left;
+    width: 30%
+  }
+
+  .index_welcome{
+    display: flex;
+    flex-direction: row;
+    margin-top: 6%;
+    width: 96%;
+  }
+
+  .index_welcome_pic{
+    margin: 12vh 0 4vh 0;
+    align-items: flex-end;
+  }
+
+  .index_welcome_start{
+    margin-left: 5%;
+  }
+
+  .index_welcome_start img{
+    width: 42%
+  }
+
+  .index_welcome_draw{
+    margin-left: 4vh;
+    width: 92%;
+  }
+
+  .index_mobile_content{
+    display: none;
+  }
+}
+
+@media screen and (min-width:1366px) {
+  .index_head{
+    margin: 4% 0 0 4%;
+    width: 22%;
+  }
+
+  .index_welcome{
+    margin-top: 2%;
+  }
+
+  .index_welcome_pic{
+    margin: 16vh 0 6vh 0;
+  }
+}
+
+@media screen and (min-width:1536px) {
+
+  .index_head{
+    margin: 3% 0 0 3%;
+    width: 20%;
+  }
+
+  .index_welcome{
+    margin-top: 0.05%;
+  }
+
+}
