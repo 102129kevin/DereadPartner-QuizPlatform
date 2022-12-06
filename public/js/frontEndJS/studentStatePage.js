@@ -1,4 +1,4 @@
-import {setBarChartData , drawBarChart , setRadarChartData , drawRadarChart , splitTimeInfo} from "./stateChart.js"
+import { setBarChartData, drawBarChart, setRadarChartData, drawRadarChart, splitTimeInfo } from "./stateChart.js"
 
 window.addEventListener("load", () => {
     let logo = document.querySelector(".logo");
@@ -7,11 +7,11 @@ window.addEventListener("load", () => {
     let radarChartDOM = document.getElementById("radarChart").getContext("2d");
     let container = document.getElementsByClassName("chartContainer");
 
-    logo.addEventListener("click",()=>{
+    logo.addEventListener("click", () => {
         window.location.href = "/student";
     })
 
-    logout.addEventListener("click",()=>{
+    logout.addEventListener("click", () => {
         window.location.href = "/login/logout";
     })
 
@@ -27,9 +27,9 @@ window.addEventListener("load", () => {
             let lineChartLabel = [];
             let lineChartData = [];
 
-            if(res.length > 0){
+            if (res.length > 0) {
 
-                Array.prototype.forEach.call(container,el=>{
+                Array.prototype.forEach.call(container, el => {
                     el.classList.remove("d-none");
                 });
 
@@ -37,11 +37,11 @@ window.addEventListener("load", () => {
                     // 大於5筆-取前5筆資料
                     for (let i = res.length - 5; i < res.length; i++) {
                         // lineChartLabel.push(res[i].timeInfo);
-    
+
                         // test
                         let label = splitTimeInfo(res[i].timeInfo);
                         lineChartLabel.push(label);
-    
+
                         let recCorrectRate = res[i].qCorrectNum / res[i].qNum;
                         lineChartData.push(recCorrectRate);
                     }
@@ -52,50 +52,50 @@ window.addEventListener("load", () => {
                         // lineChartLabel.push(rec.timeInfo);
                         let label = splitTimeInfo(rec.timeInfo);
                         lineChartLabel.push(label);
-    
+
                         lineChartData.push(rec.qCorrectNum / rec.qNum);
                     });
                 }
-    
+
                 // 製圖
-                let barData = setBarChartData(lineChartLabel,lineChartData);
-                drawBarChart(barData,lineChartDOM);
-                
+                let barData = setBarChartData(lineChartLabel, lineChartData);
+                drawBarChart(barData, lineChartDOM);
+
                 // 雷達圖
                 // 製作圖表標籤、圖表資料
                 // let radarChartLabel = ["單元1", "單元2", "單元3", "單元4"];
                 let radarChartData = [];
-    
+
                 let qNum = [0, 0, 0, 0];
                 let qCorrectNum = [0, 0, 0, 0];
-    
+
                 res.forEach((rec) => {
                     for (let i = 0; i < rec.qUnitCal.length; i++) {
                         qNum[i] += rec.qUnitCal[i].qNum;
                         qCorrectNum[i] += rec.qUnitCal[i].qCor;
                     }
                 })
-    
+
                 for (let i = 0; i < qNum.length; i++) {
                     radarChartData.push(qCorrectNum[i] / qNum[i]);
                 }
-    
+
                 // 製圖
                 let radarData = setRadarChartData(radarChartData);
-                drawRadarChart(radarData,radarChartDOM);
+                drawRadarChart(radarData, radarChartDOM);
             }
             else {
-                
+
                 let hint = document.querySelector(".stateHint");
 
-                Array.prototype.forEach.call(container,el=>{
+                Array.prototype.forEach.call(container, el => {
                     el.classList.add("d-none");
                 });
 
                 hint.classList.remove("d-none");
             }
 
-            
+
         },
         error: (err) => {
             console.log(err)

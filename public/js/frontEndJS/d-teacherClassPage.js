@@ -10,124 +10,74 @@ window.addEventListener("load", () => {
     let radarChart;
     let waiting = document.querySelector(".waiting");
 
-    logo.addEventListener("click", () => {
-        window.location.href = "/teacher";
-    })
+    // logo.addEventListener("click", () => {
+    //     window.location.href = "/teacher";
+    // })
 
-    logout.addEventListener("click", () => {
-        window.location.href = "/login/logout";
-    })
+    // logout.addEventListener("click", () => {
+    //     window.location.href = "/login/logout";
+    // })
 
-    // 提示訊息
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": true,
-        "positionClass": "toast-bottom-right",
-        "preventDuplicates": true,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "3000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
-    toastr["info"]("正在處理資料中", "請稍後......");
 
-    $.ajax({
-        url: "/teacher/class/getInitData",
-        method: "post",
-        success: (res) => {
-            // 隱藏等待畫面
-            waiting.classList.remove("d-flex");
-            waiting.classList.add("d-none");
+    waiting.classList.remove("d-flex");
+    waiting.classList.add("d-none");
 
-            // 溫馨提示訊息
-            toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": true,
-                "positionClass": "toast-bottom-right",
-                "preventDuplicates": true,
-                "onclick": null,
-                "showDuration": "400",
-                "hideDuration": "800",
-                "timeOut": "7500",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
-            toastr["success"]("您可以查看每位學生的作答狀況、能力分析圖表", "班級管理");
+    // 初始化資料
+    initData = [{ "sID": "s1311034091", "name": "小美", "barData": { "data": [0.9, 0.6, 1, 0.6, 0.6], "label": ["2022/11/21 2:51:32", "2022/11/21 2:54:17", "2022/11/21 2:55:14", "2022/11/21 2:55:40", "2022/11/21 2:56:17"] }, "radarData": [0.75, 0.9375, 0.7333333333333333, 0.6923076923076923], "totalRate": 0.7833333333333333, "totalNum": 60, "totalQNum": 47, "lastTestTime": "2022/11/21 2:56:17", "unitNum": { "unit1": 1, "unit2": 1, "unit3": 1, "unit4": 1, "unitAll": 2 } }, { "sID": "s1311034092", "name": "小鴻", "barData": { "data": [0.6, 0.5], "label": ["2022/11/21 2:57:14", "2022/11/21 2:57:35"] }, "radarData": [0.5, 0.5454545454545454, 0.6666666666666666, 0.5], "totalRate": 0.55, "totalNum": 20, "totalQNum": 11, "lastTestTime": "2022/11/21 2:57:35", "unitNum": { "unit1": 0, "unit2": 1, "unit3": 0, "unit4": 0, "unitAll": 1 } }, { "sID": "s1311034093", "name": "小光", "barData": { "data": [0.5, 0.6], "label": ["2022/11/21 2:58:31", "2022/11/21 2:58:53"] }, "radarData": [0, 0, 0.5, 0.6], "totalRate": 0.55, "totalNum": 20, "totalQNum": 11, "lastTestTime": "2022/11/21 2:58:53", "unitNum": { "unit1": 0, "unit2": 0, "unit3": 1, "unit4": 1, "unitAll": 0 } }, { "sID": "s1311034094", "name": "小恩", "barData": { "data": [0.4, 0.5], "label": ["2022/11/21 2:59:40", "2022/11/21 2:59:59"] }, "radarData": [0, 0.5, 0.6666666666666666, 0], "totalRate": 0.45, "totalNum": 20, "totalQNum": 9, "lastTestTime": "2022/11/21 2:59:59", "unitNum": { "unit1": 0, "unit2": 1, "unit3": 0, "unit4": 0, "unitAll": 1 } }, { "sID": "s1311034095", "name": "小蓁", "barData": { "data": [0.4, 1, 0.8, 0.6, 0.4], "label": ["2022/11/21 3:01:05", "2022/11/21 3:01:46", "2022/11/21 3:02:19", "2022/11/21 3:02:46", "2022/11/21 3:03:03"] }, "radarData": [0.5333333333333333, 1, 0.6129032258064516, 1], "totalRate": 0.6833333333333333, "totalNum": 60, "totalQNum": 41, "lastTestTime": "2022/11/21 3:03:03", "unitNum": { "unit1": 1, "unit2": 1, "unit3": 3, "unit4": 0, "unitAll": 1 } }, { "sID": "s1311034099", "name": "測試機", "barData": { "data": [0.2, 0.3, 0.4, 0.8, 0.2], "label": ["2022/12/6 10:48:46", "2022/12/6 13:56:10", "2022/12/6 13:58:40", "2022/12/6 13:59:09", "2022/12/6 14:00:25"] }, "radarData": [0.515625, 0.4444444444444444, 0.6923076923076923, 0.3333333333333333], "totalRate": 0.5, "totalNum": 110, "totalQNum": 55, "lastTestTime": "2022/12/6 14:00:25", "unitNum": { "unit1": 5, "unit2": 0, "unit3": 0, "unit4": 1, "unitAll": 5 } }];
 
-            // 初始化資料
-            initData = res;
+    // 渲染一堆有的沒的
+    renderPage(initData);
 
-            // 渲染一堆有的沒的
-            renderPage(initData);
+    // 事件監聽
+    titleToggle = document.getElementsByClassName("titleToggle");
+    Array.prototype.forEach.call(titleToggle, el => {
+        el.addEventListener("click", (e) => {
+            // 取得抽屜內容節點
+            let content = e.currentTarget.parentNode.nextElementSibling;
+            let panel = e.currentTarget.parentNode.parentNode.parentNode;
 
-            // 事件監聽
-            titleToggle = document.getElementsByClassName("titleToggle");
-            Array.prototype.forEach.call(titleToggle, el => {
-                el.addEventListener("click", (e) => {
-                    // 取得抽屜內容節點
-                    let content = e.currentTarget.parentNode.nextElementSibling;
-                    let panel = e.currentTarget.parentNode.parentNode.parentNode;
-
-                    // 判斷內容節點是否隱藏，使用jquey提供的slide方法進行伸縮
-                    if (window.getComputedStyle(content).display != "none") {
-                        $(content).slideUp();
-                        // // 邊界特效
-                        $(panel).removeClass("menuPanel_borderOpen");
-                    }
-                    else {
-                        $(content).slideDown();
-                        // // 邊界特效
-                        $(panel).addClass("menuPanel_borderOpen");
-                    }
-                })
-            });
-
-            // 繪圖-長條圖
-            barChart = document.getElementsByClassName("barChart");
-
-            // 修改時間標籤
-            initData.forEach((rec) => {
-                if (rec.barData) {
-                    for (let i = 0; i < rec.barData.label.length; i++) {
-                        rec.barData.label[i] = splitTimeInfo(rec.barData.label[i]);
-                    }
-                }
-            });
-
-            for (let i = 0; i < barChart.length; i++) {
-                if (initData[i].barData) {
-                    let barChartData = setBarChartData(initData[i].barData.label, initData[i].barData.data);
-                    drawBarChart(barChartData, barChart[i]);
-                }
+            // 判斷內容節點是否隱藏，使用jquey提供的slide方法進行伸縮
+            if (window.getComputedStyle(content).display != "none") {
+                $(content).slideUp();
+                // // 邊界特效
+                $(panel).removeClass("menuPanel_borderOpen");
             }
-
-            // 繪圖-雷達圖
-            radarChart = document.getElementsByClassName("radarChart");
-            for (let i = 0; i < radarChart.length; i++) {
-                if (initData[i].radarData) {
-                    let radarChartData = setRadarChartData(initData[i].radarData);
-                    drawRadarChart(radarChartData, radarChart[i]);
-                }
+            else {
+                $(content).slideDown();
+                // // 邊界特效
+                $(panel).addClass("menuPanel_borderOpen");
             }
+        })
+    });
 
-        },
-        error: (err) => {
-            console.log(err);
-            alert(err);
+    // 繪圖-長條圖
+    barChart = document.getElementsByClassName("barChart");
+
+    // 修改時間標籤
+    initData.forEach((rec) => {
+        if (rec.barData) {
+            for (let i = 0; i < rec.barData.label.length; i++) {
+                rec.barData.label[i] = splitTimeInfo(rec.barData.label[i]);
+            }
         }
-    })
+    });
+
+    for (let i = 0; i < barChart.length; i++) {
+        if (initData[i].barData) {
+            let barChartData = setBarChartData(initData[i].barData.label, initData[i].barData.data);
+            drawBarChart(barChartData, barChart[i]);
+        }
+    }
+
+    // 繪圖-雷達圖
+    radarChart = document.getElementsByClassName("radarChart");
+    for (let i = 0; i < radarChart.length; i++) {
+        if (initData[i].radarData) {
+            let radarChartData = setRadarChartData(initData[i].radarData);
+            drawRadarChart(radarChartData, radarChart[i]);
+        }
+    }
+
 })
 
 function renderPage(data) {
