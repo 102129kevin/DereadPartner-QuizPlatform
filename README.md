@@ -1,132 +1,35 @@
-![github releases](https://flat.badgen.net/github/release/webarkit/ARnft)
-![github stars](https://flat.badgen.net/github/stars/webarkit/ARnft)
-![github forks](https://flat.badgen.net/github/forks/webarkit/ARnft)
-![npm package version](https://flat.badgen.net/npm/v/@webarkit/ar-nft)
-![Dependabot Badge](https://flat.badgen.net/dependabot/thepracticaldev/dev.to?icon=dependabot)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![CI](https://github.com/webarkit/ARnft/actions/workflows/CI.yml/badge.svg)](https://github.com/webarkit/ARnft/actions/workflows/CI.yml)
-[![Build ARnft CI](https://github.com/webarkit/ARnft/actions/workflows/main.yml/badge.svg)](https://github.com/webarkit/ARnft/actions/workflows/main.yml)
-![twitter](https://flat.badgen.net/twitter/follow/WebarkitO)
+# Dearead Partner 地理好夥伴
 
-# ARnft - WebAR with NFT
+現今國中地理學科的教學內容，仍以課本作為課程設計主軸，並輔以紙本測驗，驗收學生之學習狀況。地理學中許多知識關乎一地時空變遷與圖表判讀的能力培養，在課程中若係以傳統的教學方式講授，對於時間、空間敏感度較低的學生，學習過程中會較難理解教師欲傳達的內容。故本專題以情境學習理論為基礎，並將此教學目標運用多媒體及互動技術呈現，在教材融入以「體感互動導向」設計，可刺激學生之學習意願、興趣，也能讓學習的模式突破教科書的限制，為學生打造身臨其境的學習體驗。
 
-<img src="examples/Data/arNFT-logo.gif" width="250px"/>
+## 系統架構
+本專案開發的兩套系統應用於課程教學的流程如下圖所示。於教授具有互動式體感教材的單元時，教師可於觀念講解時使用透明螢幕進行概念說明，打造學生沉浸式學習體驗；課後學生可在線上學習平台使用AR互動功能觀看3D立體模型，教師亦能於平台發布測驗並邀請學生進行單元複習，而學生與班級的作答狀況將紀錄於系統之中，教師可藉由此次教學實施結果獲取學習狀況的回饋，可評估本次課程的內容選材是否合適，並作為教學步調調整的依據。
 
-A small javascript library to develop WebAR apps. It is based on [jsartoolkitNFT](https://github.com/webarkit/jsartoolkitNFT) a lighter version of jsartoolkit5 only with **NFT** markerless technology. It use [ARnft-threejs](https://github.com/webarkit/ARnft-threejs) for the rendering part.
+## 系統介紹
+教師於實行互動教學過程中讓學生使用行動學習系統中的AR功能，加深學生在課堂中對於老師上課內容與模型的印象，而學生在課後不論身在何處，僅需一支手機便能隨時地進行測驗還有題庫複習，隨時累積自己的地理題庫以及基本功。
 
-## Start using it !
+1. 線上試題評測驗收
+    老師可以從線上學習系統進行課程的階段驗收，測驗模組採用隨機出題模式，可以避免同學互相討論作答的情況，並免去考試紙的使用，也不會有學生遺失試卷的問題發生。
 
-:one: &nbsp; Clone the repository:
+2. 試題分析與詳解
+    學生作答前都可以至線上學習平台複習老師上傳以及系統預設給的題目，題目都會附上答案以及詳細解答，讓學生可以更快速了解考試的各種題型以及出題方向，讓考試時維持最佳狀態。
 
-`git clone https://github.com/webarkit/ARnft.git`
+3. 教師自行出題
+    教師可以透過線學習上平台將自己的重點題目放進班級題目資料庫中，老師可以視每個班級的學習情況以及弱點分析，來思考該班級目前需要甚麼種類的題目進行使用，達到適性教學，讓題目效益最大化。
 
-:two: &nbsp; Install the npm packages with yarn:
+4. 教師查看該班同學學習測驗狀況
+    教師透過查看班級題目作答情況，用來檢視目前該班級學生的吸收程度以及各班級的弱點，彈性的調整目前的教學速度與進度，並且加強弱點部分，挑整各班級適合的學習步調。
 
-`yarn install`
+5. 運用擴增實境結合擬真地理模型
+    線上學習平台結合Web AR技術，使用者可運用掃描教材中的辨識圖卡，運用手指的滑動與點擊，可觀察模型細節或與其互動。本功能搭配課程教學的單元包含時區、臺灣五大地型與海岸地形。
 
-or with npm:
+## 預期效益
+1. 線上學習系統出題模組彈性化，改良傳統紙本測驗
+    教師藉由線上學習系統提供的出題模組，可讓學生於課後進行測驗或小考，別於以往教科書測驗形式，出題模組提供高度彈性，教師於出題時能夠廣泛取材，命題來源可包含:教科書之題庫、自身創意命題與外部網路資源，自行定義題目難易度、專業度與鑑別度；而學生能練習到更多不同類型的題目，對於同樣概念的知識能以更完善的面向思考，提升多面向解題能力。
 
-`npm install`
+2.  老師監測學生作答狀況，方便後續命題依據
+    教師出題能結合網路多媒體的資訊、時事，不再受限於課本內容。增加了題目多元性，讓學生思考更多不一樣的題型，亦可看作邏輯思考的延伸，達成多元評量之目的，而施測過後學生的測驗狀況也能讓老師迅速地了解到目前教學進度是否合適，讓教師適度修改教學內容調整教學方向，為不同的班級彈性調整不一樣的教學進度。
+    
+3. 複習測驗即測即評，即時修正學習誤區
+    線上測驗模組相較傳統考卷的優勢為其特有的即時性，省去紙本測驗之人工批閱時間，測驗完成後提供立即性的評估反饋，學生於試後能查看所填答選項與題目解析，修正作答錯誤之處，並理解自身學習狀況，此時測驗系統扮演輔助學生積極學習之角色，而非消極的給分工具。
 
-:three: &nbsp; Run the node server:
-
-`http-server . -p 8000`
-
-:four: &nbsp; Go to the examples:
-
-http://localhost:8000/examples/arNFT_example.html
-
-:five: &nbsp; Point your device 📱 to the pinball image 👇 a red cube will appear !
-
-<img src= https://raw.githubusercontent.com/artoolkitx/artoolkit5/master/doc/Marker%20images/pinball.jpg width="250"/>
-
-## Usage
-
-Download the zipped dist lib package from the releases page: [webarkit/ARnft/releases](https://github.com/webarkit/ARnft/releases)
-and use it in a script tag:
-
-```html
-<script src="path/to/dist/ARnft.js"></script>
-```
-
-or you can use raw.githack services (for development):
-
-```html
-<script src="https://raw.githack.com/webarkit/ARnft/master/dist/ARnft.js"></script>
-```
-
-or raw.cdn (for production, you need to add the hash):
-
-```html
-<script src="https://rawcdn.githack.com/webarkit/ARnft/<hash>/dist/ARnft.js"></script>
-```
-
-or if you want to import as a module with npm:
-
-```javascript
-import { ARnft } from "@webarkit/ar-nft";
-```
-
-## Examples
-
-Test the examples in the `/examples` folder:
-
-- `arNFT_autoupdate_example.html` Example with the autopdate routine.
-- `arNFT_container_example.html` Example with an alternative container.
-- `arNFT_event_example.html` Example with objVisibility and eventListener.
-- `arNFT_example.html` The simplest example displaying a red cube.
-- `arNFT_gltf_brave_robot_example.html` More advanced example with a gltf model and threejs events.
-- `arNFT_gltf_example.html` Example showing a gltf model (Duck).
-- `arNFT_gltf_flamingo_example.html` Example showing an animated gltf model (Flamingo).
-- `arNFT_image_example.html` Example showing an image.
-- `arNFT_initialize_raw_example.html` Example using the custom initialize function for the CameraRenderer (video).
-- `arNFT_multi_example.html` Example with multi NFT markers.
-- `arNFT_multi_dispose_example.html` Example with multi NFT markers and disposing worker.
-- `arNFT_multi_one_worker_example.html` Example with multi NFT markers in one Worker.
-- `arNFT_video_example.html` Example showing a video.
-
-You can try also a live example with React at this link: [kalwalt.github.io/ARnft-ES6-react/](https://kalwalt.github.io/ARnft-ES6-react/)
-
-## Donate
-Donate to **ARnft** ![opencollective](https://flat.badgen.net/badge/icon/opencollective?icon=opencollective&label) ![backers](https://flat.badgen.net/opencollective/backers/arnft)
-
-
-## Documentation
-
-You can build the docs with this command:
-`yarn docs`
-Then run a live server and go to the docs folder.
-
-## Features
-
-- **NFT** (**N**atural **F**eature **T**racking) Markers, read my article: [NFT natural feature tracking with jsartoolkit5](https://www.kalwaltart.com/blog/2020/01/21/nft-natural-feature-tracking-with-jsartoolkit5/)
-- **ES6** standard. You can install it as a npm package and use it as a module (experimental). Install it with npm:
-
-```
-npm i @webarkit/ar-nft
-```
-
-or with yarn:
-
-```
-yarn add @webarkit/ar-nft
-```
-
-- Configuration data in an External .json file.
-
-## Format the code with Prettier
-We are using [Prettier](https://prettier.io/) as code formatter. You only need to run `yarn format` to write the formatted code with Prettier. If you want to check if the code is well formatted run instead: `yarn format-check`
-
-## Build
-If you make changes to the code, run these commands to build the distribution libray, install all the dependencies with:
-```
-yarn --include=dev i
-```
-For a development build, that is the code will be rebuilt for every changes, run:
-```
-yarn dev-ts
-```
-Instead for a production build, with more optimizations in the code and smaller size, run:
-```
-yarn build-ts
-```

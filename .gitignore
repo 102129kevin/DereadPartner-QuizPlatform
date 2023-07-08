@@ -1,3 +1,5 @@
 node_modules/*
-js/myARthree/arnft-threejs/node_modules/*
+js/myARthree/*
+js/threeRotate/*
+package-lock.json
 docs/*
